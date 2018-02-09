@@ -1,2 +1,2 @@
 # SDWN
-This a paper lates file link for SDWN
+This a paper latex file link for SDWN
