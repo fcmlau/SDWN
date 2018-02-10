@@ -15,3 +15,51 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 	\caption{Implement modules.}
 	\label{Design}
 \end{figure}
+
+
+\begin{table}[htbp]
+	\caption{System API}
+	\label{API}
+	\centering
+	\scalebox{0.9}{
+	\begin{tabular}{|l|l|}
+		\hline
+		\makecell[tc]{\textbf{Function}} & \makecell[tc]{\textbf{Description}} \\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Sensor Control API}}\\
+		\hline
+		\textbf{switchSensor(node,state)} & Turn on or turn off the sensor \\
+		\hline
+		\textbf{getSensorInfo(node)} &\makecell[tl]{ Get sensor's information, including \\ sensor's position, duty cycle, power, etc.}\\
+		\hline
+		\makecell[tl]{\textbf{setSensorAttribute} \\ \textbf{(node,attribute,value)}} & \makecell[tl]{Set node attribute, including \\ duty cycle, radio strength, etc.} \\
+		\hline
+		\textbf{getNeighborList(node)} & Get the neighbor list of a node \\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Application API}}\\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Routing}}\\
+		\hline
+		\textbf{getTopology()} & Get the topology of the network\\
+		\hline
+		\textbf{setParentNode(Cnode,Pnode);} & Set Pnode as the parent of Cnode\\
+		\hline
+		\textbf{setRoutingTable(node,table);} & Set the routing table of a node\\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{AI prediction}}\\
+		\hline
+		\textbf{getData(nodeset,datatype)} & Get the data of the nodeset  \\
+		\hline
+		\textbf{trainModel(dataset)} & Train the AI model online \\
+		\hline
+		\textbf{predictData(pos)} & Predict the data at any position\\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Evaluator}}\\
+		\hline
+		\textbf{Deploy(nodeset,file,layer)} & Deploy a file to the layer of the nodeset \\
+		\hline
+		\textbf{Evaluator(nodeset,metric)} & Evaluate the metric of the nodeset\\
+		\hline
+	\end{tabular}
+	}
+\end{table}
