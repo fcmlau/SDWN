@@ -1,0 +1,140 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage{booktabs} % For formal tables
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{stfloats}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{cases}
+\usepackage{multirow}
+\usepackage{epstopdf}
+\usepackage{subeqnarray}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{listings}
+\lstset{
+    escapeinside={(*}{*)}
+}
+
+%\usepackage{authblk}
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+\newtheorem{problem}{Problem}
+
+\setcopyright{rightsretained}
+
+% DOI
+\acmDOI{10.475/123_4}
+
+% ISBN
+\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\acmConference[MobiCom'18]{}{}{}
+\acmYear{2018}
+\copyrightyear{2018}
+
+\acmPrice{15.00}
+
+%
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+%
+
+\begin{document}
+%\title{Adler: A Resilient, High-Performance and Energy-Efficient UAV-WSNs Hybrid System}
+\title{UAV based SDN system for wireless sensor networks}
+% \titlenote{Produces the permission block, and copyright information}
+% \subtitle{Extended Abstract}
+% \author{Dongda Li}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{The University of Hong Kong}
+%   \streetaddress{Address}
+%   \city{City}
+%   \state{State}
+%   \postcode{Zipcode}
+% }
+% \email{dongdongbhbh@gmail.com}
+
+% \author{Yuexuan Wang}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{Zhejiang University \& The University of Hong Kong}
+%   \postcode{Zipcode}
+% }
+% \email{amywang@cs.hku.hk}
+
+% \author{Zhaoquan Gu}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{Guangzhou University}
+%   \streetaddress{Address}
+%   \city{City}
+%   \state{State}
+% }
+% \email{guzhaoquan@126.com}
+
+% \author{Tong Shen}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{Zhejiang University}
+%   \streetaddress{Address}
+%   \city{City}
+%   \state{State}
+% }
+% \email{shen_t@zju.edu.cn}
+
+% \author{Yongqin Fu}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{Zhejiang University}
+% }
+% \email{yq_fu@foxmail.com}
+
+% \author{Heming Cui}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{The University of Hong Kong}
+% }
+% \email{heming@cs.hku.hk}
+
+% \author{Mingli Song}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{Zhejiang University}
+% }
+% \email{brooksong@zju.edu.cn}
+
+% \author{Francis Lau}
+% \orcid{1234-5678-9012}
+% \affiliation{%
+%   \institution{fcmlau@cs.hku.hk}
+% }
+% \email{The University of Hong Kong}
+
+%\IEEEauthorblockN{Zhaoquan Gu}
+%\IEEEauthorblockN{Zhaoquan Gu}
+
+
+
+\input{abstract}
+
+\maketitle
+
+
+\input{Introduction}
+\input{RW}
+\input{Architecture}
+\input{NC}
+\input{Applications}
+\input{Implementation}
+\input{Evaluation}
+\input{Conclusion}
+\bibliographystyle{acm}
+\bibliography{Ref}
+
+\end{document}

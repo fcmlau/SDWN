@@ -1,0 +1,30 @@
+\section{Network construction}
+
+\subsection{Sensor selection}
+ssss
+Physical topology :  uniform distribution (Density ρ).
+
+Sensor selection algorithm:
+\begin{itemize}
+\item[1)] A simple cluster algorithm: threshold δ -The distance between sensors \&\& the overlapping of sensing area \&\& the similar neighbor list. 
+\item[2)] SRSSS Algorithm (AAAI-16) - trained by an AI model based on the collected data. 
+\end{itemize}
+
+Output : Redundant nodes
+
+\subsection{Topology Mapping}
+
+Redundant nodes are mapped to a virtual node. 
+They can awaken each other according to their  residual energy. 
+When:    
+$$
+\begin{aligned}                        
+ResidualEnergy(i) \leq \xi \cdot ResidualEnergy(j) & &   {turn~node~i~to~node~j}\\
+\end{aligned}
+$$
+
+These virtual nodes are called critical nodes in the logical topology while other nodes are called ordinary nodes.
+
+\subsection{Logical routing}
+
+Critical nodes first (CNF) algorithm
