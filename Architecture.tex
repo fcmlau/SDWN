@@ -11,56 +11,86 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 
 
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 	\caption{System API}
 	\label{API}
 	\centering
 	\scalebox{0.9}{
 	\begin{tabular}{|l|l|}
 		\hline
-		\makecell[tc]{\textbf{Function}} & \makecell[tc]{\textbf{Description}} \\
+		\makecell[tc]{\textbf{Structure \&\& Function}} & \makecell[tc]{\textbf{Description}} \\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Sensor Control API}}\\
+		\multicolumn{2}{|c|}{\textbf{Sensor Control Interface}}\\
 		\hline
-		\textbf{switch\_sensor(node,state)} & Turn on or turn off the sensor \\
+		struct node & Sensor node structure\\
 		\hline
-		\textbf{get\_sensor\_info(node)} &\makecell[tl]{ Get sensor's information, including \\ sensor's position, duty cycle, power, etc.}\\
+		struct nodeset & A set of sensor nodes \\
 		\hline
-		\makecell[tl]{\textbf{set\_sensor\_attr} \\ \textbf{(node,attribute,value)}} & \makecell[tl]{Set node attribute, including  duty cycle,\\ radio strength, etc.} \\
+		struct neighbor\_list & Neighbor infomation \\
 		\hline
-		\textbf{get\_neighborlist(node)} & Get the neighbor list of a node \\
+		struct energy\_item & Energy statistic information \\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Application API}}\\
+		struct routing\_table & Routing table \\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Routing protocol}}\\
+		struct duty\_cycle\_table & Duty cycle control table \\
 		\hline
-		\textbf{topology get\_topology()} & Get the topology of the network\\
+		struct sensor\_enable\_table & All the nodes's states. Node state: \{on,off\} \\
 		\hline
-		\textbf{set\_route(route)} & Set the routing table \\
+		switch\_node(node,state) & Turn on or turn off the node \\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Node selection}}\\
+		get\_node\_info(node) & Get node's information, including  node's position, duty cycle, power, etc.\\
 		\hline
-		\textbf{nodeset naive\_selection(location)} & Select sensor set by location information\\
+		set\_node\_attr(node,attrTag,value) & Set node attribute, including  duty cycle, radio strength, etc. \\
 		\hline
-		\textbf{nodeset AI\_selection(dataset)} & \makecell[tl]{Select sensor set by AI algorithm based\\ on sensing data}\\
+		get\_neighborlist(node) & Get the neighbor list of a node \\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Task scheduler}}\\
+		\multicolumn{2}{|c|}{\textbf{UAV Application Interface}}\\
 		\hline
-		\textbf{task\_buffer(task)} & Add a new task to task buffer \\
+		\multicolumn{2}{|c|}{\textbf{Routing}}\\
 		\hline
-		\textbf{task\_schedule(buffer)} & Schedule the tasks in the buffer\\
+		get\_topology() & Get the topology of the network\\
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Network monitoring and visualization}}\\
+		get\_route(node) & Get the routing table of a node \\
 		\hline
-		\textbf{float get\_node\_energy(node)} & Get node energy \\
+		set\_route(route\_table,node) & Set the routing table of a node \\
 		\hline
-		\textbf{int get\_traffic\_num(node)} & Get traffic number\\
+		\multicolumn{2}{|c|}{\textbf{AI Node selection}}\\
 		\hline
-		\textbf{show\_network\_info()} & Show the network GUI\\
+		nodeset simple\_selection(nodeset) & Select sensor set by location information\\
+		\hline
+		nodeset SRSSS\_selection(dataset) & Select sensor set by AI algorithm based on sensing data\\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{AI Energy Prediction}}\\
+		\hline
+		model\_selsct(modeltype) & Select an AI model\\
+		\hline
+		model.train(dataset,ratio) & Train an AI model with learning ratio on the data set\\
+		\hline
+		model.test(dataset) & Test the AI model on the data set\\
+		\hline
+		model.predict(node) & Do the energy prediction for a node \\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Multi-tasks}}\\
+		\hline
+		create\_scheduler() & Create a task scheduler \\
+		\hline
+		scheduler.create\_buffer() & Create a task buffer \\
+		\hline
+		scheduler.task\_buffer\_add(task,nodenum) & Add a new task to task buffer \\
+		\hline
+		scheduler.task\_schedule() & Schedule the tasks in the buffer\\
+		\hline
+		\multicolumn{2}{|c|}{\textbf{Diagnosis}}\\
+		\hline
+		detect() & Detect problematic region with probes \\
+		\hline
+		get\_topical\_topology(nodeset) & Construct topical topology\\
+		\hline
+		diagnose\_network(topology,nodeset) & Diagnose the failure nodes or lossy links\\
 		\hline
 	\end{tabular}
 	}
-\end{table}
+\end{table*}
 
 \begin{lstlisting}[language={[ANSI]C},label=update,caption={An example of deploy routing algorithm},keywordstyle=\color{blue!70},showstringspaces=false, commentstyle=\color{red!50!green!80!blue!70},frame=single,captionpos=t, rulesepcolor=\color{red!20!green!20!blue!20}]
 topology = get_topology();
