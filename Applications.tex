@@ -1,21 +1,48 @@
 \section{Applications}
 
-Design the following applications and provide APIs to users.
+\subsection{Overview}
+
+Traditional applications can not achieve complicated and efficient goals due 
+to the limited processing power and memory space of sensors.
+
+In our system, applications for wireless sensor networks are inspired by 
+greater potential with the UAV based SDN controller. The central controller
+helps sensors execute complex calculations such as AI model training, as well 
+as store global information. Besides, UAVs have flexible features and can deploy 
+tasks to sensors by one-hop communication directly. Thus it enables the sensor network
+to achieve much more intelligent applications.
+
+In our system, applications can be found for a variety of purposes, including routing, AI node selection,
+Ai energy prediction, multi-tasks and network diagnosis. We design all these applications and provide 
+easy-to-use interfaces to users as in Table \ref{API}.
+
+
 
 \subsection{Routing}
-\iffalse
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=2in]{Figure/Multi-tasks}
-	\caption{Multi-tasks.}
-	\label{system}
-\end{figure}
-\fi
-
 
 \subsection{AI Node Selection}
 
-simple selection.
+\subsubsection{Motivation}
+
+\subsubsection{Design}
+
+Greedy selection algorithm.
+
+\begin{algorithm}
+\caption{Greedy Selection Algorithm}
+\label{Greedy}
+\begin{algorithmic}[1]
+\STATE Input: Sensor set $N$, Selected set $M$, Target area $\Omega$, Covering area $\Phi$;
+\STATE Initialize : $N = \emptyset$, $\Phi = \emptyset$
+\WHILE {$M \neq N$}
+    \IF{$\Phi = \Omega $}
+        \STATE break; $\backslash$$\backslash$ selected set has been found
+    \ENDIF
+    \STATE Find $n_i : argmax(\Phi \cap range(n))$, $n_i \in (N-M)$;
+    \STATE $\Phi = \Phi \cup {n_i}$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 
 SRSSS AI algorithm selection.
 
@@ -56,7 +83,41 @@ a specific set of protocols for medium access, localization and positioning, tim
 
 \subsection{AI Energy Prediction}
 
+\subsubsection{Motivation}
+
+\subsubsection{Design}
+
 \subsection{Multi-tasks}
+
+\subsubsection{Motivation}
+
+A software defined sensor node can perform multiple tasks.
+
+wireless sensor network(WSN) are generally comprised of a group of 
+spatially dispersed sensors, monitoring and recording the physical conditions
+of the environment. WSNs measure environmental conditions like temperature, sound, sunlight,
+humidity, etc.
+
+A deployed wireless sensor networks are usually assigned  
+
+In our system, a sensor node can perform multiple tasks with different sensing targets simultaneously.
+
+A sensor node may have different sensing ranges for different tasks.
+
+only the sensor node loaded with a program for task can sense targets.
+
+There are several practical requirements.
+
+Different tasks have different requirements, including time, sensing range, sensing ratio, etc.
+
+For example tasks like sunlight collection only need to be carried out during the daytime.
+
+Our system provide a task scheduling to 
+
+Sensors are usually assigned multi-tasks.
+
+\subsubsection{Design}
+
 Sensors are assigned tasks to monitor a specific area.
 
 Different tasks have different requirements, including time, density, etc.
@@ -71,6 +132,6 @@ Scheduling table.
 
 ...
 
-\subsection{Diagnosis}
+\subsection{Network Diagnosis}
 
 Diagnose the network.
