@@ -30,7 +30,7 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 		\hline
 		struct energy\_item & Energy statistic information \\
 		\hline
-		struct routing\_table & Routing table \\
+		struct flow\_table & Flow table \\
 		\hline
 		struct duty\_cycle\_table & Duty cycle control table \\
 		\hline
@@ -50,9 +50,9 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 		\hline
 		get\_topology() & Get the topology of the network\\
 		\hline
-		get\_route(node) & Get the routing table of a node \\
+		get\_flow_table(node) & Get the flow table of a node \\
 		\hline
-		set\_route(route\_table,node) & Set the routing table of a node \\
+		set\_flow_table(flow\_table,node) & Set the flow table of a node \\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{AI Node selection}}\\
 		\hline
