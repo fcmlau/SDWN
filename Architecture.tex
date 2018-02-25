@@ -11,6 +11,7 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 
 
 
+
 \begin{table*}[htbp]
 	\caption{System API}
 	\label{API}
@@ -52,7 +53,7 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 		\hline
 		get\_flow\_table(node) & Get the flow table of a node \\
 		\hline
-		set\_flow\_table(flow\_table,node) & Set the flow table of a node \\
+		set\_flow(flow,node) & Set the flow of a node \\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{AI Node selection}}\\
 		\hline
@@ -76,9 +77,13 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 		\hline
 		scheduler.create\_buffer() & Create a task buffer \\
 		\hline
-		scheduler.task\_buffer\_add(task,nodenum) & Add a new task to task buffer \\
+		scheduler.task\_buffer\_add(task,nodeset) & Add a new task to task buffer \\
 		\hline
-		scheduler.task\_schedule() & Schedule the tasks in the buffer\\
+		scheduler.task\_buffer\_remove(task) & Remove a new task to task buffer \\
+		\hline
+		scheduler.task\_buffer\_update(task,nodeset) & Update a task to task buffer with a new nodeset \\
+		\hline
+		scheduler.task\_update() & Schedule the added or removed tasks in the buffer\\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Diagnosis}}\\
 		\hline
@@ -94,17 +99,42 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 
 \begin{lstlisting}[language={[ANSI]C},label=update,caption={An example of deploy routing algorithm},keywordstyle=\color{blue!70},showstringspaces=false, commentstyle=\color{red!50!green!80!blue!70},frame=single,captionpos=t, rulesepcolor=\color{red!20!green!20!blue!20}]
 topology = get_topology();
-//calculate routetable for each node 
+//calculate flowtable for each node 
 //based on topology 
 for(node in nodeset){
-	node.routetable = 
-		calculate_route(topology);
+	node.flowtable = 
+		calculate_flowtable(topology);
 }
-//set route for each node
+//set flowtable for each node
 for(node in nodeset){
 	UAV fly to node;
-	for(route in node.routeTable) 
-  		set_route(route);
+	for(flow in node.flowtable) 
+  		set_route(flow);
+}
+
+\end{lstlisting}
+
+\begin{lstlisting}[language={[ANSI]C},label=update,caption={An example of AI selection and Muti-tasks},keywordstyle=\color{blue!70},showstringspaces=false, commentstyle=\color{red!50!green!80!blue!70},frame=single,captionpos=t, rulesepcolor=\color{red!20!green!20!blue!20}]
+AI_Multitasks(taskset){
+
+create_scheduler();
+scheduler.create_buffer();
+
+for(task in taskset)
+	scheduler.task_buffer_add(task, 
+defaultset);
+
+scheduler.task_update();
+...
+...
+for(task in scheduler.task_buffer){
+	data = get_collected_data();
+	nodeset = SRSSS_selection(dataset);
+	scheduler.task_buffer_update(task, 
+nodeset);
+}
+}
+scheduler.task_update();
 }
 
 \end{lstlisting}
