@@ -97,44 +97,60 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 	}
 \end{table*}
 
-\begin{lstlisting}[language={[ANSI]C},label=update,caption={An example of deploy routing algorithm},keywordstyle=\color{blue!70},showstringspaces=false, commentstyle=\color{red!50!green!80!blue!70},frame=single,captionpos=t, rulesepcolor=\color{red!20!green!20!blue!20}]
+\begin{lstlisting}[
+	language={[ANSI]C},
+	label=update,caption={An example of deploy routing algorithm},
+	keywordstyle=\color{blue!70},
+	showstringspaces=false,
+	commentstyle=\color{red!50!green!80!blue!70},
+	frame=single,captionpos=t,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	basicstyle=\ttfamily]
 topology = get_topology();
-//calculate flowtable for each node 
-//based on topology 
+//calculate flowtable for each node
+//based on topology
 for(node in nodeset){
-	node.flowtable = 
-		calculate_flowtable(topology);
+   node.flowtable =
+      calculate_flowtable(topology);
 }
 //set flowtable for each node
 for(node in nodeset){
-	UAV fly to node;
-	for(flow in node.flowtable) 
-  		set_route(flow);
+   UAV fly to node;
+   for(flow in node.flowtable)
+        set_route(flow);
 }
 
 \end{lstlisting}
 
-\begin{lstlisting}[language={[ANSI]C},label=update,caption={An example of AI selection and Muti-tasks},keywordstyle=\color{blue!70},showstringspaces=false, commentstyle=\color{red!50!green!80!blue!70},frame=single,captionpos=t, rulesepcolor=\color{red!20!green!20!blue!20}]
+\begin{lstlisting}[language={[ANSI]C},label=update,
+	caption={An example of AI selection and Muti-tasks},
+	keywordstyle=\color{blue!70},
+	showstringspaces=false,
+	commentstyle=\color{red!50!green!80!blue!70},
+	frame=single,captionpos=t,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	basicstyle=\ttfamily]
 AI_Multitasks(taskset){
+   create_scheduler();
+   scheduler.create_buffer();
 
-create_scheduler();
-scheduler.create_buffer();
+   for(task in taskset)
+      scheduler.task_buffer_add(
+         task,
+         defaultset);
 
-for(task in taskset)
-	scheduler.task_buffer_add(task, 
-defaultset);
-
-scheduler.task_update();
-...
-...
-for(task in scheduler.task_buffer){
-	data = get_collected_data();
-	nodeset = SRSSS_selection(dataset);
-	scheduler.task_buffer_update(task, 
-nodeset);
-}
-}
-scheduler.task_update();
+   scheduler.task_update();
+   ...
+   ...
+   for(task in scheduler.task_buffer){
+      data = get_collected_data();
+      nodeset =
+         SRSSS_selection(dataset);
+      scheduler.task_buffer_update(
+         task,
+         nodeset);
+   }
+   scheduler.task_update();
 }
 
 \end{lstlisting}
