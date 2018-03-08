@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+\documentclass{sig-alternate-10pt}
+=======
 \documentclass{sig-alternate}
+>>>>>>> 478f096fe35be5dc7dd6d3d9b8ce0e6cf2d6602b
 
 
 \usepackage{algorithm}
@@ -52,8 +56,8 @@
 \begin{document}
 
 \title{UAV based SDN system for wireless sensor networks}
-\author{}
 
+\author{}
 % \titlenote{Produces the permission block, and copyright information}
 % \subtitle{Extended Abstract}
 % \author{Dongda Li}
