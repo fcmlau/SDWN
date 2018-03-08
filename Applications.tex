@@ -13,7 +13,7 @@ tasks to sensors by one-hop communication directly. Thus it enables the sensor n
 to achieve much more intelligent applications.
 
 In {\sdn}, applications can be found for a variety of purposes, including routing, AI node selection,
-Ai energy prediction, multi-tasks and network diagnosis. We design all these applications and provide 
+AI energy prediction, multi-tasks and network diagnosis. We design all these applications and provide 
 easy-to-use interfaces to users as in Table \ref{API}.
 
 
@@ -51,15 +51,37 @@ Actions:
 \item	Forward
 \item	Drop
 \item	Report
+\item	Forward
+\item	Drop
+\item	Report
+\item	Drop
+\item	Report
 \end{itemize}
 
 \subsection{AI Node Selection}
 
 \subsubsection{Motivation}
 
-\subsubsection{Design}
+It is inevitable that there will be a part of redundant sensors when deploying a 
+practical wireless sensor network. These redundant nodes have overlaps of
+observation regions, and what makes the matter worse is that redundant nodes
+may cause great communication interference. Therefore it is significant to select 
+proper sensors to avoid data redundancy and save the sensor network energy consumption.
 
-Greedy selection algorithm.
+In {\sdn}, we provide the node selection application to users. The SDN controller executes the 
+selecting algorithm and send the control instructions to activate the selected nodes.
+
+
+
+\subsubsection{Design} Our {\sdn} system provide two main node selecting methods: 
+greedy selection algorithm and SRSSS algorithm. This application will be extended to more elegant 
+algorithms in our future work. 
+
+\textbf{Greedy selection algorithm.} We first provide a simple method to select 
+the redundant nodes by a greedy selection algorithm, as described in \ref{Greedy}. 
+The key idea is to select nodes as less as possible to coverage the whole area
+ based on the location and sensing range. 
+
 
 \begin{algorithm}
 \caption{Greedy Selection Algorithm}
@@ -81,15 +103,37 @@ Greedy selection algorithm.
 \end{algorithmic}
 \end{algorithm}
 
-SRSSS AI algorithm selection.
 
+\textbf{Spatially regularized streaming sensor selection (SRSSS).} 
+To realize more intelligent and effective sensor selection, we introduce 
+an AI algorithm named spatially regularized streaming sensor selection (SRSSS).
+SRSSS is a state-of-the-art sensor selection algorithm proposed in \cite{li2016spatially}.
+
+Different from the greedy selection algorithm, SRSSS is a multi-variate 
+interpolation framework and focuses on selecting a subset
+of sensors in a streaming scenario to minimize collected information redundancy. 
+
+The aim of SRSSS is to optimize its objective function which is an equation given
+certain constraints of collected information, location and energy consumption
+The objective function is formulated as:
+
+$$
+\begin{aligned}
+& (W_{k+1},z_{k+1})  \\
+& = arg \min_{W,z} \sum_{i=1}^k \mu^{k-i}\lVert X_k^iD_zW(I-D_z)-X_k^i(I-D_z)\rVert^2_2 \\
+& + \alpha\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2\lvert W_{i,j} \rvert - \beta\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2 z_iz_j + \lambda\lVert W \rVert^2_F \\
+&s.t. z = [z_1,...,z_n] \in {\{0,1\}}^n, c^Tz \leq P
+\end{aligned}
+$$
+
+\iffalse
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=2in]{Figure/OF}
 	\caption{Objective function.}
 	\label{system}
 \end{figure}
-
+\fi
 
 **************
 
@@ -107,7 +151,7 @@ AI systems have been improving, and new advances in machine intelligence are cre
 * Sequence planning 
 * Controlling plant growth. 
 
-AI can increase effective communication, reduce mistakes, minimize errors, and extend sensor life.
+.
 
 
 
@@ -172,13 +216,28 @@ Sensors are usually assigned multi-tasks.
 
 Sensors are assigned tasks to monitor a specific area.
 
-Different tasks have different requirements, including time, density, etc.
+\begin{table}[htbp]
+	\caption{Task Buffer}
+	\label{TB}
+	\centering
+	\scalebox{0.9}{
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		\hline
+		\end{tabular}
+	}
+\end{table}
+
+Different tasks have different requirements, i.e. 
 
 \begin{itemize}
-\item[nodeset] kk
-\item[sensing rate] energy
-\item[sensing range] processing
-\item[sensing duration] memory
+\item \textbf{Node set.} Users can assign tasks to 
+\item \textbf{Sensing rate.}
+\item \textbf{Sensing range.} The maximum distance that a node can detect. 
+
+\item \textbf{Sensing duration.} The sensing time from start to end. 
+There is no need to collect sunlight data at night.
 \end{itemize}
 
 Task scheduler do the arrangement. 
