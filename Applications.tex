@@ -1,4 +1,5 @@
 \section{Applications}
+\label{App}
 
 \subsection{Overview}
 
@@ -201,6 +202,26 @@ With the AI sensor selection process, {\sdn} becomes a smarter and adaptive sens
 \iffalse
 \newpage
 \subsection{AI Energy Prediction}
+
+\subsubsection{Motivation}
+Wireless sensor networks (WSN)  generally use muti-hop for data collection,
+and due to limited compute capability and storage capacity, sensors are unable
+to do data mining. Hence, self optimization is impossible.
+
+The sensor next to data center always has the most routing task, which leads to
+the heaviest workload and the shortest battery life. Worse more, after the
+first sensor run out of energy, a new sensor will be selected to take the place 
+of it with more workload. As a result, its lifetime is shorter and the whole 
+sensor network will soon run out of energy. We call this Energy exausted problem.
+
+A ideal solution for Energy exausted problem is to find a self-adjust routing schedule which 
+according to  Energy status of each sensors. Actually, it is a kind of dynamic proggramming 
+problem, the optimization target is the loggest lifetime of the whole network, with
+complex constrains. We modified LSTM and RNN deep learning model to simulate and simplified
+this constrains. Challenges occurs in traditional WSN beacuse of lack
+of global information energy information. With the help of UAV, our {\sdn} system can do
+this optimization
+
 
 \subsubsection{Motivation}
 

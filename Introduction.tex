@@ -1,32 +1,94 @@
 \section{Introduction}
 
-Why we are SDN ?
 
-Software defined network is able to support flexible network programmability 
-by using programmable data plane and centralized network controller.
+%logic flow
 
-OpenFlow focus on wired networks.
+%SDN improves the traditional WSN 
+ 
+ Software defined network (SDN) and Artificial intelligence (AI) 
+ are two popular topics in recent research field, 
+ both of which greatly improve the performance of traditional
+ networks.
+ 
+On the one hand, SDN enables flexible 
+programmability on traditional network system 
+by using programmable data plane and centralized network controller \cite{}.
+It shows remarkable advantages in good management of network control, 
+less operating costs and easy deployment for new applications \cite{}.
+On the other hand, AI technology promises a smarter and more effective network system
+due to its high performance in predicting and optimizing network capacity,
+e.g. network throughput, energy consumption, etc.
 
-Challenges and opportunities of SDN for WSN:
+In this paper, we study integrating these two elegant techniques into 
+the wireless sensor networks (WSN). Our fundamental observation is 
+that conducting AI methods in WSN requires
+the support of SDN. This is due to two majoy reasons. 
+First, traditional sensor device 
+has limited processing capability and cannot deal with complex computations.
+Second, the sensor device is also lack of storage space 
+to support complicated operations. With the help of SDN, 
+the central controller can conduct complex computations 
+and store huge data information instead.
+  
+Unfortunately, implementing a real SDN in sensor system 
+is still an open problem. The existing work \cite{} 
+all design framework of SDN for WSN and validate them by simulations.  
+Even worse, these simulational SDN works construct the central controller 
+of SDN in their database station. The controller transmits control 
+instructions with sensor nodes by multi-hop communications.
+This causes a great deal of energy consumption, which 
+makes it a paradox since sensor network ought to be an energy-efficient network.
 
-Challenges: Limited resources of WSN nodes:
-\begin{itemize}
-\item	energy
-\item	processing
-\item	memory
-\item	communication
-\end{itemize}
+Our insight is that, since it is unpractical to deploy SDN 
+for sensor system by multi-hop control,
+we refer to various equipments and techniques, 
+and finally find the unmanned aerial vehicle (UAV) 
+perfect to serve as the SDN controller.
+ 
 
-Opportunities: 
-\begin{itemize}
-\item	Improve resource reuse
-\item	Implement node retasking 
-\item	Node and network management
-\item	Enable experiments with new protocols
-\end{itemize}
+In this paper, we 
+UAV dd dk
+
+In this paper, we present {\sdn}\footnote{{\sdn} means .}, a real UAV based SDN sensor system.
+By utilizing Adler's application program interfaces (APIs), it is easy to evaluate any algorithm or run any application on a pure sensor network or a UAV-enable sensor system.
+We implemented five fundamental applications: routing, network diagnosis, 
+AI prediction, AI node selection and multi-tasks.
+
+First, to get a sensor's three-dimension (3D) position if global position system (GPS) data is unavailable or inaccurate, we design a UAV-based localization method, which improves localization accuracy compared to methods through a multi-hop network or a mobile vehicle (as anchor nodes on the ground). Second, to gather data efficiently, we propose a UAV-based method that uses the minimum number of hexagons to cover sensors, designs flight trajectory and gathers sensors' data by UAVs. This method reduces gathering latency compared to a mobile vehicle method. Third, to update parameter settings or switch between different applications/tasks, we present a UAV-based reconfiguration method that utilizes over-the-air (OTA) programming to reconfigure sensors through one-hop communication, which reduces package loss probability compared to a multi-hop OTA programming method.
+
+We implemented {\sdn} with DJI M100 UAVs and CC2560 Sensor tags in real experiments, and we conducted extensive simulations for large-scale sensors.
+Adler improves localization accuracy of $20$ sensors by reducing $78.4\%$ root-mean-square error (RMSE) compared to methods by multi-hop networks or mobile vehicles. Adler achieves about $10\%$ higher package receiving ratio compared to notable mobile sink methods for gathering application. Adler reduces sensors' average energy consumption by about $80\%$ compared to multi-hop based methods. When the number of sensor nodes increases or some nodes run out of energy, Adler is more resilient and holds better performance than the state-of-the-art methods.
+
+
+The contributions of the paper are summarized as follows:
+1. We design and implement  {\sdn}, a real UAV based SDN sensor system.
+2. We adopt AI tools in {\sdn} and implement five applications to smart and provide users with easy-to-use interfaces 
+3. We conduct practical experiments and the evaluations 
+
+
+The paper is organized as follows. We introduce related works in the next section. 
+Design of {\sdn} is presented in Section \ref{Arc}, 
+and we implement five fundamental applications: routing, network diagnosis, 
+AI prediction, AI node selection and multi-tasks in Section \ref{App}. 
+Section \ref{Imp} gives the implement setup.
+The evaluation results are provided in Section \ref{Eva} 
+and we conclude the paper in Section \ref{Con}.
+%In our
+
+%AI can greatly improve the sensor system
+
+%Sensor system can improve AI system
+
+%eco-system
 
 
 
+
+
+
+
+
+\iffalse
 Why and How we can implement AI ?
 
 How we combine Ai with other applications?
@@ -56,3 +118,4 @@ The tools and methods described have minimal computation complexity and can be i
 minimum energy, data loss, reliability, robustness, etc., in place during the design and operation of wireless sensor networks
 
 a specific set of protocols for medium access, localization and positioning, time synchronization, topology control, security and routing are identified based on the current configuration of the network, the requirements of the application and the topology of their deployment.
+\fi
