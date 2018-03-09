@@ -43,28 +43,36 @@ Our insight is that, since it is unpractical to deploy SDN
 for sensor system by multi-hop control,
 we refer to various equipments and techniques, 
 and finally find the unmanned aerial vehicle (UAV) 
-perfect to serve as the SDN controller.
+perfect to serve as the SDN controller. The flexibility
+of UAV can promise one-hop communication between controller
+and nodes. Furthermore, the reason why we choose UAV instead of
+terrestrial mobile controller is that, the air-ground communication range
+is almost 10 times than that of ground-ground communication under ZigBee protocol, which are
+around 145 meters and 15 meters respectively tested by our practical experiments.
+This is due to the air-ground communication suffers from less interference of the terrestrial WSN.
  
 
-In this paper, we 
-UAV dd dk
-
-In this paper, we present {\sdn}\footnote{{\sdn} means .}, a real UAV based SDN sensor system.
-By utilizing Adler's application program interfaces (APIs), it is easy to evaluate any algorithm or run any application on a pure sensor network or a UAV-enable sensor system.
+In this paper, we present {\sdn}\footnote{{\sdn} is .}, 
+a real UAV based SDN sensor system.
+In {\sdn}, UAV plays the role of the central controller to monitor the sensor system.
 We implemented five fundamental applications: routing, network diagnosis, 
-AI prediction, AI node selection and multi-tasks.
+AI energy prediction, AI node selection and multi-tasks,
+and provide users with easy-to-use interfaces.
+Routing application allows users to flow table to sensors.
+Network diagnosis is used to find the fault source when .
+Multi-tasks application enables sensor to perform multiple 
+tasks simultaneously. All the applications are within a ecosystem
+and can be combined to achieve synergistic effect. For example,
+users can execute the AI node selection application to choose
+the node set for the multi-task application. 
 
-First, to get a sensor's three-dimension (3D) position if global position system (GPS) data is unavailable or inaccurate, we design a UAV-based localization method, which improves localization accuracy compared to methods through a multi-hop network or a mobile vehicle (as anchor nodes on the ground). Second, to gather data efficiently, we propose a UAV-based method that uses the minimum number of hexagons to cover sensors, designs flight trajectory and gathers sensors' data by UAVs. This method reduces gathering latency compared to a mobile vehicle method. Third, to update parameter settings or switch between different applications/tasks, we present a UAV-based reconfiguration method that utilizes over-the-air (OTA) programming to reconfigure sensors through one-hop communication, which reduces package loss probability compared to a multi-hop OTA programming method.
 
 We implemented {\sdn} with DJI M100 UAVs and CC2560 Sensor tags in real experiments, and we conducted extensive simulations for large-scale sensors.
 Adler improves localization accuracy of $20$ sensors by reducing $78.4\%$ root-mean-square error (RMSE) compared to methods by multi-hop networks or mobile vehicles. Adler achieves about $10\%$ higher package receiving ratio compared to notable mobile sink methods for gathering application. Adler reduces sensors' average energy consumption by about $80\%$ compared to multi-hop based methods. When the number of sensor nodes increases or some nodes run out of energy, Adler is more resilient and holds better performance than the state-of-the-art methods.
 
-
-The contributions of the paper are summarized as follows:
-1. We design and implement  {\sdn}, a real UAV based SDN sensor system.
-2. We adopt AI tools in {\sdn} and implement five applications to smart and provide users with easy-to-use interfaces 
-3. We conduct practical experiments and the evaluations 
-
+The main contribution of this paper is the first practically implemented SDN for sensor system, {\sdn}. 
+We adopt AI tools in {\sdn} and realize five applications with easy-to-use interfaces.
+We then conduct practical experiments and the evaluations validate the high performance of {\sdn}.
 
 The paper is organized as follows. We introduce related works in the next section. 
 Design of {\sdn} is presented in Section \ref{Arc}, 
@@ -73,49 +81,5 @@ AI prediction, AI node selection and multi-tasks in Section \ref{App}.
 Section \ref{Imp} gives the implement setup.
 The evaluation results are provided in Section \ref{Eva} 
 and we conclude the paper in Section \ref{Con}.
-%In our
-
-%AI can greatly improve the sensor system
-
-%Sensor system can improve AI system
-
-%eco-system
 
 
-
-
-
-
-
-
-\iffalse
-Why and How we can implement AI ?
-
-How we combine Ai with other applications?
-
-
-AI 
-
-AI systems have been improving, and new advances in machine intelligence are creating seamless interactions between people and digital sensor systems.
-
- In sensor systems, applications can be found for a variety of tasks, including selection of sensor inputs, interpreting signals, condition monitoring, fault diagnosis, machine and process control, machine design, process planning, production scheduling, and system configuring. Some examples of specific tasks undertaken by expert systems are:
-* Assembly 
-* Automatic programming 
-* Controlling intelligent complex vehicles  
-* Planning inspection 
-* Predicting risk of disease 
-* Selecting tools and machining strategies 
-* Sequence planning 
-* Controlling plant growth. 
-
-.
-
-
-
-The tools and methods described have minimal computation complexity and can be implemented on small assembly lines, single robots, or systems with low-capability microcontrollers. These novel approaches proposed use ambient intelligence and the mixing of different AI tools in an effort to use the best of each technology. The concepts are generically applicable across many processes.
-
-
-minimum energy, data loss, reliability, robustness, etc., in place during the design and operation of wireless sensor networks
-
-a specific set of protocols for medium access, localization and positioning, time synchronization, topology control, security and routing are identified based on the current configuration of the network, the requirements of the application and the topology of their deployment.
-\fi
