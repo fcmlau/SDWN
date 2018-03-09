@@ -17,8 +17,12 @@ AI energy prediction, multi-tasks and network diagnosis. We design all these app
 easy-to-use interfaces to users as in Table \ref{API}.
 
 
-
+\newpage
 \subsection{Routing}
+
+one round
+
+cluster header
 
 \begin{table}[htbp]
 	\caption{Flow Table}
@@ -58,6 +62,57 @@ Actions:
 \item	Report
 \end{itemize}
 
+\newpage
+\subsection{Network Diagnosis}
+
+\subsubsection{Motivation}
+
+Sensor nodes are provisioned with low-capacity batteries and will run out of energy in the end. 
+Besides, uncertain environmental factors will lead to the failure of communications.
+Upon these two factors, there occurs network faults such as failure nodes and lossy links from time to time.
+
+Network fault diagnosis is then designed to help network administrators monitor the network 
+operational status and maintain a sensor network system. The key idea of the existing works
+on fault diagnosis is to collect running information from nodes and deduce root causes of network
+exceptions. The running information is collected by a mechanism of probing.
+
+We implement the network diagnosis process as an application in our {\sdn} system.
+Since in {\sdn} we have our mobile UAV as a controller, a more flexible way is to infer the suspicious 
+nodes of the network fault in traditional way first and then set the UAV to check out the fault sources. 
+ 
+\subsubsection{Design}
+
+We first introduce a state-of-the-art algorithm named DID 
+\cite{gong2015directional}, which is a directional diagnosis approach.
+We utilize the node tracing module and the tracing collection module of DID
+to infer the suspicious nodes in our network diagnosis application, 
+and then set our UAV controller to confirm the network elements being faulty.
+
+The node tracing module is conducted in each sensor node. 
+Every time a packet arrives at a node, it counts
+the source of the packet . The tracing collection module
+is set in the UAV controller. When network exception is detected, 
+it gathers the tracing information in the tracing module of the relevant nodes
+and infers a suspicious node set. Next we set the UAV to fly through the 
+node set and check each node first to diagnose the failed nodes. 
+Then UAV collects the neighbor lists of all the nodes in the suspicious node set.
+With the collected neighbor lists, the UAV controller reconstructs the topical topology and 
+compares it with the default topology to find the failed links.
+
+Compared to DID, the diagnosis application in {\sdn} releases the complicated inference
+computations and can achieve accurate diagnosis since the UAV can fly to the sensors 
+to confirm the network faults. {\sdn} can realize the four types of fault sources the same as DID:  
+\begin{itemize}
+\item	Node failure. This network failure is caused by the node itself.
+\item	Link failure. This network failure is caused by the communication links 
+between nodes, mainly relating to traffic flow in networks.
+\item	Temporary failure. This  network failure is caused by complex interior or exterior 
+interferences and quick self-recovery
+\item	Multiple failures. This  network failure is caused by multiple failures above.
+\end{itemize}
+
+
+
 \subsection{AI Node Selection}
 
 \subsubsection{Motivation}
@@ -71,17 +126,17 @@ proper sensors to avoid data redundancy and save the sensor network energy consu
 In {\sdn}, we provide the node selection application to users. The SDN controller executes the 
 selecting algorithm and send the control instructions to activate the selected nodes.
 
-
-
 \subsubsection{Design} Our {\sdn} system provide two main node selecting methods: 
 greedy selection algorithm and SRSSS algorithm. This application will be extended to more elegant 
 algorithms in our future work. 
 
 \textbf{Greedy selection algorithm.} We first provide a simple method to select 
-the redundant nodes by a greedy selection algorithm, as described in \ref{Greedy}. 
+the redundant nodes by a greedy selection algorithm, as described in Alg. \ref{Greedy}. 
 The key idea is to select nodes as less as possible to coverage the whole area
  based on the location and sensing range. 
-
+ 
+ We implement the greedy selection algorithm in {\sdn}. The evaluations in section \ref{Eva} 
+ show it greatly saves the sensors' energy and thus prolongs the network lifetime.
 
 \begin{algorithm}
 \caption{Greedy Selection Algorithm}
@@ -91,7 +146,7 @@ The key idea is to select nodes as less as possible to coverage the whole area
 \STATE Initialize : $M = \emptyset$, $\Phi = \emptyset$
 \WHILE {$M \neq N$}
     \IF{$\Phi = \Omega $}
-        \STATE break; $\backslash$$\backslash$ selected set has been found
+        \STATE break; $\backslash$$\backslash$ Selected set has been found
     \ENDIF
     \IF{$\forall n_i \in (N-M) : range(n_i) \subset \Phi$}
     	 \STATE break;$\backslash$$\backslash$ Cannot cover the target area;
@@ -103,71 +158,56 @@ The key idea is to select nodes as less as possible to coverage the whole area
 \end{algorithmic}
 \end{algorithm}
 
-
 \textbf{Spatially regularized streaming sensor selection (SRSSS).} 
 To realize more intelligent and effective sensor selection, we introduce 
-an AI algorithm named spatially regularized streaming sensor selection (SRSSS).
-SRSSS is a state-of-the-art sensor selection algorithm proposed in \cite{li2016spatially}.
+a state-of-the-art AI algorithm named spatially regularized streaming 
+sensor selection (SRSSS) proposed in \cite{li2016spatially}.
 
 Different from the greedy selection algorithm, SRSSS is a multi-variate 
 interpolation framework and focuses on selecting a subset
-of sensors in a streaming scenario to minimize collected information redundancy. 
+of sensors in a streaming scenario to minimize collected information redundancy.  
+
+Traditional wireless sensor network is not suitable to implement an AI selection approach
+due to the limited computational capability of sensors. Some work use the database to collect data
+and make decisions by multi-hop communications. However, in this way the network will use up a great deal of energy.
+In our {\sdn}, the UAV fly through the nodes to pick up the collected data and executes the computations.
+Then it sends the control instructions to the nodes by one-hop communication and greatly saves the network energy.
 
 The aim of SRSSS is to optimize its objective function which is an equation given
-certain constraints of collected information, location and energy consumption
+certain constraints of collected information, location and energy consumption.
 The objective function is formulated as:
 
-$$
+\begin{equation}
+\label{OF}
 \begin{aligned}
 & (W_{k+1},z_{k+1})  \\
 & = arg \min_{W,z} \sum_{i=1}^k \mu^{k-i}\lVert X_k^iD_zW(I-D_z)-X_k^i(I-D_z)\rVert^2_2 \\
-& + \alpha\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2\lvert W_{i,j} \rvert - \beta\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2 z_iz_j + \lambda\lVert W \rVert^2_F \\
+& + \alpha\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2\lvert W_{i,j} \rvert - \beta\sum_{i,j=1}^n\lVert y_i-y_j\rVert_2 z_iz_j \\
+& + \lambda\lVert W \rVert^2_F \\
 &s.t. z = [z_1,...,z_n] \in {\{0,1\}}^n, c^Tz \leq P
 \end{aligned}
-$$
+\end{equation}
+
+The first term in (\ref{OF}) is to minimize the prediction error of the collected data
+and the following two terms incorporate spatial information. The last term constrains
+the complexity of the learned matrix $W$. The energy constraint is controlled by 
+the inequality in (\ref{OF}). Because of the limitation of length,  we leave out all the details. 
+The meaning of the parameters and the mechanism of 
+SRSSS can be seen in \cite{li2016spatially}. 
+
+With the AI sensor selection process, {\sdn} becomes a smarter and adaptive sensor systems. 
+
 
 \iffalse
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=2in]{Figure/OF}
-	\caption{Objective function.}
-	\label{system}
-\end{figure}
-\fi
-
-**************
-
-AI helps creating smarter sensor systems.
-
-AI systems have been improving, and new advances in machine intelligence are creating seamless interactions between people and digital sensor systems.
-
- In sensor systems, applications can be found for a variety of tasks, including selection of sensor inputs, interpreting signals, condition monitoring, fault diagnosis, machine and process control, machine design, process planning, production scheduling, and system configuring. Some examples of specific tasks undertaken by expert systems are:
-* Assembly 
-* Automatic programming 
-* Controlling intelligent complex vehicles  
-* Planning inspection 
-* Predicting risk of disease 
-* Selecting tools and machining strategies 
-* Sequence planning 
-* Controlling plant growth. 
-
-.
-
-
-
-The tools and methods described have minimal computation complexity and can be implemented on small assembly lines, single robots, or systems with low-capability microcontrollers. These novel approaches proposed use ambient intelligence and the mixing of different AI tools in an effort to use the best of each technology. The concepts are generically applicable across many processes.
-
-
-minimum energy, data loss, reliability, robustness, etc., in place during the design and operation of wireless sensor networks
-
-a specific set of protocols for medium access, localization and positioning, time synchronization, topology control, security and routing are identified based on the current configuration of the network, the requirements of the application and the topology of their deployment.
-
+\newpage
 \subsection{AI Energy Prediction}
 
 \subsubsection{Motivation}
 
 \subsubsection{Design}
+\fi
 
+\newpage
 \subsection{Multi-tasks}
 
 \subsubsection{Motivation}
@@ -198,7 +238,36 @@ receive task control instructions.
 
 \subsubsection{Design}
 
-A deployed wireless sensor networks are usually assigned  
+A deployed wireless sensor networks are usually assigned  with
+different data collection requirement. In {\sdn}, we design and 
+implement multi-task application and provide easy-to-use
+interfaces to users.
+
+When a user assign a task to {\sdn}, the UAV controller will first check out 
+the energy and storage constraints of the required sensor set, as described in Alg. \ref{}. 
+If the task requirement exceeds the capacity of the sensor set, it will be sent to a     
+task queue; Otherwise it will be put into the task buffer to conduct.
+
+
+\begin{algorithm}
+\caption{Sensor Constraint Detection}
+\label{Constraint}
+\begin{algorithmic}[1]
+\STATE Input: Sensor set $N$, Selected set $M$, Target area $\Omega$, Covering area $\Phi$;
+\STATE Initialize : $M = \emptyset$, $\Phi = \emptyset$
+\WHILE {$M \neq N$}
+    \IF{$\Phi = \Omega $}
+        \STATE break; $\backslash$$\backslash$ Selected set has been found
+    \ENDIF
+    \IF{$\forall n_i \in (N-M) : range(n_i) \subset \Phi$}
+    	 \STATE break;$\backslash$$\backslash$ Cannot cover the target area;
+    \ENDIF
+    \STATE Find $n_i : argmax(\Phi \cap range(n))$, $n_i \in (N-M)$;
+    \STATE $\Phi = \Phi \cup {n_i}$
+\ENDWHILE
+\STATE Output: $M$;
+\end{algorithmic}
+\end{algorithm}
 
 
 A sensor node may have different sensing ranges for different tasks.
@@ -216,7 +285,7 @@ Sensors are usually assigned multi-tasks.
 
 Sensors are assigned tasks to monitor a specific area.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 	\caption{Task Buffer}
 	\label{TB}
 	\centering
@@ -225,9 +294,17 @@ Sensors are assigned tasks to monitor a specific area.
 		\hline
 		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
 		\hline
+		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		\hline
+		...& ...& ... & ...& ... \\
+		\hline
+		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		\hline
+		...& ...& ... & ...& ... \\
+		\hline
 		\end{tabular}
 	}
-\end{table}
+\end{table*}
 
 Different tasks have different requirements, i.e. 
 
@@ -250,6 +327,3 @@ Scheduling table.
 
 ...
 
-\subsection{Network Diagnosis}
-
-Diagnose the network.
