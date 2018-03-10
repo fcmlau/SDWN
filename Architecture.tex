@@ -4,7 +4,12 @@
 
 
 
-The architecture of the UAV based SDN system for wireless sensor networks.
+To build software defined network system in WSN and achieve low energy consumption and high performance, the SDN controller must 
+configure data plane within several hop. So we choose UAV as a mobile SDN controller. In our SDN system, UAV is a control plane which communicate with sensor nodes within on hop, it significantly reduce
+ sensor nodes energy consumption in SDN system. At same time, to achieve high performance, the SDN controller should has much more intelligent than sensor nodes can to run real-time decision, our UAV carry 
+ a powerfully airborne computer which has ability to run some intelligent applications in real-time.
+ 
+
 
 \begin{figure}[htbp]
 	\centering
@@ -12,10 +17,20 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 	\caption{Architecture of the system.}
 	\label{Architecture}
 \end{figure}
+The architecture of the UAV based SDN system for wireless sensor networks shown as Fig. \ref{Architecture}. The system divided into three layers, data plane, control plane and management plane, respectively
+. The data plane running on sensor nodes, the controller plane and management plane running on UAVs. And the interface between data plane and control plane is defined as southbound interface,
+ the interface between control plane and management plane is southbound interface.
 
+Different from wired network, sensor network data plane not only runs data forwarding function, but also runs data sampling function, so user can define routing and sensing application at same time, on sensor nodes, 
+it runs neighbor discovery for getting topology, data sampling for get data form environment and data forwarding for sensor data gathering.
 
+On control plane, in order to make our system easy to use,  we implement a SDN database and designed interface abstraction for data plane and SDN applications. The control plane connected data plane and 
+management plane. The database manage the topology gathered from data plane, route table inputed form applications, and sensor task schedule table form management application.
 
+On management plane, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
+scheduler, tec.
 
+The Table \ref{API} shows our southbound interface for user write applications.
 \begin{table*}[htbp]
 	\caption{System API}
 	\label{API}
@@ -100,6 +115,9 @@ The architecture of the UAV based SDN system for wireless sensor networks.
 	\end{tabular}
 	}
 \end{table*}
+
+The List. \ref{topology-update} demonstrate a deploy routing algorithm based on our southbound APIs. 
+And the List. \ref{AI} demonstrate a AI selection and Muti-tasks application.
 
 \begin{lstlisting}[
 	language={[ANSI]C},
