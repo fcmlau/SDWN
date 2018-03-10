@@ -14,18 +14,46 @@ tasks to sensors by one-hop communication directly. Thus it enables the sensor n
 to achieve much more intelligent applications.
 
 In {\sdn}, applications can be found for a variety of purposes, including routing, AI node selection,
-AI energy prediction, multi-tasks and network diagnosis. We design all these applications and provide 
+AI energy prediction, multi-task and network diagnosis. We design all these applications and provide 
 easy-to-use interfaces to users as in Table \ref{API}.
 
 
 
 \subsection{Routing}
 
+\subsubsection{Motivation}
 
+Different from the internet protocol (IP) networks which adopt
+routing with shortest path,
+traditional WSNs use the RPL (Routing Protocol for LLN) protocol,
+focusing on routing with less energy consumption.
+
+Low-Power and Lossy network
+
+The remarkable of SND is its 
+
+is feasible using access control lists (ACLs) and routing protocols. Users can provide 
+
+determine the path of network.
+
+As we discuss before, sensors are limited to their processing capability and storage space.
+Thus we simplified flow table and 
+
+Traditional wireless sensor network RPL \cite{Winter2012}.
+
+Open Shortest Path First (OSPF) is a routing 
+protocol for Internet Protocol (IP) networks.
+
+In our , we implement OSPF in the 
+
+The flow table of the 
 
 one round
 
 cluster header
+
+
+\subsubsection{Design}
 
 \begin{table}[htbp]
 	\caption{Flow Table}
@@ -68,6 +96,9 @@ Actions:
 	\label{routing-flow}
 	\vspace{-0.2in}
 \end{figure}
+
+
+
 
 
 \subsection{Network Diagnosis}
@@ -118,6 +149,63 @@ interferences and quick self-recovery
 \item	Multiple failures. This  network failure is caused by multiple failures above.
 \end{itemize}
 
+\subsection{AI Energy Prediction}
+
+\subsubsection{Motivation}
+Traditional wireless sensor networks (WSN)  generally carry out data 
+collection by multi-hop transmission,
+and due to limited computation capability and storage capacity, sensors are incapable
+to perform deep learning methods for data mining. 
+Hence, intelligent self energy consumption optimization for a sensor is hard to achieve.
+
+The sensor next to the data center always has the most frequent routing tasks, which leads to
+the heaviest workload and the shortest battery life. Worse more, after the
+first sensor runs out of energy, a new sensor will be selected to take the place 
+of it with more workload. As a result, its lifetime becomes shorter and the whole 
+sensor network will soon run out of energy. We call this energy exhausted problem.
+
+An ideal solution to the energy exhausted problem is to find a self-adjusted routing schedule which 
+makes adjustments according to the energy status of each sensor. 
+Actually, this is a kind of dynamic programming problem and
+the optimization target is to achieve the longest lifetime of the whole network under
+complex constrains. We modify linear and simple MLP\cite{} deep learning model to simulate and simplify
+this constrains. Challenges occurs in traditional WSN because of lack
+of global energy information. 
+
+In {\sdn}, the UAV controller .   
+all these factors makes it possible to execute
+this optimization. Besides, the 
+The AI prediction application can contribute to the network diagnosis application
+This kind of cooperation and mutual assistance makes {\sdn} an effective ecosystem.
+
+\subsubsection{Design}
+In our {\sdn} system, we implement a prediction application for 
+energy storage of sensors. The architecture of the AI energy prediction
+can be seen in Fig. \ref{prediction}. The special system architecture enables
+us to analyze the sensor data in real time. After the information 
+collected by the sensor is transmitted to database, it is used as
+the input of the incremental learning model, which outputs the
+life expectancy of each sensor. These predicted information contributes
+to other application. 
+
+A sample input of energy information contains at least four components: sensors'
+duty cycle, packet-sending time, data receiving time and other energy
+consumption. Data collection module records these information with time stamp,
+as well as routing information. We use the database to maintain our experimental data,
+and use the sql query to manage training data. In this way, we can easily
+get each sensor's routing task and energy consumption at any time as input. A forgetting factor
+is used to avoid overfitting. Then the model will output the prediction of a energy consumption list in time
+sequences. The sensor which is most likely to run out of energy will rank in the first place of the list. 
+Combined with our diagnosis application, we can make use of our prediction result to prolong the network
+lifetime.
+
+
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics[width=5in]{Figure/SDWN-AIprediction}
+	\caption{AI prediction}
+	\label{prediction}
+\end{figure*}
 
 
 \subsection{AI Node Selection}
@@ -142,8 +230,8 @@ the redundant nodes by a greedy selection algorithm, as described in Alg. \ref{G
 The key idea is to select nodes as less as possible to coverage the whole area
  based on the location and sensing range. 
  
- We implement the greedy selection algorithm in {\sdn}. The evaluations in section \ref{Eva} 
- show it greatly saves the sensors' energy and thus prolongs the network lifetime.
+We implement the greedy selection algorithm in {\sdn}. The evaluations in section \ref{Eva} 
+wshow it greatly saves the sensors' energy and thus prolongs the network lifetime.
 
 \begin{algorithm}
 \caption{Greedy Selection Algorithm}
@@ -207,33 +295,9 @@ With the AI sensor selection process, {\sdn} becomes a smarter and adaptive sens
 
 
 
-\subsection{AI Energy Prediction}
-
-\subsubsection{Motivation}
-Wireless sensor networks (WSN)  generally use multi-hop for data collection,
-and due to limited compute capability and storage capacity, sensors are unable
-to do data mining. Hence, self optimization is impossible.
-
-The sensor next to data center always has the most routing task, which leads to
-the heaviest workload and the shortest battery life. Worse more, after the
-first sensor run out of energy, a new sensor will be selected to take the place 
-of it with more workload. As a result, its lifetime is shorter and the whole 
-sensor network will soon run out of energy. We call this Energy exhausted problem.
-
-An ideal solution for Energy exhausted problem is to find a self-adjust routing schedule which 
-according to  Energy status of each sensors. Actually, it is a kind of dynamic programming 
-problem, the optimization target is the longgest lifetime of the whole network, with
-complex constrains. We modified linear and simple MLP deep learning model to simulate and simplified
-this constrains. Challenges occurs in traditional WSN because of lack
-of global information energy information. With the help of UAV, our {\sdn} system can do
-this optimization
 
 
-\subsubsection{Design}
-
-
-
-\subsection{Multi-tasks}
+\subsection{Multi-task}
 
 \subsubsection{Motivation}
 
@@ -252,10 +316,10 @@ For example, sensors deployed in a grove are assigned tasks to collect
 sunlight, temperature and humidity data and these tasks require different 
 number of  nodes with respective sensing range, rate and duration.
 However, traditional sensor networks are not suitable to conduct this 
-multi-tasks due to the limitations of computation complexity for task 
+multi-task due to the limitations of computation complexity for task 
 arrangement of each node.
 
-In our {\sdn} system, we implement the multi-tasks application 
+In our {\sdn} system, we implement the multi-task application 
 with the help of the central controller. The SDN controller
 maintains programmable task scheduling and management
 modules while sensor nodes are loaded with interfaces to
@@ -305,7 +369,7 @@ For example tasks like sunlight collection only need to be carried out during th
 
 Our system provide a task scheduling to 
 
-Sensors are usually assigned multi-tasks.
+Sensors are usually assigned multi-task.
 
 Sensors are assigned tasks to monitor a specific area.
 

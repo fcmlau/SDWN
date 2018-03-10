@@ -1,15 +1,10 @@
-\newpage
 \section{Architecture}
 \label{Arc}
 
 
-
-To build software defined network system in WSN and achieve low energy consumption and high performance, the SDN controller must 
-configure data plane within several hop. So we choose UAV as a mobile SDN controller. In our SDN system, UAV is a control plane which communicate with sensor nodes within on hop, it significantly reduce
- sensor nodes energy consumption in SDN system. At same time, to achieve high performance, the SDN controller should has much more intelligent than sensor nodes can to run real-time decision, our UAV carry 
- a powerfully airborne computer which has ability to run some intelligent applications in real-time.
- 
-
+The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
+The system is divided into three layers: data plane, 
+control plane and management plane respectively.
 
 \begin{figure}[htbp]
 	\centering
@@ -17,18 +12,36 @@ configure data plane within several hop. So we choose UAV as a mobile SDN contro
 	\caption{Architecture of the system.}
 	\label{Architecture}
 \end{figure}
-The architecture of the UAV based SDN system for wireless sensor networks shown as Fig. \ref{Architecture}. The system divided into three layers, data plane, control plane and management plane, respectively
-. The data plane running on sensor nodes, the controller plane and management plane running on UAVs. And the interface between data plane and control plane is defined as southbound interface,
- the interface between control plane and management plane is southbound interface.
 
-Different from wired network, sensor network data plane not only runs data forwarding function, but also runs data sampling function, so user can define routing and sensing application at same time, on sensor nodes, 
-it runs neighbor discovery for getting topology, data sampling for get data form environment and data forwarding for sensor data gathering.
+To build software defined network system in WSN and achieve low 
+energy consumption and high performance, the SDN controller ought to  
+configure data plane within as less hops as possible.  
+In {\sdn}, we choose UAV as a mobile SDN controller,  
+which communicates with sensor nodes by on-hop communication.
+It significantly reduces the energy consumption of nodes in {\sdn}. 
+To achieve high performance, the UAV controller carries
+a powerful airborne computer which has ability to run 
+some intelligent applications in real-time.
 
-On control plane, in order to make our system easy to use,  we implement a SDN database and designed interface abstraction for data plane and SDN applications. The control plane connected data plane and 
-management plane. The database manage the topology gathered from data plane, route table inputed form applications, and sensor task schedule table form management application.
+The data plane runs on sensor nodes while the control 
+plane and management plane run on UAV controller. 
+And the interface between data plane and control plane is defined as southbound interface,
+while the interface between control plane and management plane is defined as southbound interface.
+
+In the control plane, in order to make our system easy to use,  we implement a database on the UAV and design interfaces for data plane and SDN applications. The control plane connected data plane and 
+management plane. The database maintain the topology gathered from the data plane, route table inputed form applications, and sensor task schedule table form management application.
 
 On management plane, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
 scheduler, tec.
+
+Different from wired network, the data plane of WSN not only runs
+data forwarding function, but also executes data sampling function. 
+For example,  sensor nodes execute neighbor discovery process for getting topology, 
+data sampling process for getting data from environment and data forwarding process
+for data gathering. In
+
+{\sdn} is a easy-to-use system that we design and implement a lot of 
+interfaces for users.
 
 The Table \ref{API} shows our southbound interface for user write applications.
 \begin{table*}[htbp]
@@ -116,7 +129,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 	}
 \end{table*}
 
-The List. \ref{topology-update} demonstrate a deploy routing algorithm based on our southbound APIs. 
+The List. \ref{topology-update} demonstrate a deployed routing algorithm based on our southbound APIs. 
 And the List. \ref{AI} demonstrate a AI selection and Muti-tasks application.
 
 \begin{lstlisting}[
