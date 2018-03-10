@@ -31,7 +31,8 @@ the central controller can conduct complex computations
 and store huge data information instead.
   
 Unfortunately, implementing a real SDN in sensor system 
-is still an open problem. The existing work \cite{} 
+is still an open problem. The existing work 
+\cite{mahmud2011exploitation, costanzo2012software, luo2012sensor, de2015tinysdn, galluccio2015sdn} 
 all design framework of SDN for WSN and validate them by simulations.  
 Even worse, these simulational SDN works construct the central controller 
 of SDN in their database station. The controller transmits control 
@@ -58,8 +59,8 @@ In {\sdn}, UAV plays the role of the central controller to monitor the sensor sy
 We implemented five fundamental applications: routing, network diagnosis, 
 AI energy prediction, AI node selection and multi-tasks,
 and provide users with easy-to-use interfaces.
-Routing application allows users to flow table to sensors.
-Network diagnosis is used to find the fault source when .
+Routing application allows users to update the flow table of nodes.
+Network diagnosis is used to find the fault source when network exception is detected.
 Multi-tasks application enables sensor to perform multiple 
 tasks simultaneously. All the applications are within a ecosystem
 and can be combined to achieve synergistic effect. For example,
@@ -67,7 +68,7 @@ users can execute the AI node selection application to choose
 the node set for the multi-task application. 
 
 
-We implemented {\sdn} with DJI M100 UAVs and CC2560 Sensor tags in real experiments, and we conducted extensive simulations for large-scale sensors...................
+We implemented {\sdn} with DJI M100 UAVs and CC2560 Sensor tags in real experiments, and we conducted extensive experiments for a large-scale sensor network. We deploy 130 sensors ...................
 \iffalse
 Adler improves localization accuracy of $20$ sensors by reducing $78.4\%$ root-mean-square error (RMSE) compared to methods by multi-hop networks or mobile vehicles. Adler achieves about $10\%$ higher package receiving ratio compared to notable mobile sink methods for gathering application. Adler reduces sensors' average energy consumption by about $80\%$ compared to multi-hop based methods. When the number of sensor nodes increases or some nodes run out of energy, Adler is more resilient and holds better performance than the state-of-the-art methods.
 \fi
