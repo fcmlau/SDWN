@@ -18,7 +18,7 @@ AI energy prediction, multi-tasks and network diagnosis. We design all these app
 easy-to-use interfaces to users as in Table \ref{API}.
 
 
-\newpage
+
 \subsection{Routing}
 
 
@@ -58,11 +58,6 @@ Actions:
 \item	Forward
 \item	Drop
 \item	Report
-\item	Forward
-\item	Drop
-\item	Report
-\item	Drop
-\item	Report
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -74,7 +69,7 @@ Actions:
 	\vspace{-0.2in}
 \end{figure}
 
-\newpage
+
 \subsection{Network Diagnosis}
 
 \subsubsection{Motivation}
@@ -211,7 +206,7 @@ With the AI sensor selection process, {\sdn} becomes a smarter and adaptive sens
 
 
 
-\newpage
+
 \subsection{AI Energy Prediction}
 
 \subsubsection{Motivation}
@@ -234,12 +229,10 @@ of global information energy information. With the help of UAV, our {\sdn} syste
 this optimization
 
 
-\subsubsection{Motivation}
-
 \subsubsection{Design}
 
 
-\newpage
+
 \subsection{Multi-tasks}
 
 \subsubsection{Motivation}
@@ -285,19 +278,18 @@ task queue; Otherwise it will be put into the task buffer to conduct.
 \caption{Sensor Constraint Detection}
 \label{Constraint}
 \begin{algorithmic}[1]
-\STATE Input: Sensor set $N$, Selected set $M$, Target area $\Omega$, Covering area $\Phi$;
-\STATE Initialize : $M = \emptyset$, $\Phi = \emptyset$
-\WHILE {$M \neq N$}
-    \IF{$\Phi = \Omega $}
-        \STATE break; $\backslash$$\backslash$ Selected set has been found
-    \ENDIF
-    \IF{$\forall n_i \in (N-M) : range(n_i) \subset \Phi$}
-    	 \STATE break;$\backslash$$\backslash$ Cannot cover the target area;
-    \ENDIF
-    \STATE Find $n_i : argmax(\Phi \cap range(n))$, $n_i \in (N-M)$;
-    \STATE $\Phi = \Phi \cup {n_i}$
-\ENDWHILE
-\STATE Output: $M$;
+\STATE Input: Sensor set $N$, Task $T$;
+\STATE Input: Remaining Energy for each node :$Energy(u_i)$;
+\STATE Input: Remaining Storage for each node :$Energy(u_i)$;
+\STATE Initialize: Energy capacity $\eta$, Storage capacity $\xi$;
+\STATE Calculate the energy cost of $T$ for each sensor as : $\phi$;
+\STATE Calculate the storage cost of $T$ for each sensor as :$\varphi$;
+\FOR{Each node $u_i$ in $N$}
+	\IF{$Energy(u_i)+\phi \geq \eta \Vert Storage(u_i)+\varphi \geq \xi$}
+   	 \STATE Set $T$ to task queue;
+   	 \ENDIF
+\ENDFOR
+\STATE Set $T$ to task buffer;
 \end{algorithmic}
 \end{algorithm}
 
