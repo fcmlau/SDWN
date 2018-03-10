@@ -13,5 +13,5 @@ Data sampling, node read task table received from UAV to decide when to wake up 
 On UAV, we run our UAV flight controller on ROS and use MySQL as our SDN database, UAV gathered topology data from every node and save in database, 
 so user can easily read the whole network data from database, For the same 
 reasoning, after user get routing algorithm result and save it to database via northbound interface, 
-our middleware will automatically divide the whole network routing result to individual node routing table, and then send it to specific node
-through southbound interface. Base on our SDN framework, we provide well-defined northbound interface, applications will easily implement.
+our middleware will automatically divide the whole network routing result to individual node routing table, and then send it to specific node.
+
