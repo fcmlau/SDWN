@@ -1,6 +1,16 @@
 \section{Architecture}
 \label{Arc}
+Before introduce our SDN system architecture, we first lead into some basic terms in SDN system,.
 
+\textbf{Data plane}: forwarding data and basic sensing functions.
+
+\textbf{Control plane}: the protocols used to populate the forwarding tables of data plane elements.
+
+\textbf{Management plane}: software services. network policy is defined in management plane, the control plane enforces the policy, and  the data plane executes it by forwarding data accordingly. (running applications)
+
+\textbf{Southbound Interface (SI)}: The instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact.
+
+\textbf{Northbound Interface (NI)}: The middleware on control plane can offer an API to application developers. This API represents a northbound interface, i.e., a common interface for developing applications. Typically, a northbound interface abstracts the low-level instruction sets used by southbound interfaces to program forwarding devices.
 
 The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
 The system is divided into three layers: data plane, 
@@ -23,38 +33,47 @@ To achieve high performance, the UAV controller carries
 a powerful airborne computer which has ability to run 
 some intelligent applications in real-time.
 
-The data plane runs on sensor nodes while the control 
+The \textbf{data plane} runs on sensor nodes while the control 
 plane and management plane run on UAV controller. 
 And the interface between data plane and control plane is defined as southbound interface,
 while the interface between control plane and management plane is defined as southbound interface.
 
-In the control plane, in order to make our system easy to use,  we implement a database on the UAV and design interfaces for data plane and SDN applications. The control plane connected data plane and 
+In the \textbf{control plane}, in order to make our system easy to use,  we implement a database on the UAV and design interfaces for data plane and SDN applications. The control plane connected data plane and 
 management plane. The database maintain the topology gathered from the data plane, route table inputed form applications, and sensor task schedule table form management application.
 
-On management plane, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
-scheduler, tec.
+On \textbf{management plane}, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
+scheduler, etc.
 
 
 Different from wired network, the data plane of WSN not only runs
 data forwarding function, but also executes data sampling function. 
 For example,  sensor nodes execute neighbor discovery process for getting topology, 
 data sampling process for getting data from environment and data forwarding process
-for data gathering. In
-
-{\sdn} is a easy-to-use system that we design and implement a lot of 
+for data gathering. In {\sdn} is a easy-to-use system that we design and implement a lot of 
 interfaces for users.
+
+As shown in Fig \ref{downstream} and Fig \ref{upstream}, the southbound data structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1\columnwidth]{Figure/southbound-data}
-	\caption{Southbound data structure}
-	\label{southbound-data}
+	\includegraphics[width=1\columnwidth]{Figure/downstream}
+	\caption{Downstream data structure}
+	\label{downstream}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\columnwidth]{Figure/upstream}
+	\caption{Upstream data structure}
+	\label{upstream}
 \end{figure}
 
 
-The Table \ref{API} shows our southbound interface for user write applications.
-\begin{table*}[htbp]
-	\caption{System API}
+
+The Table \ref{API} shows our southbound interface for user write applications. By using our SDN Southbound Interface, user can easy to write 
+a variety of applications, such as routing protocol, sensor task scheduler, network diagnose, algorithm evaluator, etc.
+\begin{table*}[!b]
+	\caption{SDN Southbound Interface}
 	\label{API}
 	\centering
 	\scalebox{0.9}{
@@ -64,6 +83,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Sensor Control Interface}}\\
 		\hline
+		\hline
 		struct node & Sensor node structure\\
 		\hline
 		struct nodeset & A set of sensor nodes \\
@@ -72,7 +92,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 		\hline
 		struct energy\_item & Energy statistic information \\
 		\hline
-		struct flow\_table & Flow table \\
+		struct rout\_table & Route table \\
 		\hline
 		struct duty\_cycle\_table & Duty cycle control table \\
 		\hline
@@ -90,19 +110,22 @@ The Table \ref{API} shows our southbound interface for user write applications.
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Routing}}\\
 		\hline
+		\hline
 		get\_topology() & Get the topology of the network\\
 		\hline
-		get\_flow\_table(node) & Get the flow table of a node \\
+		get\_rout\_table(node) & Get the route table of a node \\
 		\hline
-		set\_flow(flow,node) & Set the flow of a node \\
+		set\_route(node) & Set the route of a node \\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{AI Node selection}}\\
+		\hline
 		\hline
 		nodeset simple\_selection(nodeset) & Select sensor set by location information\\
 		\hline
 		nodeset SRSSS\_selection(dataset) & Select sensor set by AI algorithm based on sensing data\\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{AI Energy Prediction}}\\
+		\hline
 		\hline
 		model\_selsct(modeltype) & Select an AI model\\
 		\hline
@@ -113,6 +136,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 		model.predict(node) & Do the energy prediction for a node \\
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Multi-tasks}}\\
+		\hline
 		\hline
 		create\_scheduler() & Create a task scheduler \\
 		\hline
@@ -128,6 +152,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 		\hline
 		\multicolumn{2}{|c|}{\textbf{Diagnosis}}\\
 		\hline
+		\hline
 		detect() & Detect problematic region with probes \\
 		\hline
 		get\_topical\_topology(nodeset) & Construct topical topology\\
@@ -138,7 +163,7 @@ The Table \ref{API} shows our southbound interface for user write applications.
 	}
 \end{table*}
 
-The List. \ref{topology-update} demonstrate a deployed routing algorithm based on our southbound APIs. 
+We demonstrate two application code using our southbound interface. The List. \ref{topology-update} shows a deployed routing algorithm based on our SI. 
 And the List. \ref{AI} demonstrate a AI selection and Muti-tasks application.
 
 \begin{lstlisting}[
@@ -151,17 +176,16 @@ And the List. \ref{AI} demonstrate a AI selection and Muti-tasks application.
 	rulesepcolor=\color{red!20!green!20!blue!20},
 	basicstyle=\ttfamily]
 topology = get_topology();
-//calculate flowtable for each node
+//calculate route table for each node
 //based on topology
-for(node in nodeset){
-   node.flowtable =
-      calculate_flowtable(topology);
+for(node=0; node<nude_num; node++){
+   node.routingtable =
+      calculate_routable(topology);
 }
-//set flowtable for each node
-for(node in nodeset){
-   UAV fly to node;
-   for(flow in node.flowtable)
-        set_route(flow);
+//set route table for each node
+for(node=0; node<nude_num; node++){
+   fly_to(node);
+        set_route(node.routingtable);
 }
 
 \end{lstlisting}
@@ -178,7 +202,7 @@ AI_Multitasks(taskset){
    create_scheduler();
    scheduler.create_buffer();
 
-   for(task in taskset)
+   for(task=taskset.head; task < taskset.len;task=task.next)
       scheduler.task_buffer_add(
          task,
          defaultset);
@@ -186,7 +210,7 @@ AI_Multitasks(taskset){
    scheduler.task_update();
    ...
    ...
-   for(task in scheduler.task_buffer){
+   while((task = scheduler.task_next)!= NULL){
       data = get_collected_data();
       nodeset =
          SRSSS_selection(dataset);
