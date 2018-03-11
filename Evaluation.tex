@@ -119,11 +119,29 @@ Figure~\ref{fig:diagnosis}
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/diagnosis}
 	\vspace{-0.1in}
-	\caption{Failure detection rate for various failure type and number
+	\caption{
 		\textnormal{
 		}}
 	\label{fig:diagnosis}
 \end{figure}
+
+\begin[htbp]{table}
+	\centering
+	\begin{tabular}{|c||c|c|c|c|c|}
+		\hline
+		\diagbox{Type}{Failures} & 1 & 2 & 3 & 4 & 5\\
+		\hline
+		\hline
+		Sensing & 98\% & 95\% & 93\% & 92\% & 90\%\\
+		\hline
+		Energy & 100\% & 93\% & 92\% & 90\% & 88\%\\
+		\hline
+		Radio & 100\% & 90\% & 88\% & 84\% & 80\%\\
+		\hline
+	\end{tabular}
+	\caption{Failure detection rate for various failure type and number}
+	\label{tab:diagnosis}
+\end{table}
 
 \subsection{AI Node Selection}
 \textbf{Scalability.}
