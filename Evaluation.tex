@@ -9,9 +9,8 @@ state-of-the-art works.
 
 \subsection{Routing}
 
-\textbf{Packet loss ratio}
-
-Packet loss ratio is defined as the proportion of the total data packets
+\textbf{Packet recieved ratio.}
+Packet recieved ratio is defined as the proportion of the total data packets
 recieved by data sink and the the total data packets sent by all nodes, and it
 can be formulated as
 
@@ -23,28 +22,27 @@ where $L$ reprents the throughput, and $S_i$ and $R$ denotes the number of
 packets sent by the $i$-th node and the number of packets recieved by data
 sink, respectively.
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.85\columnwidth]{Figure/packet_loss_ratio}
-	\vspace{-0.1in}
-	\caption{Packet loss ratio in time
-		\textnormal{
-		}}
-	\label{fig:packet_loss_ratio}
-\end{figure}
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=.85\columnwidth]{Figure/packet_loss_ratio}
+%	\vspace{-0.1in}
+%	\caption{Packet loss ratio in time
+%		\textnormal{
+%		}}
+%	\label{fig:packet_loss_ratio}
+%\end{figure}
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/packet_loss_ratio_with_size}
 	\vspace{-0.1in}
-	\caption{Packet loss ratio in various network sizes
+	\caption{Packet recieved ratio in various network sizes
 		\textnormal{
 		}}
 	\label{fig:packet_loss_ratio_with_size}
 \end{figure}
 
-\textbf{Total throughput}
-
+\textbf{Total throughput.}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/throughput}
@@ -69,9 +67,8 @@ others, because all computation-intensive tasks are done by UAV and sensors do
 not need to send packets to negotiate route path, which decrease the energy
 consumption with no doubt.
 
-\textbf{Fault tolerance}
-
-Fault tolenrance is a significant metric to evaluate the performance of routing
+\textbf{Resilience}
+Resilience  is a significant metric to evaluate the performance of routing
 algorithms. It measures the throughput with various number of node died.
 Throughput can drop sharply if a node which most traffic passes by dies and can
 be influenced only slightly by death of nodes which no traffic passes through.
@@ -89,14 +86,13 @@ however, our {\sdn} still performs better than PRL.
 	\vspace{-0.1in}
 	\caption{Fault tolerance
 		\textnormal{
-			RPL and {\sdn} are compared on fault tolerance, and {\sdn} perform
+			RPL and {\sdn} are compared on resilience, and {\sdn} perform
 			slightly better than PRL.
 		}}
 	\label{fig:fault_tolerance}
 \end{figure}
 
-\textbf{Scalability}
-
+\textbf{Scalability.}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/scalability}
@@ -109,10 +105,10 @@ however, our {\sdn} still performs better than PRL.
 \end{figure}
 
 \subsection{Network Diagnosis}
-\textbf{Robustness}
+\textbf{Robustness.}
 
 \subsection{AI Node Selection}
-\textbf{Scalability}
+\textbf{Scalability.}
 
 \subsection{AI Energy Prediction}
 
@@ -121,7 +117,7 @@ CPU running time and radio listening and transmitting time and summing them up.
 The coefficients are proportional to the working current described in sensor's
 DataSheet.
 
-\textbf{Prediction accuracy}
+\textbf{Prediction accuracy.}
 
 \begin{figure}[htbp]
 	\centering
@@ -147,8 +143,9 @@ DataSheet.
 \end{figure}
 
 \subsection{Multi-tasks}
-\textbf{Energy Performance}
-\textbf{Scalability}
+\textbf{Energy Performance.}
+
+\textbf{Scalability.}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/multitask_energy}
