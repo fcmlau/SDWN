@@ -79,7 +79,14 @@ By designing local routing repair mechanism, our system achieves robustness to r
 	\label{routing-flow}
 	\vspace{-0.1in}
 \end{figure}
-As shown in Fig. \ref{routing-flow}, after the node get routing table for UAV, it set it's netxt hop IP following received table, and also using neighbor's RSSI information find the nearest node as its substitute node, then node broadcast its next hop IP and substitute node IP. After the substitute node received the broadcast packet, it save the source's next hop IP and keep monitoring the source status. The substitute node will became new header when it detected the current header failed.
+
+As shown in Figure~\ref{routing-flow}, after the node get routing table from
+UAV, it sets its next hop IP following received table, and also uses its
+neighbor's RSSI information to find the nearest node as its substitute node,
+then node broadcast its next hop IP and substitute node IP. After the substitute
+node received the broadcast packet, it save the source's next hop IP and keep
+monitoring the source status. The substitute node will became new header when it
+detected the current header failed.
 
 We implement our software defined routing and local reparation, the routing in our system achieve both energy efficiency and robustness.
 
