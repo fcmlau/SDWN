@@ -36,13 +36,22 @@ sink, respectively.
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/packet_loss_ratio_with_size}
 	\vspace{-0.1in}
-	\caption{Packet recieved ratio in various network sizes
+	\caption{Packet recieved ratio
 		\textnormal{
 		}}
 	\label{fig:packet_loss_ratio_with_size}
 \end{figure}
 
+Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
+{\sdn}: (1) The packet recieved ratio highly exceeds others'; (2) The decreasing
+speed is slow. The reasons are {\sdn} uses UAVs and AI algorithms to help
+diagnose and fix routing problems quickly and the cluster mechanism to do local
+repair when UAVs are absent.
+
 \textbf{Total throughput.}
+Throughput is defined as the the total data packets recieved by data sink, and it
+measures the capability and scalability of a network.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/throughput}
@@ -56,8 +65,6 @@ sink, respectively.
 	\label{fig:throughput}
 \end{figure}
 
-Throughput is defined as the the total data packets recieved by data sink, and it
-measures the capability and scalability of a network.
 
 Figure~\ref{fig:throughput} compares network throughput by deploying various
 routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
@@ -105,7 +112,18 @@ however, our {\sdn} still performs better than PRL.
 \end{figure}
 
 \subsection{Network Diagnosis}
-\textbf{Robustness.}
+\textbf{Failure detection rate.}
+Figure~\ref{fig:diagnosis}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\columnwidth]{Figure/diagnosis}
+	\vspace{-0.1in}
+	\caption{Failure detection rate for various failure type and number
+		\textnormal{
+		}}
+	\label{fig:diagnosis}
+\end{figure}
 
 \subsection{AI Node Selection}
 \textbf{Scalability.}
@@ -118,16 +136,18 @@ The coefficients are proportional to the working current described in sensor's
 DataSheet.
 
 \textbf{Prediction accuracy.}
+Figure~\ref{fig:energy_pred:a} shows the real energy consumption curve and the
+prediction one.
 
 \begin{figure}[htbp]
 	\centering
 	\subfloat[Energy prediction]{
-		\includegraphics[width=.43\columnwidth]{Figure/energy_pred}
+		\includegraphics[width=.45\columnwidth]{Figure/energy_pred}
 		\label{fig:energy_pred:a}
 	}
-	\hspace{0.3cm}
+	\hspace{0.1cm}
 	\subfloat[Energy prediction error]{
-		\includegraphics[width=.43\columnwidth]{Figure/energy_pred_err}
+		\includegraphics[width=.45\columnwidth]{Figure/energy_pred_err}
 		\label{fig:energy_pred:b}
 	}
 	\vspace{-0.1in}
@@ -135,7 +155,7 @@ DataSheet.
 		\textnormal{
 			We use regression method to predict energy consumption and the
 			prediction result is consistent with the truthground.  The absolute
-			error of energy prediction never exceeds 0.05 with normalized energy
+			error of energy prediction never exceeds $3\times10^{-10}$ with normalized energy
 			(i.e. the maximum energy of a sensor is 1).
 		}
 	}
