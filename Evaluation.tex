@@ -8,6 +8,21 @@ use different metrics for various applications and compare our works with other
 state-of-the-art works.
 
 \subsection{Routing}
+
+\textbf{Packet loss ratio}
+
+Packet loss ratio is defined as the proportion of the total data packets
+recieved by data sink and the the total data packets sent by all nodes, and it
+can be formulated as
+
+\begin{equation}
+	L = \frac{\sum_{i = 0}^{N}S_i}{R}
+\end{equation}
+
+where $L$ reprents the throughput, and $S_i$ and $R$ denotes the number of
+packets sent by the $i$-th node and the number of packets recieved by data
+sink, respectively.
+
 \textbf{Total throughput}
 
 \begin{figure}[htbp]
@@ -23,17 +38,8 @@ state-of-the-art works.
 	\label{fig:throughput}
 \end{figure}
 
-Throughput is defined as the proportion of the total data packets recieved by
-data sink and the the total data packets sent by all nodes, and it can be
-formulated as
-
-\begin{equation}
-	T = \frac{\sum_{i = 0}^{N}S_i}{R}
-\end{equation}
-
-where $T$ reprents the throughput, and $S_i$ and $R$ denotes the number of
-packets sent by the $i$-th node and the number of packets recieved by data
-sink, respectively.
+Throughput is defined as the the total data packets recieved by data sink, and it
+measures the capability and scalability of a network.
 
 Figure~\ref{fig:throughput} compares network throughput by deploying various
 routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
@@ -70,6 +76,17 @@ however, our {\sdn} still performs better than PRL.
 \end{figure}
 
 \textbf{Scalability}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\columnwidth]{Figure/scalability}
+	\vspace{-0.1in}
+	\caption{Scalability
+		\textnormal{
+			{\sdn} succeeds RPL in different network sizes.
+		}}
+	\label{fig:scalability}
+\end{figure}
 
 \subsection{Network Diagnosis}
 \textbf{Robustness}
