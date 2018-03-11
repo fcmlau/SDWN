@@ -12,6 +12,7 @@ Before introduce our SDN system architecture, we first lead into some basic term
 
 \textbf{Northbound Interface (NI)}: The middleware on control plane can offer an API to application developers. This API represents a northbound interface, i.e., a common interface for developing applications. Typically, a northbound interface abstracts the low-level instruction sets used by southbound interfaces to program forwarding devices.
 
+\subsection{Overview}
 The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
 The system is divided into three layers: data plane, 
 control plane and management plane respectively.
@@ -33,6 +34,7 @@ To achieve high performance, the UAV controller carries
 a powerful airborne computer which has ability to run 
 some intelligent applications in real-time.
 
+\subsection{SDN Planes}
 The \textbf{data plane} runs on sensor nodes while the control 
 plane and management plane run on UAV controller. 
 And the interface between data plane and control plane is defined as southbound interface,
@@ -51,8 +53,8 @@ For example,  sensor nodes execute neighbor discovery process for getting topolo
 data sampling process for getting data from environment and data forwarding process
 for data gathering. In {\sdn} is a easy-to-use system that we design and implement a lot of 
 interfaces for users.
-
-As shown in Fig \ref{downstream} and Fig \ref{upstream}, the southbound data structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
+\subsection{Southbound Data Structures}
+As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{southbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
 
 \begin{figure}[htbp]
 	\centering
@@ -69,10 +71,10 @@ As shown in Fig \ref{downstream} and Fig \ref{upstream}, the southbound data str
 \end{figure}
 
 
-
+\subsection{Southbound Interface}
 The Table \ref{API} shows our southbound interface for user write applications. By using our SDN Southbound Interface, user can easy to write 
 a variety of applications, such as routing protocol, sensor task scheduler, network diagnose, algorithm evaluator, etc.
-\begin{table*}[!b]
+\begin{table*}[!t]
 	\caption{SDN Southbound Interface}
 	\label{API}
 	\centering
