@@ -1,5 +1,6 @@
 \section{Architecture}
 \label{Arc}
+\subsection{Overview}
 Before introduce our SDN system architecture, we first lead into some basic terms in SDN system,.
 
 \textbf{Data plane}: forwarding data and basic sensing functions.
@@ -12,7 +13,7 @@ Before introduce our SDN system architecture, we first lead into some basic term
 
 \textbf{Northbound Interface (NI)}: The middleware on control plane can offer an API to application developers. This API represents a northbound interface, i.e., a common interface for developing applications. Typically, a northbound interface abstracts the low-level instruction sets used by southbound interfaces to program forwarding devices.
 
-\subsection{Overview}
+
 The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
 The system is divided into three layers: data plane, 
 control plane and management plane respectively.
