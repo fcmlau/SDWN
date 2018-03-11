@@ -6,7 +6,7 @@
 There are several existing SDN approaches for sensor system, 
 namely flow sensor \cite{mahmud2011exploitation}, SDWN \cite{costanzo2012software},
 sensor openflow \cite{luo2012sensor}, TinySDN \cite{de2015tinysdn}, SDN-WISE \cite{galluccio2015sdn}.
-However, they are all implemented and evaluated by simulations. 
+However, they are all implemented and evaluated only by simulations. 
 
 \textbf{Flow Sensor.}
 The previous idea presented in paper \cite{mahmud2011exploitation} addresses 
@@ -56,20 +56,20 @@ SDN-WISE shows its good performance in different operation conditions.
 
 
 \subsection{Applications for Wireless Sensor Networks}
-
-To design a ecosystem for sensor network, 
-we are to implement several applications.  
-We make a survey of the traditional sensor 
-networks and find some typical applications: 
+Traditional applications in wireless sensor networks 
+can not promise global optimization without the support of SDN.
+To design a ecosystem for software defined sensor networks, 
+we are to implement several typical applications:
 routing, network diagnosis, AI sensor, sensor selection and multi-task.
+
 
 \textbf{Routing.}
 Low-power and lossy network consists of devices whose processing capability, 
 memory and energy are constrained \cite{Winter2012}. Hence, traditional 
-protocols cannot be used there. However, RPL is one of the standards for ipv6 routing in LLN. 
+protocols cannot be used there. However, RPL is one of the standards for IPv6\cite{Deering1998Internet} routing in LLN. 
 It builds the topology in form of a tree, performing DAO, DIO, ACK to generate a directed acyclic graph 
 from one or more roots to the leaf nodes. The experiments done in the paper \cite{Tsiftes2010a} show 
-that Ipv6 routing with ContikiRPL is both lightweight and power-efficient.
+that IPv6 routing with ContikiRPL is both lightweight and power-efficient.
  
 \textbf{Network Diagnosis.}
 Previous diagnosis algorithms share the same drawback 
