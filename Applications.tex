@@ -151,37 +151,19 @@ An ideal solution to the energy exhausted problem is to find a self-adjusted rou
 makes adjustments according to the energy status of each sensor. 
 Actually, this is a kind of dynamic programming problem and
 the optimization target is to achieve the longest lifetime of the whole network under
-complex constrains. We modify linear and simple MLP\cite{Harvey1988An} deep learning model to simulate and simplify
-this constrains. Challenges occurs in traditional WSN because of lack
-of global energy information. 
+complex constrains. 
 
-In {\sdn}, the UAV controller .   
-all these factors makes it possible to execute
-this optimization. Besides, the 
-The AI prediction application can contribute to the network diagnosis application
+In {\sdn}, the UAV controller stores the global energy information 
+and can perform large-scale computations, laying 
+the foundation for the intelligent energy prediction.
+The AI prediction in term can contribute to the whole system  network diagnosis application
 This kind of cooperation and mutual assistance makes {\sdn} an effective ecosystem.
 
-\subsubsection{Design}
-In our {\sdn} system, we implement a prediction application for 
-energy storage of sensors. The architecture of the AI energy prediction
-can be seen in Fig. \ref{prediction}. The special system architecture enables
-us to analyze the sensor data in real time. After the information 
-collected by the sensor is transmitted to database, it is used as
-the input of the incremental learning model, which outputs the
-life expectancy of each sensor. These predicted information contributes
+
+These predicted information contributes
 to other application. 
 
-A sample input of energy information contains at least four components: sensors'
-duty cycle, packet-sending time, data receiving time and other energy
-consumption. Data collection module records these information with time stamp,
-as well as routing information. We use the database to maintain our experimental data,
-and use the sql query to manage training data. In this way, we can easily
-get each sensor's routing task and energy consumption at any time as input. A forgetting factor
-is used to avoid overfitting. Then the model will output the prediction of a energy consumption list in time
-sequences. The sensor which is most likely to run out of energy will rank in the first place of the list. 
-Combined with our diagnosis application, we can make use of our prediction result to prolong the network
-lifetime.
-
+\subsubsection{Design}
 
 \begin{figure*}[htbp]
 	\centering
@@ -189,6 +171,34 @@ lifetime.
 	\caption{AI prediction}
 	\label{prediction}
 \end{figure*}
+
+In {\sdn},  we implement an energy prediction application 
+to forecast lifetime of sensors. The architecture of this application
+can be seen in Fig. \ref{prediction}.
+
+
+We utilize the popular machine learning model, 
+Multi-layer Perceptron (MLP) \cite{Harvey1988An},
+to conduct the energy prediction process. 
+The AI-based prediction architecture enables
+users to analyze the sensor data in real time. 
+After the information collected by the sensor is transmitted to database, it is used as
+the input of the incremental learning model, which outputs the
+life expectancy of each sensor. 
+
+A sample input of energy information contains at least four components: sensors'
+duty cycle, packet-sending time, data receiving time and other energy
+consumption. Data collection module records these information with time stamp
+as well as routing information. We use the database to maintain our experimental data,
+and use the sql query to manage training data. In this way, we can easily
+get each sensor's routing flows and energy consumption at any time as input. A forgetting factor
+is used to avoid overfitting. Then the model will output the prediction of a energy consumption list in time
+sequences. The sensor which is most likely to run out of energy will rank in the first place of the list. 
+Combined with our diagnosis application, we can make use of our prediction result to prolong the network
+lifetime.
+
+
+
 
 
 \subsection{AI Node Selection}

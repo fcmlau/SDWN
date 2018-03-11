@@ -1,31 +1,47 @@
 \section{Evaluation}
 \label{Eva}
 
-In this section, we describle our performance evaluation in real-scene
-experiments. We distribute 130 TI SensorTag sensors in an about $250~\times~250$
-square meters area, with contiki-ng as its operating system. We use different
-metrics for various applications and compare our works with other
+In this section, we describle our performance evaluation in simulation and
+real-scene experiments. We distribute 130 TI SensorTag sensors in an about
+$250~\times~250$ square meters area, with contiki-ng as its operating system. We
+use different metrics for various applications and compare our works with other
 state-of-the-art works.
 
 \subsection{Routing}
-\textbf{Energy efficiency}
-
-We estimate sensor energy cost by multipling different coefficients on CPU
-running time and radio listening and transmitting time and summing them up. The
-coefficients are proportional to the working current described in sensor's
-DataSheet.
+\textbf{Total throughput}
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.85\columnwidth]{Figure/throughput}
 	\vspace{-0.1in}
 	\caption{Routing throughput.
-		\textnormal{The figure shows throughput
-			corresponding to three kinds of Routing algorithms. Throughput can
-			drop to zero when some key nodes are dead in the network.}}
-	\label{throughput}
-	\vspace{-0.2in}
+		\textnormal{
+			The figure shows throughput corresponding to three kinds of Routing
+			algorithms. Throughput can drop to zero when some key nodes are dead
+			in the network.
+		}}
+	\label{fig:throughput}
 \end{figure}
+
+Throughput is defined as the proportion of the total data packets recieved by
+data sink and the the total data packets sent by all nodes, and it can be
+formulated as
+
+\begin{equation}
+	T = \frac{\sum_{i = 0}^{N}S_i}{R}
+\end{equation}
+
+where $T$ reprents the throughput, and $S_i$ and $R$ denotes the number of
+packets sent by the $i$-th node and the number of packets recieved by data
+sink, respectively.
+
+Figure~\ref{fig:throughput} compares network throughput by deploying various
+routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
+sensors to data sink, to caculate the route table, its throughput exceeds RPL
+and LEACH. Besides, in {\sdn}, sensors' lifetime increases a lot more than
+others, because all computation-intensive tasks are done by UAV and sensors do
+not need to send packets to negotiate route path, which decrease the energy
+consumption with no doubt.
 
 \textbf{Fault-tolerance}
 
@@ -38,6 +54,12 @@ DataSheet.
 \textbf{Scalability}
 
 \subsection{AI Energy Prediction}
+
+We estimate sensor energy consumption by multipling different coefficients on
+CPU running time and radio listening and transmitting time and summing them up.
+The coefficients are proportional to the working current described in sensor's
+DataSheet.
+
 \textbf{Prediction accuracy}
 
 \begin{figure}[htbp]
@@ -45,12 +67,12 @@ DataSheet.
 	\centering
 	\subfloat[Energy prediction]{
 		\includegraphics[width=.43\columnwidth]{Figure/energy_pred}
-		\label{energy_pred:a}
+		\label{fig:energy_pred:a}
 	}
 	\hspace{0.3cm}
 	\subfloat[Energy prediction error]{
 		\includegraphics[width=.43\columnwidth]{Figure/energy_pred_err}
-		\label{energy_pred:b}
+		\label{fig:energy_pred:b}
 	}
 	\vspace{-0.1in}
 	\caption{Energy prediction
@@ -61,8 +83,7 @@ DataSheet.
 			(i.e. the maximum energy of a sensor is 1).
 		}
 	}
-	\label{energy_pred}
-	\vspace{-0.1in}
+	\label{fig:energy_pred}
 \end{figure}
 
 \subsection{Multi-tasks}
@@ -75,6 +96,5 @@ DataSheet.
 	\caption{Average energy consumption with and without multitask schedule
 		\textnormal{When with multitask schedule, sensor consumes half of the energy
 			comparing to when without multitask schedule.}}
-	\label{multitask_energy}
-	\vspace{-0.2in}
+	\label{fig:multitask_energy}
 \end{figure}

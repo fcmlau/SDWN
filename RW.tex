@@ -9,19 +9,50 @@ sensor openflow \cite{luo2012sensor}, TinySDN \cite{de2015tinysdn}, SDN-WISE \ci
 However, they are all implemented and evaluated by simulations. 
 
 \textbf{Flow Sensor.}
-The previous idea presented in paper \cite{mahmud2011exploitation} addresses reliability in the sensor networks through exploiting the OpenFlow technology. Coming up with the concept of flow-sensor instead of typical sensor \cite{Liu2015Thermoresistive}, they have successfully made it possible to communicate between controller, gateway and sensors. Besides that, they proved flow sensor more reliable since data packets, control packets and the sensor nodes themselves can be easily monitored, regulated and routed whenever required. Therefore, a robust routing and uninterruptable messages flow of sensors are achieved. The results described in this paper shows flow-sensor is able to display much better performance even for large networks.
+The previous idea presented in paper \cite{mahmud2011exploitation} addresses 
+reliability in the sensor networks through exploiting the OpenFlow technology\cite{Mckeown2008OpenFlow}. 
+Coming up with the concept of flow-sensor instead of typical sensor \cite{Liu2015Thermoresistive}, 
+they have successfully made it possible to achieve communications between controller, 
+gateway and sensors. Besides, they proved flow sensor to be more 
+reliable since data packets, control packets and the sensor nodes 
+themselves can be easily monitored, regulated and routed whenever 
+required. Therefore, a robust routing and uninterruptible messages 
+flow of sensors are achieved. The results described in this paper 
+shows flow-sensor is able to display much better performance even for large networks.
 
 \textbf{SDWN.}
-The solution of supporting the SDN approach in LR-WPANS is first presented in \cite{costanzo2012software}. Given the gap that advantages of SDN and the proper ways to expand that to wireless network were not clear enough, the group analyzes the opportunities of SDN-related wireless network and illustrates the requirements should be considered to utilize SDN solution for wireless network. They made a good attempt to develop the SDWN protocol stack.
+The solution of supporting the SDN approach in LR-WPANS is first presented in \cite{costanzo2012software}. 
+Given the gap that advantages of SDN and the proper ways to expand it to wireless networks are not clear enough, 
+the group analyzes the opportunities of SDN-related wireless network and illustrates 
+the requirements should be considered to utilize SDN solution for wireless networks. 
+They made a good attempt to develop the SDWN protocol stack.
 
 \textbf{Sensor OpenFlow.}
-In the paper \cite{luo2012sensor}, the group toke a radical, yet backward and peer compatible, approach to tackle the problems existing in WSN such as resource underutilization, counterproductive, rigidity to policy change and manage difficulty. They propose SD-WSN with a separation between data plane performing flow-based packet forwarding and control plane performing network control. The core part designed is Sensor OpenFlow(SOF), which gives a standard protocol for the communication between data and control part. Based on the whole architecture they gave, the underlying network becomes programmable by using SOF.
+In the paper \cite{luo2012sensor}, the group took a radical, yet backward 
+and peer compatible approach to tackle the problems existing in WSN 
+such as resource underutilization, counterproductive, rigidity to policy 
+change and manage difficulty. They propose SD-WSN with a separation between 
+data plane performing flow-based packet forwarding and control plane performing network control. 
+The core part designed is Sensor OpenFlow(SOF), which gives a standard protocol for the communication 
+between data and control part. Based on the whole architecture they gave, 
+the underlying network becomes programmable by using SOF.
 
 \textbf{Tiny SDN.}
-TinySDN \cite{de2015tinysdn} is a TinyOS-based SDN framework aims to address the problem that only single controller can be coupled to the sink. Besides, TinySDN is a hardware independent framework that comprises two parts: SDN-enable sensor node and SDN-controller node. In order to test the reliability of this framework, the authors done some experiments on COOJA. Through analyzing results concerning delay and memory footprint, they found it is feasible in communication provided by SDN paradigm.
+TinySDN \cite{de2015tinysdn} is a TinyOS-based SDN framework aiming to 
+address the problem that only single controller can be coupled to the sink. 
+Besides, TinySDN is a hardware independent framework that comprises two parts: 
+SDN-enabled sensor node and SDN-controller node. 
+In order to test the reliability of this framework, the authors conducted some experiments on COOJA. 
+Through analyzing results concerning delay and memory 
+footprint, they found it is feasible in communication provided by SDN paradigm.
 
 \textbf{SDN-WISE.}
-One solution for wireless sensor network is introduced in the paper \cite{galluccio2015sdn}, and the authors implement the prototype of this idea. Compared to other SDN solutions for wireless network, this solution successfully reduces the messages exchange needed between sensor node and controller. Besides, flexible APIs are provided by the authors, thus making the network much easier to program. Also, they done some experimental testbed, found that in a power limit hardware, the response delay is still very small, SDN-WISE shows its good performance in different operation conditions.
+One solution for wireless sensor network is introduced in the paper \cite{galluccio2015sdn}, 
+and the authors implement the prototype of this idea. Compared to other SDN solutions for wireless network, 
+this solution successfully reduces the message exchange needed between sensor nodes and controller. 
+Besides, flexible APIs are provided by the authors, which makes the network much easier to program. 
+Also, they implemented some experimental testbed, and found that in a power limited hardware, the response delay was still very small. 
+SDN-WISE shows its good performance in different operation conditions.
 
 
 \subsection{Applications for Wireless Sensor Networks}
@@ -29,20 +60,59 @@ One solution for wireless sensor network is introduced in the paper \cite{galluc
 To design a ecosystem for sensor network, 
 we are to implement several applications.  
 We make a survey of the traditional sensor 
-networks  and find some typical applications: 
-routing, network diagnosis, AI sensor, sensor selection and multi-tasks.
+networks and find some typical applications: 
+routing, network diagnosis, AI sensor, sensor selection and multi-task.
 
-\textbf{Routing}
-Low-power and lossy network consist of devices whose processing, memory and energy are both constrained \cite{Winter2012}. Hence, traditional protocols can’t be used there. However, RPL is one of the standards for ipv6 routing in LLN. It builds the topology like a tree, performing DAO, DIO, ACK to generate a directed acyclic graph from one or more root to the leaf nodes. The experiments done in the paper [Low-Power Wireless IPv6 Routing with ContikiRPL] \cite{Tsiftes2010a} shows that Ipv6 routing with ContikiRPL is both lightweight and power-efficient.
+\textbf{Routing.}
+Low-power and lossy network consists of devices whose processing capability, 
+memory and energy are constrained \cite{Winter2012}. Hence, traditional 
+protocols can’t be used there. However, RPL is one of the standards for ipv6 routing in LLN. 
+It builds the topology in form of a tree, performing DAO, DIO, ACK to generate a directed acyclic graph 
+from one or more roots to the leaf nodes. The experiments done in the paper \cite{Tsiftes2010a} show 
+that Ipv6 routing with ContikiRPL is both lightweight and power-efficient.
  
-\textbf{Network Diagnosis}
-Previous diagnosis algorithms share the same drawback that their process of gathering information is static and the reports sent to be analysis is not intermediate enough \cite{Ramanathan2005Sympathy,Khan2010Diagnostic}. Directional Diagnosis \cite{gong2015directional} is an online diagnosis approach to dynamically recognize the most useful information according to an engine designed in the approach. Besides, the diagnosis process only focuses on the problematic area, so that it can produce a more accuracy prediction \cite{Pavlou2015How}. To be specify, the whole approach consist of four main parts: Node Tracing, Trace Collection, Inference Model and Incremental Probing. The node tracing algorithms dynamically reconstruct topical topology and derive inner dependencies. Based on the data information collected, inference model can guide the next probe by Incremental Probing applying Belief network. The experiments done show the diagnosis result is efficient and in real time.
+\textbf{Network Diagnosis.}
+Previous diagnosis algorithms share the same drawback 
+that their process of gathering information is static and the reports sent to be 
+analysis are not intermediate enough \cite{Ramanathan2005Sympathy,Khan2010Diagnostic}. 
+Directional Diagnosis \cite{gong2015directional} is an online diagnosis approach to dynamically 
+recognize the most useful information according to an engine designed in the approach. 
+Besides, the diagnosis process only focuses on the problematic area, 
+thus it can produce a more accuracy prediction \cite{Pavlou2015How}. 
+Specifically, the whole approach consists of four main parts: 
+node tracing, trace collection, inference model and incremental probing. 
+The node tracing algorithms dynamically reconstruct the topical topology and derive inner dependencies. 
+Based on the collected data information, inference model can guide the next probe 
+by incremental probing upon belief network. The experiments done show the diagnosis 
+process promises high efficiency in real time.
 
-\textbf{AI sensor}
-The application of sensors often relays on the filed like sensor select, data prediction combining with AI algorithms. In order to select the subset of nodes to be active, related study give a way to dynamically response to the change of sensor network based on the historical information \cite{Mo2013Dynamic}, the new sensor node has a different time factor from the old node when construct the predict network. Besides, the position of nodes may be highly used to reduce the weight of nearby nodes in a predict network \cite{Kumar2017Edge}. As for data prediction, on the one hand, the energy consuming information can be collected. Previous work on diagnosis, for example, only performs diagnosis when sensor almost run out of energy. On the other hand, the original data about temperature, humidity, light intensity is a reliable resources for prediction in time series\cite{Raza2014Practical}. 
+\textbf{AI sensor.}
+The application of sensors often relays on the fields 
+like sensor selection and data prediction with the help of AI algorithms. 
+In order to select the subset of nodes to be active, related study gives a way to dynamically 
+response to the change of sensor network based on the historical information \cite{Mo2013Dynamic}.
+The new sensor node has a different time factor from the old 
+node when constructing the predictive network. 
+Besides, the position of nodes may be sufficiently used to reduce the weight of 
+nearby nodes in a predictive network \cite{Kumar2017Edge}. 
+As for the data prediction, on the one hand, the energy consumption information 
+can be collected. Previous work on diagnosis, for example, only performs 
+diagnosis process when sensors almost run out of energy. On the other hand, the original 
+data on temperature, humidity, light intensity is a reliable resources for 
+prediction in time series\cite{Raza2014Practical}. 
 
-\text{Sensor Select}
-Redundant sensor network always contains nodes that generating data stream with some overleap parts \cite{Ali1995Redundant}. Collected information can be useful to determine which sensors are active. The algorithms come up with in paper\cite{li2016spatially} are called Spatially Regularized Streaming Sensor Selection(SRSSS). The authors not only consider the spatial information but also the historical obversion of the sensor network. They apply higher weights to nearby sensors and introduce a time-forgetting factor \cite{Astrom1989Adaptive} so that their approach can predict more accuracy and response much faster than others.
+\textbf{Sensor Selection.}
+Redundant sensor network always contains nodes that generating data 
+stream with some overlapping parts \cite{Ali1995Redundant}. 
+Collected information can be useful to determine which sensors are active. 
+The algorithms come up with in paper\cite{li2016spatially} are called Spatially Regularized Streaming Sensor Selection(SRSSS). 
+The authors not only consider the spatial information but also the historical obversion of the sensor network. 
+They apply higher weights to nearby sensors and introduce a time-forgetting factor \cite{Astrom1989Adaptive} so that their approach can predict more accurately and response much faster.
 	
-\textbf{Multitask}
-One single sensor node may shoulder several tasks. To achieve power saving, when a task performed, we need to choose which sensor to be active and which to be inactive \cite{Georges2011Energy}. Nowadays, work aims to design an energy-efficient sensor management strategy tends to develop their method in three ways: choose the proper subset of nodes to be active \cite{Aghdasi2009High}, which sensors to assign the task and the sampling rate on one node when performing task. Related study has found an efficient online algorithm considering sensor activation and task mapping to deal with dynamic events during runtimes of SDSNS \cite{Zeng2015}.
+\textbf{Multi-task.}
+One single sensor node may shoulder several tasks. To save the energy consumption of the network, 
+when a task is assigned, we need to choose which sensor to be active and which to be inactive \cite{Georges2011Energy}. 
+Nowadays, works aiming to design an energy-efficient sensor management strategy
+tends to develop their methods in three steps: choose the proper subset of nodes to be active \cite{Aghdasi2009High}, choose the subset of active nodes to assign the task and set the sampling rate of the task. Related study has found an efficient online 
+algorithm considering sensor activation and task mapping to deal with dynamic events during the 
+runtime of software defined sensor network system \cite{Zeng2015}.
