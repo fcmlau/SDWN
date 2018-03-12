@@ -1,23 +1,15 @@
 \section{Architecture}
 \label{Arc}
-\subsection{Overview}
-Before introducing our SDN system architecture, we first present some basic terms in SDN system,.
+\subsection{Preliminaries}
+Before introducing our SDN system architecture, we first present some general terms including three planes and two interfaces in SDN system \cite{kreutz2015software}.
 
-\textbf{Data plane}: forwarding data and basic sensing functions.
+A data plane is the part of a network that carries user traffic and basic sensing functions. And a control plane is the part of a network that carries signaling traffic and is responsible for routing. The top layer of SDN system is management plane which includes the software services, such as simple network management protocol (SNMP). It used to remotely monitor and configure the control functionality. The user implement their applications on it.
 
-\textbf{Control plane}: the protocols used to populate the forwarding tables of data plane elements.
+Southbound Interface (SI) is the instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact. Northbound Interface (NI) is the middleware on control plane can offer an API to application developers.
 
-\textbf{Management plane}: software services. network policy is defined in management plane, the control plane enforces the policy, and  the data plane executes it by forwarding data accordingly. (running applications)
-
-\textbf{Southbound Interface (SI)}: The instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact.
-
-\textbf{Northbound Interface (NI)}: The middleware on control plane can offer an API to application developers. This API represents a northbound interface, i.e., a common interface for developing applications. Typically, a northbound interface make abstracts the low-level instruction sets used by southbound interfaces to program forwarding devices.
-
-
+\subsection{Overview of {\sdn}}
 The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
-The system is divided into three layers: data plane, 
-control plane and management plane respectively.
-
+The system is divided into three layers and two interface abstraction, the southbound interface connect data plane and control plane, and the nouthbound interface connect control plane and management plane. In our system, the data plane runs on sensor nodes. The control plane and management plane runs on more powerful UAVs.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=3.5in]{./Figure/Architecture}
@@ -35,25 +27,22 @@ To achieve high performance, the UAV controller carries
 a powerful airborne computer which has ability to run 
 some intelligent applications in real-time.
 
-\subsection{SDN Planes}
-The \textbf{data plane} runs on sensor nodes while the control 
-plane and management plane run on UAV controller. 
-And the interface between data plane and control plane is defined as a southbound interface,
-while the interface between control plane and management plane is defined as a northbound interface.
+\subsection{SDN Planes of {\sdn}}
+The \textbf{data plane} runs on sensor nodes contains four components, including neighbor discovery, routing mapping, radio duty cycle control and data sampling. We abstract the function running on sensor nodes to southbound interface. Our clearly abstraction of data plane functions make the SDN system work efficiently.
 
-In the \textbf{control plane}, in order to make our system easy to use,  we implement a database on the UAV and design interfaces for data plane and SDN applications. The control plane connected data plane and 
-management plane. The database maintain the topology gathered from the data plane, route table inputed form applications, and sensor task schedule table form management application.
+In the \textbf{control plane} of {\sdn}, in order to make our system easy to use, we implement a database on the UAV and design interfaces for data plane and SDN applications. The control plane connected data plane and management plane. The database maintain the topology gathered from the data plane, route table inputed form applications, and sensor task schedule table form management application.
 
 On \textbf{management plane}, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
-scheduler, etc.
+scheduler, etc. Our system is capable to run application together. We design and implement five applications on {\sdn}. The detail design of our applications is described in section \ref{App}. 
 
+As shown in Fig. \ref{Architecture}, both the upward data flow and downward SDN commands transfer smoothly by using our well defined interface. Take the topology gathering as an example, the control plane receives nodes neighbor table through southbound interface, it saves the topology in database. After UAV gathered all nodes' neighbor table, the topology management module arrange nodes neighbor table in database and get the whole network topology for management applications such as routing protocol application to read. Another example is sensor's task deployment, the task scheduler application outputs the task schedule table to control plane. Then the task management module save it to database. When UAVs is near sensor nodes, it get the task table for specific nodes from database. 
 
 Different from wired network, the data plane of WSN not only runs
 data forwarding function, but also executes data sampling function. 
 For example,  sensor nodes execute neighbor discovery process for getting topology, 
 data sampling process for getting data from environment and data forwarding process
 for data gathering. {\sdn} is an easy-to-use system that we design and implement a lot of 
-interfaces for users.
+interfaces for users. The detail implementation of our system is introduced in section \ref{Imp}.
 \subsection{Nouthbound Data Structures}
 
 As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
@@ -175,7 +164,4 @@ a variety of applications, such as routing protocol, sensor task scheduler, netw
 \end{table*}
 
 We demonstrate two application code using our southbound interface and write the code in in Section \ref{subsectionrouting} and Section \ref{subsectionmultitask}.
-
-
-
 

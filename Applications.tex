@@ -1,4 +1,4 @@
-\section{Applications in {\sdn}}
+\section{SDN Applications in {\sdn}}
 \label{App}
 
 \subsection{Overview}
@@ -64,7 +64,7 @@ To address the above challenges, we use a mobile controller which communicates w
 
 
 \subsubsection{Design}
-In WSNs, cluster routing method is a kind of protocol, which nodes choose a header periodically, the other node around cluster header send it's data to cluster header, and the cluster header forwards it to another header, until the root node receives the data. 
+In WSNs, cluster routing method is a kind of protocol, which nodes choose a header periodically, the other node around cluster header (CH) send it's data to cluster header, and the cluster header forwards it to another header, until the root node receives the data. 
 Though cluster method will reduce the energy hole problems, the routing protocol between is running on sensor nodes locally, because sensor nodes only have local information of network and limited computing ability, it can not achieve global optimal routing, and it is difficult to modify protocol according users requirements.
 
 We improve cluster method by using our SDN controller to update the routing protocol between cluster headers. 
