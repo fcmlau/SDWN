@@ -38,7 +38,7 @@ WSN is challenging because the controllers and nodes may be
 disconnected. When some nodes' radio fails, it may cause the entire network connection crashing.
 
 To address the above challenges, we use mobile controllers 
-which communicate with nodes via one-hop transmission. In this way it improved the 
+which communicate with nodes via one-hop transmission. In this way, it improves the 
 reliability of connection between nodes and controllers. Meanwhile, we 
 design a cluster-based SDN routing protocol and a local repair 
 mechanism to achieve both energy efficiency and robustness.
@@ -48,10 +48,10 @@ mechanism to achieve both energy efficiency and robustness.
 \subsubsection{Design}
 In WSNs, one kind of routing protocol is based on clusters. 
 In this way, nodes in the network will choose their nearby header periodically.
-The nodes around cluster header (CH) send their data to the header, 
-and each cluster header forwards it to another header until the root node receives the data. 
+The nodes around the cluster header (CH) send their data to the header, 
+and each cluster header forwards it to one another until the root node receives the data. 
 
-This kind of cluster method releases the energy hole problem~\cite{} of WSNs.
+This kind of cluster method releases the energy hole problem~\cite{Zeng2010Energy} of WSNs.
 However, in the traditional WSNs, sensor nodes only have local information 
 and are limited to computing capability which makes them hard to achieve global optimal routing. 
 % it is difficult to modify protocol according to users requirements.
