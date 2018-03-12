@@ -55,14 +55,8 @@ data sampling process for getting data from environment and data forwarding proc
 for data gathering. {\sdn} is an easy-to-use system that we design and implement a lot of 
 interfaces for users.
 \subsection{Nouthbound Data Structures}
-As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=1\columnwidth]{Figure/downstream}
-	\caption{Downstream data structure}
-	\label{downstream}
-\end{figure}
+As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
 
 \begin{figure}[htbp]
 	\centering
@@ -71,6 +65,20 @@ As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound 
 	\label{upstream}
 \end{figure}
 
+The upstream data is input for routing protocol, it including neighbor information collected by node neighbor discovery. 
+When node runs neighbor, it also records the received signal strength indicator (RSSI) of every neighbor nodes. To keep neighbor table freshness, 
+node will execute neighbor discovery periodically base on user defined interval.
+Moreover, node also records some statistic information including the data traffic and energy consumption for control plane to optimize and diagnose the network.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\columnwidth]{Figure/downstream}
+	\caption{Downstream data structure}
+	\label{downstream}
+\end{figure}
+
+The downstream data is the configuration data that control plane send to data plane. In wireless sensor networks, 
+the configuration data including routing table, sensor sampling control table and sensor task map, the specific explaination of data structure will discuss in section \ref{App}.
 
 \subsection{Southbound Interface}
 The Table \ref{API} shows our southbound interface for user write applications. By using our SDN Southbound Interface, users can easily write 
