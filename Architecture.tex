@@ -83,7 +83,7 @@ the configuration data including routing table, sensor sampling control table an
 \subsection{Southbound Interface}
 The Table \ref{API} shows our southbound interface for user write applications. By using our SDN Southbound Interface, users can easily write 
 a variety of applications, such as routing protocol, sensor task scheduler, network diagnose, algorithm evaluator, etc.
-\begin{table*}[!t]
+\begin{table*}[!b]
 	\caption{SDN Southbound Interface}
 	\label{API}
 	\centering
@@ -174,63 +174,8 @@ a variety of applications, such as routing protocol, sensor task scheduler, netw
 	}
 \end{table*}
 
-We demonstrate two application code using our southbound interface. The List. \ref{topology-update} shows a deployed routing algorithm based on our SI. 
-And the List. \ref{AI} demonstrate a AI selection and Muti-tasks application.
+We demonstrate two application code using our southbound interface and write the code in in Section \ref{subsectionrouting} and Section \ref{subsectionmultitask}.
 
-\begin{lstlisting}[
-	language={[ANSI]C},
-	label=topology-update,caption={An example of deploy routing algorithm},
-	keywordstyle=\color{blue!70},
-	showstringspaces=false,
-	commentstyle=\color{red!50!green!80!blue!70},
-	frame=single,captionpos=t,
-	rulesepcolor=\color{red!20!green!20!blue!20},
-	basicstyle=\ttfamily]
-topology = get_topology();
-//calculate route table for each node
-//based on topology
-for(node=0; node<nude_num; node++){
-   node.routingtable =
-      calculate_routable(topology);
-}
-//set route table for each node
-for(node=0; node<nude_num; node++){
-   fly_to(node);
-        set_route(node.routingtable);
-}
 
-\end{lstlisting}
 
-\begin{lstlisting}[language={[ANSI]C},label=AI,
-	caption={An example of AI selection and Muti-tasks},
-	keywordstyle=\color{blue!70},
-	showstringspaces=false,
-	commentstyle=\color{red!50!green!80!blue!70},
-	frame=single,captionpos=t,
-	rulesepcolor=\color{red!20!green!20!blue!20},
-	basicstyle=\ttfamily]
-AI_Multitasks(taskset){
-   create_scheduler();
-   scheduler.create_buffer();
-
-   for(task=taskset.head; task < taskset.len;task=task.next)
-      scheduler.task_buffer_add(
-         task,
-         defaultset);
-
-   scheduler.task_update();
-   ...
-   ...
-   while((task = scheduler.task_next)!= NULL){
-      data = get_collected_data();
-      nodeset =
-         SRSSS_selection(dataset);
-      scheduler.task_buffer_update(
-         task,
-         nodeset);
-   }
-   scheduler.task_update();
-}
-
-\end{lstlisting}
 

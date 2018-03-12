@@ -20,6 +20,7 @@ easy-to-use interfaces to users as in Table \ref{API}.
 
 
 \subsection{Routing}
+\label{subsectionrouting}
 
 \subsubsection{Motivation}
 
@@ -94,7 +95,33 @@ node received the broadcast packet, it save the source's next hop IP and keep
 monitoring the source status. The substitute node will became new header when it
 detected the current header failed.
 
-We implement our software defined routing and local reparation, the routing in our system achieve both energy efficiency and robustness.
+\begin{lstlisting}[
+	language={[ANSI]C},
+	label=topology-update,caption={An example of deploy routing algorithm},
+	keywordstyle=\color{blue!70},
+	showstringspaces=false,
+	commentstyle=\color{red!50!green!80!blue!70},
+	frame=single,captionpos=t,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	basicstyle=\ttfamily]
+topology = get_topology();
+//calculate route table for each node
+//based on topology
+for(node=0; node<nude_num; node++){
+   node.routingtable =
+      calculate_routable(topology);
+}
+//set route table for each node
+for(node=0; node<nude_num; node++){
+   fly_to(node);
+        set_route(node.routingtable);
+}
+
+\end{lstlisting}
+
+
+
+We implement our software defined routing and local reparation in {\sdn} and demonstrate the code in List \ref{topology-update}, the routing in our system achieve both energy efficiency and robustness.
 
 
 \subsection{Network Diagnosis}
@@ -300,7 +327,7 @@ SRSSS can be seen in \cite{li2016spatially}. With the AI sensor selection proces
 
 
 \subsection{Multi-task}
-
+\label{subsectionmultitask}
 \subsubsection{Motivation}
 
 Wireless sensor networks (WSN)  generally comprise of a group of 
@@ -358,7 +385,41 @@ task queue; Otherwise it will be put into the task buffer to conduct.
 \STATE Set $T$ to task buffer;
 \end{algorithmic}
 \end{algorithm}
+We implement AI node selection and multi-task in {\sdn}, and demonstrate the code in List \ref{AI}.
 
+
+\begin{lstlisting}[language={[ANSI]C},label=AI,
+	caption={An example of AI selection and Muti-tasks},
+	keywordstyle=\color{blue!70},
+	showstringspaces=false,
+	commentstyle=\color{red!50!green!80!blue!70},
+	frame=single,captionpos=t,
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	basicstyle=\ttfamily]
+AI_Multitasks(taskset){
+   create_scheduler();
+   scheduler.create_buffer();
+
+   for(task=taskset.head; task < taskset.len;task=task.next)
+      scheduler.task_buffer_add(
+         task,
+         defaultset);
+
+   scheduler.task_update();
+   ...
+   ...
+   while((task = scheduler.task_next)!= NULL){
+      data = get_collected_data();
+      nodeset =
+         SRSSS_selection(dataset);
+      scheduler.task_buffer_update(
+         task,
+         nodeset);
+   }
+   scheduler.task_update();
+}
+
+\end{lstlisting}
 
 \begin{table*}[htbp]
 	\caption{Task Buffer}
