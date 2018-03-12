@@ -1,7 +1,7 @@
 \section{Evaluation}
 \label{Eva}
 
-\subsection{Evaluation Settup}
+\subsection{Evaluation Setup}
 In this section, we describle our performance evaluation in simulation and
 real-scene experiments. We distribute 100 TI SensorTag sensors randomly deploy in a
 $250~\times~250$ square meters area, with contiki-ng as its operating system. We
@@ -28,8 +28,9 @@ center in unit time, and it measures the capability and scalability of a network
 \textbf{Latency} is define as the time interval between node sent data package and
 data center received the package.
 
-\textbf{Network Lifetime} is define as the elapsed time when total package received
-ratio less than 50\%, which is an important for metrics for the reliability of network.
+\textbf{Network Lifetime} is define as the elapsed time when total package
+received ratio is less than 50\%, which is an important metric to measures the
+reliability of network.
 
 \textbf{Energy Consumption} is estimated by multiplying different coefficients on
 CPU running time and radio listening and transmitting time and summing them up.
@@ -39,10 +40,11 @@ unit time.
 
 \subsection{Basic Routing}
 
-In order to fairly compare with existing works, we first only using our basic SDN 
-routing protocol without any intelligent approaches. We evaluate routing performance by throughput, 
-package received ratio and end-to-end latency. Meanwhile, We also evaluate the scalability of our network
-through network lifetime.
+In order to fairly compare with existing works, we first only use our basic
+{\sdn} routing protocol without any intelligent approaches. We evaluate routing
+performance by throughput, package received ratio and end-to-end latency.
+Meanwhile, We also evaluate the scalability of our network through network
+lifetime.
 
 Figure~\ref{fig:throughput} compares network throughput by deploying various
 routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
@@ -85,18 +87,34 @@ between nodes.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/scalability}
+	\includegraphics[width=.95\columnwidth]{Figure/lifetime}
 	\vspace{-0.1in}
-	\caption{Scalability
+	\caption{Network lifetime using various routing algorithm
 		\textnormal{
-			{\sdn} succeeds RPL in different network sizes.
+			{\sdn} succeeds RPL and leach in different network sizes.
 		}}
-	\label{fig:scalability}
+	\label{fig:lifetime}
 \end{figure}
 
 Our {\sdn} system is capable in large scale wireless sensor networks as
-Figure~\ref{fig:scalability} shows. Its performance surpasses RPL and LEACH in
-both small and large network sizes.
+Figure~\ref{fig:lifetime} shows. Its lifetime surpasses RPL and LEACH in both
+small and large network sizes.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/latency}
+	\vspace{-0.1in}
+	\caption{Latency of different routing algorithms and distance
+		\textnormal{
+		}}
+	\label{fig:latency}
+\end{figure}
+
+When testing the latency of the network, our {\sdn}-basic routing method
+performs best due to using the global topology information to find the optimal
+route path. As shown in Figure~\ref{fig:latency}, as the distance increases, the
+latency grows about 4 times and 1.5 times slower than LEACH and RPL,
+respectively.
 
 \subsection{Intelligence}
 
