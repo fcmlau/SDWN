@@ -3,7 +3,7 @@
 
 \subsection{Overview}
 
-Traditional applications can not achieve complicated and efficient goals due 
+Traditional applications cannot achieve complicated goals and efficiency due 
 to the limited processing power and memory space of sensors.
 
 In {\sdn}, applications for wireless sensor networks are inspired by 
@@ -23,9 +23,11 @@ easy-to-use interfaces to users as in Table \ref{API}.
 
 \subsubsection{Motivation}
 
-Routing is a fundamental application of SDN system. There are lots of studies on SDN in wired network, but only few researches on wireless sensor networks since implementation of SDN routing in WSN have following challenges. First, the wireless communication is unstable, the poor reliability of connection between controller and sensor nodes make SDN system performance worse, especially the controller connect with nodes through multi-hop wireless approach. Second, the sensor network is energy sensitive, the deployment of SDN downward stream energy cost need be ignore compare with the normal network data communication, and the frequency of routing update should low. Last but not least, the robust of SDN routing mechanism in WSN is difficult to achieve, since the controller and nodes not may be disconnected, if some nodes radio failure, it may cause all network connection crash.
+Routing is a fundamental application of SDN system. There are lots of studies on SDN in wired network, but only few researches on wireless sensor networks since the implementation of SDN routing in WSN have the following challenges. First, the wireless communication is unstable, the poor reliability of connection between controller and sensor nodes makes SDN system performance worse, especially the controller connects with nodes through multi-hop wireless approach. 
+Second, the sensor network is energy sensitive, the deployment of SDN downward stream energy cost needs to be ignored, compare with the normal network data communication, and the frequency of routing update should low. 
+Last but not least, achieving the robustness of SDN routing in WSN is challenging because the controller and nodes may be disconnected. When some nodes' radio fails, it may cause the entire network connection crashing.
 
-To address above challenges, we use mobile controller which communicate with nodes via one-hop to improve the reliability of nodes and controller connection. Meanwhile, we design cluster-base SDN routing protocol and local repair mechanism to achieve both energy efficiency and robustness.
+To address the above challenges, we use a mobile controller which communicates with nodes via one-hop to improve the reliability of nodes and controller connection. Meanwhile, we design a cluster-based SDN routing protocol and a local repair mechanism to achieve both energy efficiency and robustness.
 
 
 
@@ -61,9 +63,13 @@ To address above challenges, we use mobile controller which communicate with nod
 
 
 \subsubsection{Design}
-In WSNs, cluster routing method is a kind of protocol, which nodes choose a header periodically, the other node around cluster header send it's data to cluster header, and the cluster header forward it to anther header, until root node receive the data. Through cluster method will reduce the energy hole problems, but the routing protocol between is running on sensor nodes locally, because sensor nodes only have local information of network and limited computing ability, it can not achieve global optimal routing, and it is difficult to modify protocol according users requirements.
+In WSNs, cluster routing method is a kind of protocol, which nodes choose a header periodically, the other node around cluster header send it's data to cluster header, and the cluster header forwards it to another header, until the root node receives the data. 
+Though cluster method will reduce the energy hole problems, the routing protocol between is running on sensor nodes locally, because sensor nodes only have local information of network and limited computing ability, it can not achieve global optimal routing, and it is difficult to modify protocol according users requirements.
 
-We improve cluster method by using our SDN controller to update the routing protocol between cluster headers. At first, UAV fly around sensor field and get topology data from nodes, and then calculate the cluster header schedule do decide which node should be cluster header at specific time phase to balance energy consumption between nodes, and calculate the routing result between current header's topology through
+We improve cluster method by using our SDN controller to update the routing protocol between cluster headers. 
+At first, a UAV flies around the sensor field and get topology data from nodes, 
+and then calculates the cluster header schedule to decide which node should be the cluster header at a specific time phase 
+to balance energy consumption between nodes, and calculate the routing result between current header's topology through
 Open Shortest Path First (OSPF) protocol base on gathered topology information, In WSN, every node only need send its data to root node, so the OSPF destination internet protocol (IP) has be set as root IP. Through OSPF, UAV get the routing table between cluster header. When UAV fly near the nodes, it send routing table to nodes, including the node role and next hop IP in every time phase.
 
 Considering the economic and energy limitation, UAV can not keep fly above the sensing field. It only fly to sensing field to gather topology after node deployed and update nodes routing on demand. So after the routing has been deployed, the system routing repair mechanism should make sure some nodes failure don't make the network routing crashed.
@@ -354,21 +360,6 @@ task queue; Otherwise it will be put into the task buffer to conduct.
 \end{algorithm}
 
 
-\iffalse
-A sensor node may have different sensing ranges for different tasks.
-
-There are several practical requirements.
-
-Different tasks have different requirements, including time, sensing range, sensing ratio, etc.
-
-For example tasks like sunlight collection only need to be carried out during the daytime.
-
-Our system provide a task scheduling to 
-
-Sensors are usually assigned multi-task.
-
-Sensors are assigned tasks to monitor a specific area.
-
 \begin{table*}[htbp]
 	\caption{Task Buffer}
 	\label{TB}
@@ -378,11 +369,11 @@ Sensors are assigned tasks to monitor a specific area.
 		\hline
 		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
 		\hline
-		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		 010& \{$u_2,u_6,...,u_{88}...u_{99}$\}& 0.2 & 4 & 2046 \\
 		\hline
 		...& ...& ... & ...& ... \\
 		\hline
-		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		101&  \{$u_3,u_4,...,u_{34}...u_{67}$\}& 0.2 & 5 & 4096 \\
 		\hline
 		...& ...& ... & ...& ... \\
 		\hline
@@ -390,15 +381,10 @@ Sensors are assigned tasks to monitor a specific area.
 	}
 \end{table*}
 
-Different tasks have different requirements, i.e. 
+Each task has a unique task ID. The task buffer maintains the task information of node set, 
+sensing rate, sensing range and sensing duration. 
+Every time a task is removed or updated by the user, or it runs out of its duration time,
+the task queue will check to release new tasks into the task buffer.
 
-\begin{itemize}
-\item \textbf{Node set.} Users can assign tasks to 
-\item \textbf{Sensing rate.}
-\item \textbf{Sensing range.} The maximum distance that a node can detect. 
 
-\item \textbf{Sensing duration.} The sensing time from start to end. 
-There is no need to collect sunlight data at night.
-\end{itemize}
 
-\fi

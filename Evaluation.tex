@@ -6,12 +6,13 @@ In this section, we describle our performance evaluation in simulation and
 real-scene experiments. We distribute 100 TI SensorTag sensors in an about
 $250~\times~250$ square meters area, with contiki-ng as its operating system. We
 use different metrics for various applications and compare our works with other
-state-of-the-art works.
+state-of-the-art works. When testing the network, we make nodes send packets
+every 10 seconds, and the packet size is 60 bytes.
 
 \subsection{Evaluation Metrics}
 
 \textbf{Packet recieved ratio} is defined as the proportion of the total data
-packets recieved by data sink and the the total data packets sent by all nodes,
+packets recieved by data center and the the total data packets sent by all nodes,
 and it can be formulated as
 \begin{equation}
 	L = \frac{\sum_{i = 0}^{N}S_i}{R}
@@ -21,7 +22,7 @@ packets sent by the $i$-th node and the number of packets recieved by data
 center, respectively.
 
 \textbf{Throughput} is defined as the the total data packets recieved by data
-sink, and it measures the capability and scalability of a network.
+center in unit time, and it measures the capability and scalability of a network.
 
 \textbf{Energy Consumption} is estimated by multipling different coefficients on
 CPU running time and radio listening and transmitting time and summing them up.
@@ -43,9 +44,7 @@ between nodes.
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/packet_loss_ratio_with_size}
 	\vspace{-0.1in}
-	\caption{Packet recieved ratio
-		\textnormal{
-		}}
+	\caption{Packet recieved ratio improved by {\sdn}}
 	\label{fig:packet_loss_ratio_with_size}
 \end{figure}
 
@@ -70,6 +69,11 @@ consumption with no doubt.
 	\label{fig:throughput}
 \end{figure}
 
+By deploying intelligent node selection algorithm, we use leaset waken sensors
+but collect most necessary sensing data covering the whole area and reduce the
+redundant ones in the meantime. Besides, less sensors means less collision and
+interference. And the packet recieved ratio achieves alomst 100\%.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/ai_selection}
@@ -79,6 +83,10 @@ consumption with no doubt.
 		}}
 	\label{fig:ai_selection}
 \end{figure}
+
+By deploying MLP on UAV, {\sdn} can predicts the energy consumption precisely as
+Figure~\ref{fig:ai_selection} shows, and the absolute error can be restricted in
+$3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
 
 \begin{figure}[htbp]
 	\centering
@@ -104,7 +112,6 @@ consumption with no doubt.
 	\label{fig:energy_pred}
 \end{figure}
 
-
 \subsection{Resilience}
 
 \begin{figure}[htbp]
@@ -119,22 +126,12 @@ consumption with no doubt.
 	\label{fig:fault_tolerance}
 \end{figure}
 
-We compare the impact caused by death of nodes using throughput between RPL and
-{\sdn} and the results are shown in Figure~\ref{fig:fault_tolerance}. Throughput
-can be low when the number of death is small, because we distribute the sensors
-densely and the collision problem is severe. And the throughput grows as some
-node died. But after some key nodes died, the throughput falls down quickly,
-however, our {\sdn} still performs better than RPL.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/diagnosis}
-	\vspace{-0.1in}
-	\caption{
-		\textnormal{
-		}}
-	\label{fig:diagnosis}
-\end{figure}
+We compare the impact caused by death of nodes using throughput among LEACH, RPL
+and {\sdn} and the results are shown in Figure~\ref{fig:fault_tolerance}. The
+total recieved packets of {\sdn} increses stably due to its resilience to faults
+of nodes. The resilience is achieved by 2 approaches: (1) cluster based protocol
+is immune from failures of cluster members; (2) Local repair enable the network
+recover from failures of cluster headers.
 
 \begin{table}[htbp]
 	\centering
@@ -154,8 +151,27 @@ however, our {\sdn} still performs better than RPL.
 	\end{tabular}
 \end{table}
 
+Table~\ref{tab:diagnosis} shows the failure detection rate among sensing, energy
+and radio failures. Controller proactively adjusts the routing based on the
+preliminary diagnosis results, which make it possible to decrese the routing
+failure before it happens and improve the throughput as shown in
+Figure~\ref{fig:diagnosis}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/diagnosis}
+	\vspace{-0.1in}
+	\caption{The performance improvement of automatic network repair
+		\textnormal{
+		}}
+	\label{fig:diagnosis}
+\end{figure}
 
 \subsection{Energy Consumption}
+
+By applying multi-task schedule, we reduce the working sensors on one node and
+the size of transmitted packets to cut down the energy consumption of sensing
+and communication over 50\%.
 
 \begin{figure}[htbp]
 	\centering
@@ -180,3 +196,6 @@ however, our {\sdn} still performs better than RPL.
 	\label{fig:scalability}
 \end{figure}
 
+Our {\sdn} system is capable in large scale wireless sensor networks as
+Figure~\ref{fig:scalability} shows. Its performance surpasses RPL and LEACH in
+both small and large network sizes.
