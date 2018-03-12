@@ -2,34 +2,35 @@
 
 
 %logic flow
-Software defined network (SDN) \cite{Benzekki2016Software,Sezer2013Are}
-is a trend that enables flexible programmability on the Internet 
-by using programmable data plane and centralized network controller \cite{7122247}.
-It shows remarkable strengths in network control, global optimization
-and easy deployment for new applications \cite{Feamster2014The}.
+Software defined network (SDN)~\cite{Benzekki2016Software,Sezer2013Are} paradigm
+is a trend that enables flexible programmability for networks 
+by using programmable data plane and centralized network controller~\cite{7122247}.
+It shows remarkable strengths in network control, global optimization 
+(e.g. throughputs~\cite{}, diagnosis~\cite{}, reliability~\cite{})
+and easy deployment for new applications~\cite{Feamster2014The}.
 
-With the support of SDN, programmable artificial intelligence (AI) techniques
-\cite{Norvig1995Artificial, Poole2010Artificial, Cockburn1996ARCHON} 
-are easy to be implemented on the internet \cite{}.
+With the support of SDN for networks, programmable artificial intelligence (AI) 
+techniques~\cite{Norvig1995Artificial, Poole2010Artificial, Cockburn1996ARCHON} 
+are easy to be implemented in networks \cite{}.
 In turn, AI technique makes SDN become a smarter and more effective network system
 due to its high performance in predicting and optimizing network capacity\cite{},
-e.g. network throughput, energy consumption, etc.
+e.g. network throughput~\cite{}, energy consumption~\cite{}, etc.
  
 Unfortunately, although Internet of Things (IoTs) \cite{Atzori2010The} 
 make wireless sensor networks \cite{Potdar2009Wireless}
 extremely pervasive and important, such as volcanic investigation 
 \cite{Wernerallen2006Deploying}, and agriculture monitoring \cite{Wang2010L3SN}, 
-there is no real implementation of SDN in a WSN. The existing works 
+there is no real implementation of SDN in a WSN. Existing works 
  \cite{mahmud2011exploitation, costanzo2012software, luo2012sensor, de2015tinysdn, galluccio2015sdn} 
 all design frameworks of SDN for WSNs and validate them by simulations.  
 Even worse, these simulational SDN works construct the central controller 
-of SDN in their database station. The controller transmits control 
+of SDN in their database station~\cite{}. The controller transmits control 
 instructions with sensor nodes by multi-hop communications \cite{Mizuyama2017Estimation}.
 This causes a great deal of energy consumption \cite{Yang2014}, which 
-makes it a paradox since sensor network ought to be an energy-efficient network.
+makes it a paradox since sensor network suffering from ought to be an energy-efficient and reliable network.
 
 Moreover, to achieve intelligent WSNs, 
-one fundamental observation is that AI methods 
+our observation is that AI methods 
 are only able to be conducted in the SDN controller. 
 This is due to two major reasons. 
 First, traditional sensor devices 
@@ -38,7 +39,12 @@ deal with complex computations \cite{Sharma2012Security,Heller2012The}.
 Second, the sensor devices are also lack of storage space 
 to support complicated operations. With the help of SDN, 
 the central controller can conduct complex computations 
-and store large-scale data information.
+and store large-scale data information for WSNs.
+
+Adler, a recent testbed weapon
+. 
+Although Adler is not a network but a traditional system, 
+
 
 We refer to one technical report \cite{}
 and find the unmanned aerial vehicle (UAV) 
@@ -52,7 +58,7 @@ The report also shows UAVs can enable a resilient,
 high-performance and energy-efficient sensor system.
 Furthermore, the advantage of utilizing UAV compared to
 terrestrial mobile controller is that, the air-ground communication range
-is almost 10 times than that of ground-ground communication under ZigBee protocol, which are
+is almost 10 times than that of ground-ground communication under ZigBee protocol~\cite, which are
 around 145 meters and 15 meters respectively tested by our practical experiments.
 This is due to the air-ground communication suffers from less interference of the terrestrial WSN.
 
