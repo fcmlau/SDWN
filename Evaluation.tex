@@ -7,7 +7,8 @@ real-scene experiments. We distribute 100 TI SensorTag sensors randomly deploy i
 $250~\times~250$ square meters area, with contiki-ng as its operating system. We
 use different metrics for various applications and compare our works with other
 state-of-the-art works. When testing the network, we make nodes send packets
-every 10 seconds, and the packet size is 60 bytes.
+every 10 seconds, and the packet size is 60 bytes. Unless otherwise specified,
+we set the evaluation time from 0 to 5000 seconds.
 
 \subsection{Evaluation Metrics}
 
@@ -112,9 +113,9 @@ small and large network sizes.
 
 When testing the latency of the network, our {\sdn}-basic routing method
 performs best due to using the global topology information to find the optimal
-route path. As shown in Figure~\ref{fig:latency}, as the distance increases, the
-latency grows about 4 times and 1.5 times slower than LEACH and RPL,
-respectively.
+route path. As shown in Figure~\ref{fig:latency}, as the distance from node to
+data center increases, the latency grows about 4 times and 1.5 times slower than
+LEACH and RPL, respectively.
 
 \subsection{Intelligence}
 
