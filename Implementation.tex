@@ -1,19 +1,31 @@
 \section{Implementation}
 \label{Imp}
 
-We run modified contiki-ng, a system for next generation IOT (Internet of things), on data plane. we modified the network layer of contiki-ng, and abstract data plane interface to separate network control functions from data plane. 
+We run modified contiki-ng, a system for next generation IoT (Internet of
+things), on data plane. We modify the network layer of contiki-ng, and abstract
+data plane interface to separate network control functions from data plane. 
 
-Neighbor discovery, After deployment, nodes start IPv6 neighbor discovery protocol to find the nodes which communicate with it within one hop, and save neighbor information to neighbor table and wait for UAV arrive 
-and gather the topology information. Every neighbor's information include the neighbor's IP and RSSI. 
+\textbf{Neighbor Discovery.} After deployment, nodes frist start IPv6 neighbor
+discovery protocol to find the nodes which can be reached within one hop, and
+then save neighbor information to neighbor table and wait for UAV arriving to
+gather the topology information. Every neighbor's information consists of the
+neighbor's IP and RSSI. 
 
-Packet forwarding, the nodes get routing table from UAV through northbound interface, when it receive a data packet from other nodes, it just send it to the next hop node according the routing table.
+\textbf{Packet forwarding.} The nodes get routing table from UAV through
+northbound interface. When a node receive a data packet from other nodes, it
+just sends it to the next hop node according the routing table.
 
-Data sampling, node read task table received from UAV to decide when to wake up sensors to make sure node cost minimal energy to get same quality data. 
+\textbf{Data sampling.} Nodes read task table received from UAV to decide when
+to wake up sensors to make sure that they cost minimal energy to get the same
+quality data. 
 
-On UAV, we run our UAV flight controller on ROS and use MySQL as our SDN database, UAV gathered topology data from every node and save in database, 
-so user can easily read the whole network data from database, For the same 
-reasoning, after user get routing algorithm result and save it to database via northbound interface, 
-our middleware will automatically divide the whole network routing result to individual node routing table, and then send it to specific node.
+\textbf{UAV.} We run our UAV flight controller on ROS (Robot Operating System)
+and use MySQL as our SDN database. UAV gathers topology from each node and save
+it into database, so that users can easily read the whole network data from
+database. For the same reason, after a user gets routing algorithm results and
+saves it into database via northbound interface, our control plane will
+automatically divides the whole network routing results into individual node's
+routing table, and then sends it to specific nodes.
 
 \begin{figure}[htbp]
 	\centering
@@ -24,4 +36,8 @@ our middleware will automatically divide the whole network routing result to ind
 	\vspace{-0.1in}
 \end{figure}
 
-Based on our software framework, we using DJI M100 UAV with Intel NUC as airborne computer, and 100 TI CC2650 SensorTag build our testbed. According our UAV gathered topology, we draw Fig. \ref{topology}, the bule lines represent the connection between cluster member with cluster header, and the red lines donate the routing the connection between cluster headers deployed by UAV.
+Based on our software framework, we use DJI M100 UAV with Intel NUC as airborne
+computer, and adapt 100 TI CC2650 SensorTag to build our testbed. According to
+our UAV gathered topology, we draw Figure~\ref{topology}, the blue lines
+represent the connection between cluster members with cluster headers, and the
+red lines donate the route between cluster headers deployed by UAV.
