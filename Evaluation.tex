@@ -1,14 +1,18 @@
 \section{Evaluation}
 \label{Eva}
 
-\subsection{Evaluation Setup}
-In this section, we describle our performance evaluation in simulation and
-real-scene experiments. We distribute 100 TI SensorTag sensors randomly deploy in a
-$250~\times~250$ square meters area, with contiki-ng as its operating system. We
-use different metrics for various applications and compare our works with other
-state-of-the-art works. When testing the network, we make nodes send packets
-every 10 seconds, and the packet size is 60 bytes. Unless otherwise specified,
-we set the evaluation time from 0 to 5000 seconds.
+\subsection{Evaluation Setup} In this section, we describle our performance
+evaluation in simulation and real-scene experiments. We distribute 100 TI
+SensorTag sensors randomly deploy in a $250~\times~250$ square meters area, with
+contiki-ng as its operating system. We use different metrics for various
+applications and compare our works with other state-of-the-art works such as RPL
+and LEACH. Although Alder implements a sensor system using UAVs, it doesn't
+provide a complex routing protocol, and thus we do not compare with it on
+throughput or letancy.
+
+When testing the network, we make nodes send packets every 10 seconds, and the
+packet size is 60 bytes. Unless otherwise specified, we set the evaluation time
+from 0 to 5000 seconds.
 
 \subsection{Evaluation Metrics}
 
@@ -59,53 +63,20 @@ consumption with no doubt.
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/throughput}
 	\vspace{-0.1in}
-	\caption{Routing throughput.
+	\caption{End-to-end routing throughput.
 		\textnormal{
-			The figure shows throughput corresponding to three kinds of Routing
-			algorithms. Throughput can drop to zero when some key nodes are dead
-			in the network.
+			The {\sdn}'s integral of the throughput is 1.2 times higher than the
+			the PRL's in within 0 to 5000 seconds, and is 2 times higher within 0
+			to 10000 seconds.
 		}}
 	\label{fig:throughput}
 \end{figure}
-
-Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
-{\sdn}: (1) The packet received ratio exceeds state-of-the-art
-algorithms including RPL \cite{winter2012rpl} and LEACH \cite{kaur2016wsn} by 20\%; (2) With the increasing of
-network size, the {\sdn}'s packet received ration is still much higher than
-others'. The reasons are that {\sdn} uses global information to achieve optimal
-routing and intelligent cluster header selection balances the energy consumption
-between nodes.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/packet_loss_ratio_with_size}
-	\vspace{-0.1in}
-	\caption{Packet received ratio improved by {\sdn}}
-	\label{fig:packet_loss_ratio_with_size}
-\end{figure}
-
-
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/lifetime}
-	\vspace{-0.1in}
-	\caption{Network lifetime using various routing algorithm
-		\textnormal{
-			{\sdn} succeeds RPL and leach in different network sizes.
-		}}
-	\label{fig:lifetime}
-\end{figure}
-
-Our {\sdn} system is capable in large scale wireless sensor networks as
-Figure~\ref{fig:lifetime} shows. Its lifetime surpasses RPL and LEACH in both
-small and large network sizes.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/latency}
 	\vspace{-0.1in}
-	\caption{Latency of different routing algorithms and distance
+	\caption{End-to-end average latency of different routing algorithms and distance
 		\textnormal{
 		}}
 	\label{fig:latency}
@@ -116,6 +87,42 @@ performs best due to using the global topology information to find the optimal
 route path. As shown in Figure~\ref{fig:latency}, as the distance from node to
 data center increases, the latency grows about 4 times and 1.5 times slower than
 LEACH and RPL, respectively.
+
+Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
+{\sdn}: (1) The packet received ratio exceeds state-of-the-art algorithms
+RPL\cite{winter2012rpl} and LEACH\cite{kaur2016wsn} by 20\%; (2) With the
+increasing of network size, the {\sdn}'s packet received ration is still much
+higher than others'. The reasons are that {\sdn} uses global information to
+achieve optimal routing and intelligent cluster header selection balances the
+energy consumption between nodes.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/packet_loss_ratio_with_size}
+	\vspace{-0.1in}
+	\caption{Per-node packet received ratio improved by {\sdn}.
+		\textnormal{
+			This figure implys the {\sdn} minishes collisions of nodes much by
+			reducing the routing negotiation, which decrease the radio
+			transmission.
+		}}
+	\label{fig:packet_loss_ratio_with_size}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/lifetime}
+	\vspace{-0.1in}
+	\caption{Network lifetime using various routing algorithm
+		\textnormal{
+			{\sdn} succeeds RPL and LEACH in different network sizes.
+		}}
+	\label{fig:lifetime}
+\end{figure}
+
+Our {\sdn} system is capable in large scale wireless sensor networks as
+Figure~\ref{fig:lifetime} shows. Its lifetime surpasses RPL and LEACH in both
+small and large network sizes.
 
 \subsection{Intelligence}
 
@@ -184,26 +191,42 @@ of nodes. The resilience is achieved by 2 approaches: (1) cluster based protocol
 is immune from failures of cluster members; (2) Local repair enable the network
 recover from failures of cluster headers.
 
-\begin{table}[htbp]
-	\centering
-	\caption{Failure detection rate for various failure type and number}
-	\label{tab:diagnosis}
-	\begin{tabular}{|c||c|c|c|c|c|}
-		\hline
-		\diagbox{Type}{Failures} & 1 & 2 & 3 & 4 & 5\\
-		\hline
-		\hline
-		Sensing & 98\% & 95\% & 93\% & 92\% & 90\%\\
-		\hline
-		Energy & 100\% & 93\% & 92\% & 90\% & 88\%\\
-		\hline
-		Radio & 100\% & 90\% & 88\% & 84\% & 80\%\\
-		\hline
-	\end{tabular}
-\end{table}
+%\begin{table}[htbp]
+%	\centering
+%	\caption{Failure detection rate for various failure type and number}
+%	\label{tab:diagnosis}
+%	\begin{tabular}{|c||c|c|c|c|c|}
+%		\hline
+%		\diagbox{Type}{Failures} & 1 & 2 & 3 & 4 & 5\\
+%		\hline
+%		\hline
+%		Sensing & 98\% & 95\% & 93\% & 92\% & 90\%\\
+%		\hline
+%		Energy & 100\% & 93\% & 92\% & 90\% & 88\%\\
+%		\hline
+%		Radio & 100\% & 90\% & 88\% & 84\% & 80\%\\
+%		\hline
+%	\end{tabular}
+%\end{table}
 
-Table~\ref{tab:diagnosis} shows the failure detection rate among sensing, energy
-and radio failures. Controller proactively adjusts the routing based on the
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/did_comp}
+	\vspace{-0.1in}
+	\caption{Comparation of {\sdn} and DID on failure detection rate.
+		\textnormal{
+			{\sdn} surpasses DID by using UAVs to lessen dectecting area.
+		}}
+	\label{fig:did_comp}
+\end{figure}
+
+%Table~\ref{tab:diagnosis} shows the failure detection rate among sensing, energy
+%and radio failures.
+We compare oure algorithm with DID\cite{Gong2015}, but as it is
+not open-source, we implement a version of DID and evaluate it in our own
+settings. The main reason why we can succeed DID is mainly that our UAVs can fly
+to a the fault area which decrease the number of potential candidate of injected
+nodes. Besides, our controller proactively adjusts the routing based on the
 preliminary diagnosis results, which make it possible to decrease the routing
 failure before it happens and improve the throughput as shown in
 Figure~\ref{fig:diagnosis}.
@@ -212,13 +235,13 @@ Figure~\ref{fig:diagnosis}.
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/diagnosis}
 	\vspace{-0.1in}
-	\caption{The performance improvement of automatic network repair
+	\caption{The performance improvement of automatic network repair.
 		\textnormal{
+			The automatic repair mechenism increases the lifetime 1.5 times
+			compared with the basic {\sdn} routing algorithm.
 		}}
 	\label{fig:diagnosis}
 \end{figure}
-
-
 
 \begin{figure}[htbp]
 	\centering
