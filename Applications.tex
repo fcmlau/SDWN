@@ -24,43 +24,25 @@ easy-to-use interfaces to users as in Table \ref{API}.
 
 \subsubsection{Motivation}
 
-Routing is a fundamental application of SDN system. There are lots of studies on SDN in wired network, but only few researches on wireless sensor networks since the implementation of SDN routing in WSN have the following challenges. First, the wireless communication is unstable, the poor reliability of connection between controller and sensor nodes makes SDN system performance worse, especially the controller connects with nodes through multi-hop wireless approach. 
-Second, the sensor network is energy sensitive, the deployment of SDN downward stream energy cost needs to be ignored, compare with the normal network data communication, and the frequency of routing update should low. 
-Last but not least, achieving the robustness of SDN routing in WSN is challenging because the controller and nodes may be disconnected. When some nodes' radio fails, it may cause the entire network connection crashing.
+Routing is a fundamental application of SDN system. 
+There are lots of studies on SDN in wired networks, but only 
+a few works study on wireless sensor networks due to the following challenges. 
+First, the wireless communication is unstable. The poor reliability of 
+connections between controllers and sensor nodes makes the performance of SDN 
+system worse, especially when the controllers 
+communicate with nodes through multi-hop wireless approaches. 
+Second, the sensor network is energy sensitive. 
+The transmission energy cost between controls and nodes needs to be as less as possible. 
+Last but not least, achieving the robustness of SDN routing in 
+WSN is challenging because the controllers and nodes may be 
+disconnected. When some nodes' radio fails, it may cause the entire network connection crashing.
 
-To address the above challenges, we use a mobile controller which communicates with nodes via one-hop to improve the reliability of nodes and controller connection. Meanwhile, we design a cluster-based SDN routing protocol and a local repair mechanism to achieve both energy efficiency and robustness.
+To address the above challenges, we use mobile controllers 
+which communicate with nodes via one-hop transmission. In this way it improved the 
+reliability of connection between nodes and controllers. Meanwhile, we 
+design a cluster-based SDN routing protocol and a local repair 
+mechanism to achieve both energy efficiency and robustness.
 
-
-
-
-% Different from the internet protocol (IP) networks which adopt
-% routing with shortest path,
-% traditional WSNs use the RPL (Routing Protocol for LLN) protocol,
-% focusing on routing with less energy consumption.
-
-% Low-Power and Lossy network
-
-% The remarkable of SND is its 
-
-% is feasible using access control lists (ACLs) and routing protocols. Users can provide 
-
-% determine the path of network.
-
-% As we discuss before, sensors are limited to their processing capability and storage space.
-% Thus we simplified flow table and 
-
-% Traditional wireless sensor network RPL \cite{Winter2012}.
-
-% Open Shortest Path First (OSPF) is a routing 
-% protocol for Internet Protocol (IP) networks.
-
-% In our , we implement OSPF in the 
-
-% The flow table of the 
-
-% one round
-
-% cluster header
 
 
 \subsubsection{Design}
