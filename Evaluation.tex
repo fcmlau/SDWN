@@ -3,7 +3,7 @@
 
 \subsection{Evaluation Settup}
 In this section, we describle our performance evaluation in simulation and
-real-scene experiments. We distribute 100 TI SensorTag sensors in an about
+real-scene experiments. We distribute 100 TI SensorTag sensors randomly deploy in a
 $250~\times~250$ square meters area, with contiki-ng as its operating system. We
 use different metrics for various applications and compare our works with other
 state-of-the-art works. When testing the network, we make nodes send packets
@@ -11,46 +11,42 @@ every 10 seconds, and the packet size is 60 bytes.
 
 \subsection{Evaluation Metrics}
 
-\textbf{Packet recieved ratio} is defined as the proportion of the total data
-packets recieved by data center and the the total data packets sent by all nodes,
+\textbf{Packet received ratio} is defined as the proportion of the total data
+packets received by data center and the the total data packets sent by all nodes, 
+we adopt the model in \cite{chen2017energy}
 and it can be formulated as
 \begin{equation}
 	L = \frac{\sum_{i = 0}^{N}S_i}{R}
 \end{equation}
-where $L$ reprents the throughput, and $S_i$ and $R$ denotes the number of
-packets sent by the $i$-th node and the number of packets recieved by data
+where $L$ represents the throughput, and $S_i$ and $R$ denotes the number of
+packets sent by the $i$-th node and the number of packets received by data
 center, respectively.
 
-\textbf{Throughput} is defined as the the total data packets recieved by data
+\textbf{Throughput} is defined as the the total data packets received by data
 center in unit time, and it measures the capability and scalability of a network.
 
-\textbf{Energy Consumption} is estimated by multipling different coefficients on
+\textbf{Latency} is define as the time interval between node sent data package and
+data center received the package.
+
+\textbf{Network Lifetime} is define as the elapsed time when total package received
+ratio less than 50\%, which is an important for metrics for the reliability of network.
+
+\textbf{Energy Consumption} is estimated by multiplying different coefficients on
 CPU running time and radio listening and transmitting time and summing them up.
 The coefficients are proportional to the working current described in sensor's
-DataSheet. Average energy consumption is the energy consumption of a node in
+data sheet. Average energy consumption is the energy consumption of a node in
 unit time.
 
-\subsection{Performance}
+\subsection{Basic Routing}
 
-Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
-{\sdn}: (1) The packet recieved ratio exceeds state-of-the-art
-algorithms\cite{winter2012rpl, kaur2016wsn} by 20\%; (2) With the incresing of
-network size, the {\sdn}'s packet recieved ration is still much higher than
-others'. The reasons are that {\sdn} uses global information to achieve optimal
-routing and intelligent cluster header selection balances the energy consumption
-between nodes.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/packet_loss_ratio_with_size}
-	\vspace{-0.1in}
-	\caption{Packet recieved ratio improved by {\sdn}}
-	\label{fig:packet_loss_ratio_with_size}
-\end{figure}
+In order to fairly compare with existing works, we first only using our basic SDN 
+routing protocol without any intelligent approaches. We evaluate routing performance by throughput, 
+package received ratio and end-to-end latency. Meanwhile, We also evaluate the scalability of our network
+through network lifetime.
 
 Figure~\ref{fig:throughput} compares network throughput by deploying various
 routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
-sensors to data center, to caculate the route table, its throughput exceeds RPL
+sensors to data center, to calculate the route table, its throughput exceeds RPL
 and LEACH. Besides, in {\sdn}, sensors' lifetime increases a lot more than
 others, because all computation-intensive tasks are done by UAV and sensors do
 not need to send packets to negotiate route path, which decrease the energy
@@ -69,16 +65,52 @@ consumption with no doubt.
 	\label{fig:throughput}
 \end{figure}
 
-By deploying intelligent node selection algorithm, we use leaset waken sensors
+Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
+{\sdn}: (1) The packet received ratio exceeds state-of-the-art
+algorithms\cite{winter2012rpl, kaur2016wsn} by 20\%; (2) With the increasing of
+network size, the {\sdn}'s packet received ration is still much higher than
+others'. The reasons are that {\sdn} uses global information to achieve optimal
+routing and intelligent cluster header selection balances the energy consumption
+between nodes.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/packet_loss_ratio_with_size}
+	\vspace{-0.1in}
+	\caption{Packet received ratio improved by {\sdn}}
+	\label{fig:packet_loss_ratio_with_size}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.95\columnwidth]{Figure/scalability}
+	\vspace{-0.1in}
+	\caption{Scalability
+		\textnormal{
+			{\sdn} succeeds RPL in different network sizes.
+		}}
+	\label{fig:scalability}
+\end{figure}
+
+Our {\sdn} system is capable in large scale wireless sensor networks as
+Figure~\ref{fig:scalability} shows. Its performance surpasses RPL and LEACH in
+both small and large network sizes.
+
+\subsection{Intelligence}
+
+By deploying intelligent node selection algorithm, we use least waken sensors
 but collect most necessary sensing data covering the whole area and reduce the
 redundant ones in the meantime. Besides, less sensors means less collision and
-interference. And the packet recieved ratio achieves alomst 100\%.
+interference which further improved the reliability of network. And the packet
+received ratio achieves almost 100\%.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/ai_selection}
 	\vspace{-0.1in}
-	\caption{Packet recieved ratio improved by intelligent node selction
+	\caption{Packet received ratio improved by intelligent node selection
 		\textnormal{
 		}}
 	\label{fig:ai_selection}
@@ -104,7 +136,7 @@ $3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
 	\caption{Energy prediction
 		\textnormal{
 			We use regression method to predict energy consumption and the
-			prediction result is consistent with the truthground.  The absolute
+			prediction result is consistent with the truth-ground.  The absolute
 			error of energy prediction never exceeds $3\times10^{-10}$ with normalized energy
 			(i.e. the maximum energy of a sensor is 1).
 		}
@@ -128,7 +160,7 @@ $3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
 
 We compare the impact caused by death of nodes using throughput among LEACH, RPL
 and {\sdn} and the results are shown in Figure~\ref{fig:fault_tolerance}. The
-total recieved packets of {\sdn} increses stably due to its resilience to faults
+total received packets of {\sdn} increases stably due to its resilience to faults
 of nodes. The resilience is achieved by 2 approaches: (1) cluster based protocol
 is immune from failures of cluster members; (2) Local repair enable the network
 recover from failures of cluster headers.
@@ -153,7 +185,7 @@ recover from failures of cluster headers.
 
 Table~\ref{tab:diagnosis} shows the failure detection rate among sensing, energy
 and radio failures. Controller proactively adjusts the routing based on the
-preliminary diagnosis results, which make it possible to decrese the routing
+preliminary diagnosis results, which make it possible to decrease the routing
 failure before it happens and improve the throughput as shown in
 Figure~\ref{fig:diagnosis}.
 
@@ -167,35 +199,19 @@ Figure~\ref{fig:diagnosis}.
 	\label{fig:diagnosis}
 \end{figure}
 
-\subsection{Energy Consumption}
 
-By applying multi-task schedule, we reduce the working sensors on one node and
-the size of transmitted packets to cut down the energy consumption of sensing
-and communication over 50\%.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/multitask_energy}
 	\vspace{-0.1in}
-	\caption{Average energy consumption with and without multitask schedule
-		\textnormal{When with multitask schedule, sensor consumes half of the energy
-			comparing to when without multitask schedule.}}
+	\caption{Average energy consumption with and without multi-task schedule
+		\textnormal{When with multi-task schedule, sensor consumes half of the energy
+			comparing to when without multi-task schedule.}}
 	\label{fig:multitask_energy}
 \end{figure}
 
-\subsection{Scalability}
+By applying multi-task schedule, we reduce the working sensors on one node and
+the size of transmitted packets to cut down the energy consumption of sensing
+and communication over 50\%.
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/scalability}
-	\vspace{-0.1in}
-	\caption{Scalability
-		\textnormal{
-			{\sdn} succeeds RPL in different network sizes.
-		}}
-	\label{fig:scalability}
-\end{figure}
-
-Our {\sdn} system is capable in large scale wireless sensor networks as
-Figure~\ref{fig:scalability} shows. Its performance surpasses RPL and LEACH in
-both small and large network sizes.
