@@ -2,13 +2,14 @@
 \label{Imp}
 
 We run modified contiki-ng, a system for next generation IoT (Internet of
-things), on data plane. We modify the network layer of contiki-ng, and abstract
+Things), on data plane. We modify the network layer of contiki-ng, and abstract
 data plane interface to separate network control functions from data plane. 
+The details are described as follows.
 
 \textbf{Neighbor Discovery.} After deployment, nodes frist start IPv6 neighbor
 discovery protocol to find the nodes which can be reached within one hop, and
-then save neighbor information to neighbor table and wait for UAV arriving to
-gather the topology information. Every neighbor's information consists of the
+then save the neighbor information to neighbor table and wait for UAV arriving
+to gather the topology information. Every neighbor's information consists of the
 neighbor's IP and RSSI. 
 
 \textbf{Packet forwarding.} The nodes get routing table from UAV through
