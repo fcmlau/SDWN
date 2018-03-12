@@ -121,9 +121,9 @@ Every time a packet arrives at a node, it counts
 the source of the packet . The tracing collection module
 is set in the UAV controller. When network exception is detected, 
 it gathers the tracing information in the tracing module of the relevant nodes
-and infers a suspicious node set. Next we set the UAV to fly through the 
-node set and check each node first to diagnose the failed nodes. 
-Then UAV collects the neighbor lists of all the nodes in the suspicious node set.
+and infers a suspicious node set. Next we set the UAV to fly through all these nodes 
+and send beacons to them to diagnose the failed nodes. 
+Then UAV collects the neighbor lists of every node in the suspicious node set.
 With the collected neighbor lists, the UAV controller reconstructs the topical topology and 
 compares it with the default topology to find the failed links.
 
@@ -145,7 +145,7 @@ interferences and quick self-recovery
 Traditional wireless sensor networks (WSN)  generally carry out data 
 collection by multi-hop transmission,
 and due to limited computation capability and storage capacity, sensors are incapable
-to perform deep learning methods for data mining. 
+to perform machine learning methods for data mining. 
 Hence, intelligent self energy consumption optimization for a sensor is hard to achieve.
 
 The sensor next to the data center always has the most frequent routing tasks, which leads to
@@ -163,12 +163,10 @@ complex constrains.
 In {\sdn}, the UAV controller stores the global energy information 
 and can perform large-scale computations, laying 
 the foundation for the intelligent energy prediction.
-The AI prediction in term can contribute to the whole system  network diagnosis application
+The AI prediction in turn can contribute to the whole system  network diagnosis application
 This kind of cooperation and mutual assistance makes {\sdn} an effective ecosystem.
 
 
-These predicted information contributes
-to other application. 
 
 \subsubsection{Design}
 
@@ -187,8 +185,7 @@ can be seen in Fig. \ref{prediction}.
 We utilize the popular machine learning model, 
 Multi-layer Perceptron (MLP) \cite{Harvey1988An},
 to conduct the energy prediction process. 
-The AI-based prediction architecture enables
-users to analyze the sensor data in real time. 
+The AI-based prediction architecture is  showed in Fig. \ref{prediction} .
 After the information collected by the sensor is transmitted to database, it is used as
 the input of the incremental learning model, which outputs the
 life expectancy of each sensor. 
@@ -201,7 +198,7 @@ and use the sql query to manage training data. In this way, we can easily
 get each sensor's routing flows and energy consumption at any time as input. A forgetting factor
 is used to avoid overfitting. Then the model will output the prediction of a energy consumption list in time
 sequences. The sensor which is most likely to run out of energy will rank in the first place of the list. 
-Combined with our diagnosis application, we can make use of our prediction result to prolong the network
+Combined with our diagnosis and routing application, we can make use of our prediction result to prolong the network
 lifetime.
 
 
@@ -326,14 +323,14 @@ receive task control instructions.
 
 \subsubsection{Design}
 
-A deployed wireless sensor networks are usually assigned  with
+A deployed wireless sensor network is usually assigned  with
 different data collection requirement. In {\sdn}, we design and 
 implement multi-task application and provide easy-to-use
 interfaces to users.
 
-When a user assign a task to {\sdn}, the UAV controller will first check out 
-the energy and storage constraints of the required sensor set, as described in Alg. \ref{}. 
-If the task requirement exceeds the capacity of the sensor set, it will be sent to a     
+When a user assigns a task to {\sdn}, the UAV controller will first check out 
+the energy and storage constraints of the required sensor set, as described in Alg. \ref{Constraint}. 
+If the task requirement exceeds the capacity of any selected sensor node, it will be sent to a     
 task queue; Otherwise it will be put into the task buffer to conduct.
 
 
@@ -357,10 +354,8 @@ task queue; Otherwise it will be put into the task buffer to conduct.
 \end{algorithm}
 
 
-%To be modified later
 \iffalse
 A sensor node may have different sensing ranges for different tasks.
-
 
 There are several practical requirements.
 
@@ -406,13 +401,4 @@ Different tasks have different requirements, i.e.
 There is no need to collect sunlight data at night.
 \end{itemize}
 
-Task scheduler do the arrangement. 
-
-Task buffer.
-
-Task queue.
-
-Scheduling table.
-
-...
 \fi
