@@ -65,7 +65,8 @@ This is due to the air-ground communication suffers from less interference of th
 In this paper, we present {\sdn}\footnote{In the Bible, {\sdn} is a word used to denote a messenger from God. }, 
 the first UAV based SDN sensor system.
 In {\sdn}, UAV plays the role of the central controllers to monitor the sensor system.
-We implemented five fundamental applications: routing, network diagnosis, 
+We designed routing interfaces, multi-task interfaces and AI interfaces in {\sdn} to support
+five fundamental applications: routing, network diagnosis, 
 AI energy prediction, AI node selection and multi-task,
 and provide users with easy-to-use interfaces.
 Routing application allows users to update the flow table of nodes.
@@ -80,14 +81,13 @@ the node set for the multi-task application.
 We implement {\sdn}, using DJI M100 UAV with Intel NUC as airborne computer, 
 and 100 TI CC2650 SensorTag to build our testbed.
 We evaluated the five applications of  {\sdn} on this testbed, 
-compared with LEACH~\cite{} and RPL~\cite{}.
+compared with LEACH~\cite{kaur2016wsn} and RPL~\cite{winter2012rpl}.
 Our evaluation shows that:
 \begin{itemize}
 	\item[1)] {\sdn} has high performance. {\sdn} achieves overall {\simpleTput} higher
-		throughput than RPL;
-	\item[2)] {\sdn} achieves intelligent  self-repair. {\sdn} uses AI
-		selection and diagnosis algorithm to obtain an {\totalLife} increment of network lifetime
-		compared with RPL;
+		throughput than RPL via the routing application ;
+	\item[2)] {\sdn} has intelligent features. {\sdn} achieves  absolute error of energy prediction within {\Error} 
+		and obtain an {\totalLife} increment of network lifetime compared with RPL;
 	\item[3)] {\sdn} is resilient. As time goes by, {\sdn} maintains over
 		{\pktRecvRatio} overall package received ratio while others drop to 50\%
 		sharply.
