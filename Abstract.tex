@@ -4,23 +4,22 @@ Software defined network (SDN) enables
 artificial intelligence (AI) techniques to be implemented easily, and in
 turn AI techniques greatly improve the performance and resilience of SDN system.
 However, all the existing SDN systems in wireless sensor networks
-are implemented by simulations and there is no practical 
+are implemented in simulators and there is no practical 
 implementation of SDN system in WSN.
 
 In this paper, we present {\sdn}, the first practical SDN wireless sensor network system,
 which achieves intelligence, high-performance and resilience at the same time.
-In {\sdn}, we utilize the unmanned aerial vehicle (UAV) to serve as the SDN controller. 
-The UAV communicates with network nodes by one-hop communication and thus greatly
+In {\sdn}, we utilize a set of unmanned aerial vehicles (UAVs) to serve as the SDN controllers. 
+UAVs communicate with sensor nodes by one-hop communication and thus greatly
 reduce the network energy consumption. 
 We designed easy-to-use interfaces and implemented five SDN applications, namely
 routing, multi-task, network diagnosis, AI energy exhaustion prediction, AI node selection.
 {\sdn} is an organic ecosystem that all applications can run simultaneously to benefit each other.
-Our evaluations show the throughput improves {\simpleTput} compared with the RPL protocol
-by using the basic {\sdn} routing algorithm. Meanwhile, the lifetime grows by
-{\simpleLife} compared with RPL. And after deploying diagnosis and AI
-selection algorithm, the lifetime even increases by {\diagLife} and {\seleLife}
-more, respectively. Besides, the packet received ratio keeps over 90\% in both
-small and large scale network. Code of {\sdn} is ready to open source.
+Our evaluations show the throughput improves {\simpleTput} compared with two notable protocols
+by using the basic {\sdn} routing algorithm. Meanwhile, the average lifetime of sensor nodes grows by
+{\simpleLife}. By running diagnosis and AI
+selection applications together, {\sdn} further increases the lifetime by {\diagLife} and {\seleLife}
+more, respectively. All source code and results of {\sdn} are ready to open source.
 
 
 

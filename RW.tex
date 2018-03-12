@@ -6,7 +6,7 @@
 There are several existing SDN approaches for sensor system, 
 namely flow sensor \cite{mahmud2011exploitation}, SDWN \cite{costanzo2012software},
 sensor openflow \cite{luo2012sensor}, TinySDN \cite{de2015tinysdn}, SDN-WISE \cite{galluccio2015sdn}.
-However, they are all implemented and evaluated only by simulations. 
+However, they are all implemented and evaluated only in simulators. 
 
 \textbf{Flow Sensor.}
 The previous idea presented in paper \cite{mahmud2011exploitation} addresses 
@@ -52,7 +52,7 @@ and the authors implement the prototype of this idea. Compared to other SDN solu
 this solution successfully reduces the message exchange needed between sensor nodes and controller. 
 Besides, flexible APIs are provided by the authors, which makes the network much easier to program. 
 Also, they implemented some experimental testbed, and found that in a power limited hardware, the response delay was still very small. 
-SDN-WISE shows its good performance in different operation conditions.
+SDN-WISE shows its good performance in different operation conditions. However, SDN-WISE only validates its performance in simulators. 
 
 
 \subsection{Applications for Wireless Sensor Networks}
@@ -60,10 +60,10 @@ SDN-WISE shows its good performance in different operation conditions.
 
 There are already a rich set of the applications for WSNs. 
 However we study the typical applications and find that
-distributed fashions for WSN can not 
+distributed fashions for WSN cannot 
 promise global optimization. %without the support of SDN.
 Worse, no existing work can combine different applications to run together.
-To design a ecosystem for software defined sensor networks, 
+To design a ecosystem for software defined sensor networks, we are to implement applications of
 routing, network diagnosis, AI sensor, sensor selection and multi-task.
 
 
