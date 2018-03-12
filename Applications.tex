@@ -7,8 +7,8 @@ Traditional applications cannot achieve complicated goals and efficiency due
 to the limited processing power and memory space of sensors.
 
 In {\sdn}, applications for wireless sensor networks are inspired by 
-greater potential with the UAV based SDN controller. The central controller
-helps sensors execute complex calculations such as AI model training, as well 
+greater potential with the UAVs based SDN controllers. The central controllers
+help sensors execute complex calculations such as AI model training, as well 
 as store global information. Besides, UAVs have flexible features and can deploy 
 tasks to sensors by one-hop communication directly. Thus it enables the sensor network
 to achieve much more intelligent applications.
@@ -46,19 +46,39 @@ mechanism to achieve both energy efficiency and robustness.
 
 
 \subsubsection{Design}
-In WSNs, cluster routing method is a kind of protocol, which nodes choose a header periodically, the other node around cluster header (CH) send it's data to cluster header, and the cluster header forwards it to another header, until the root node receives the data. 
-Though cluster method will reduce the energy hole problems, the routing protocol between is running on sensor nodes locally, because sensor nodes only have local information of network and limited computing ability, it can not achieve global optimal routing, and it is difficult to modify protocol according users requirements.
+In WSNs, one kind of routing protocol is based on clusters. 
+In this way, nodes in the network will choose their nearby header periodically.
+The nodes around cluster header (CH) send their data to the header, 
+and each cluster header forwards it to another header until the root node receives the data. 
 
-We improve cluster method by using our SDN controller to update the routing protocol between cluster headers. 
-At first, a UAV flies around the sensor field and get topology data from nodes, 
-and then calculates the cluster header schedule to decide which node should be the cluster header at a specific time phase 
+This kind of cluster method releases the energy hole problem~\cite{} of WSNs.
+However, in the traditional WSNs, sensor nodes only have local information 
+and are limited to computing capability which makes them hard to achieve global optimal routing. 
+% it is difficult to modify protocol according to users requirements.
+
+We improve this cluster method by using our SDN controllers 
+to update the routing protocol between cluster headers. 
+At first, a UAV flies around the sensor field and get topology data from nodes. 
+Then it calculates to decide the node to be the cluster header at a specific time phase 
 to balance energy consumption between nodes, and calculate the routing result between current header's topology through
 Open Shortest Path First (OSPF) protocol base on gathered topology information, In WSN, every node only need send its data to root node, so the OSPF destination internet protocol (IP) has be set as root IP. Through OSPF, UAV get the routing table between cluster header. When UAV fly near the nodes, it send routing table to nodes, including the node role and next hop IP in every time phase.
 
-Considering the economic and energy limitation, UAV can not keep fly above the sensing field. It only fly to sensing field to gather topology after node deployed and update nodes routing on demand. So after the routing has been deployed, the system routing repair mechanism should make sure some nodes failure don't make the network routing crashed.
+Considering the energy limitation, UAV cannot keep flying above the sensing field. 
+It only flies to sensing field to gather topology when the network is deployed 
+and updates nodes' routing table on demand. 
+So after the routing has been deployed, 
+the system routing repair mechanism 
+should make sure some nodes failure 
+don't make the network routing crashed.
 
 
-By designing local routing repair mechanism, our system achieves robustness to radio failure. When a node in cluster member failure, it didn't influences the whole routing between the routing we deployed routing. On other case, when the cluster header failure, if the network don't have local repair mechanism, the whole routing between cluster headers will crash and make the network partial. So we design the local repair mechanism through local header switching. 
+By designing local routing repair mechanism, our system achieves 
+robustness to radio failure. When a node in cluster member failure, 
+it didn't influences the whole routing between the routing we deployed routing. 
+On other case, when the cluster header failure, if the network don't have local 
+repair mechanism, the whole routing between cluster headers will crash and 
+make the network partial. So we design the local repair mechanism through 
+local header switching. 
 
 \begin{figure}[htbp]
 	\centering
@@ -69,11 +89,11 @@ By designing local routing repair mechanism, our system achieves robustness to r
 	\vspace{-0.1in}
 \end{figure}
 
-As shown in Figure~\ref{routing-flow}, after the node get routing table from
-UAV, it sets its next hop IP following received table, and also uses its
-neighbor's RSSI information to find the nearest node as its substitute node,
-then node broadcast its next hop IP and substitute node IP. After the substitute
-node received the broadcast packet, it save the source's next hop IP and keep
+As shown in Figure~\ref{routing-flow}, after a node gets routing table from
+a UAV, it sets its next hop IP following received table and also uses its
+neighbor's RSSI information to find the nearest node as its substitute node.
+Then node broadcasts its next hop IP and the substitute node IP. After the substitute
+node received the broadcast packet, it saves the source of next hop IP and keeps
 monitoring the source status. The substitute node will became new header when it
 detected the current header failed.
 
@@ -103,7 +123,10 @@ for(node=0; node<nude_num; node++){
 
 
 
-We implement our software defined routing and local reparation in {\sdn} and demonstrate the code in List \ref{topology-update}, the routing in our system achieve both energy efficiency and robustness.
+We implement our software defined routing and 
+local reparation mechanism in {\sdn}, 
+and demonstrate the code in List \ref{topology-update}. 
+Our routing application in {\sdn} achieves both energy efficiency and robustness.
 
 
 \subsection{Network Diagnosis}
