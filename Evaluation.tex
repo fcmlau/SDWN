@@ -1,14 +1,14 @@
 \section{Evaluation}
 \label{Eva}
 
-\subsection{Evaluation Setup} In this section, we describle our performance
-evaluation in simulation and real-scene experiments. We distribute 100 TI
-SensorTag sensors randomly deploy in a $250~\times~250$ square meters area, with
-contiki-ng as its operating system. We use different metrics for various
+\subsection{Evaluation Setup} In this section, we evaluate the performance of {\sdn}
+by real-scene experiments. We deploy 100 TI
+SensorTag sensors randomly in a $250~\times~250$ square meters area. 
+The operating system of sensors is contiki-ng~\cite{}. We use different metrics for various
 applications and compare our works with other state-of-the-art works such as RPL
 and LEACH. Although Alder implements a sensor system using UAVs, it doesn't
 provide a complex routing protocol, and thus we do not compare with it on
-throughput or letancy.
+throughput or latency.
 
 When testing the network, we make nodes send packets every 10 seconds, and the
 packet size is 60 bytes. Unless otherwise specified, we set the evaluation time
@@ -17,7 +17,7 @@ from 0 to 5000 seconds.
 \subsection{Evaluation Metrics}
 
 \textbf{Packet received ratio} is defined as the proportion of the total data
-packets received by data center and the the total data packets sent by all nodes, 
+packets received by data center and the total data packets sent by all nodes, 
 we adopt the model in \cite{chen2017energy}
 and it can be formulated as
 \begin{equation}
