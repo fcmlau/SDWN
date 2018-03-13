@@ -10,7 +10,7 @@ and LEACH. Although Alder implements a sensor system using UAVs, it doesn't
 provide a complex routing protocol, and thus we do not compare with it on
 throughput or latency.
 
-When testing the network, we make nodes send packets every 10 seconds, and the
+When measuring the network, we make nodes send packets every 10 seconds, and the
 packet size is 60 bytes. Unless otherwise specified, we set the evaluation time
 from 0 to 8000 seconds.
 
@@ -116,13 +116,13 @@ energy consumption between nodes.
 	\vspace{-0.1in}
 	\caption{Network lifetime using various routing algorithm
 		\textnormal{
-			{\sdn} succeeds RPL and LEACH in different network sizes.
+			{\sdn} surpasses RPL and LEACH in different network sizes.
 		}}
 	\label{fig:lifetime}
 \end{figure}
 
 Our {\sdn} system is capable in large scale wireless sensor networks as
-Figure~\ref{fig:lifetime} shows. Its lifetime surpasses RPL and LEACH in both
+Figure~\ref{fig:lifetime} shows. Its lifetime excels RPL and LEACH in both
 small and large network sizes.
 
 \subsection{AI Applications}
@@ -145,7 +145,7 @@ received ratio achieves almost 100\%.
 
 By deploying MLP on UAV, {\sdn} can predicts the energy consumption precisely as
 Figure~\ref{fig:ai_selection} shows, and the absolute error can be restricted in
-$3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
+$0.1$, which enable us to predict and fix energy failure in advance.
 
 \begin{figure}[htbp]
 	\centering
@@ -164,7 +164,7 @@ $3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
 		\textnormal{
 			We use MLP to predict energy consumption and the
 			prediction result is consistent with the truth-ground.  The absolute
-			error of energy prediction never exceeds $3\times10^{-10}$ with normalized energy
+			error of energy prediction never exceeds $0.1$ with normalized energy
 			(i.e. the maximum energy of a sensor is 1).
 		}
 	}
@@ -221,16 +221,16 @@ recover from failures of cluster headers.
 	\label{fig:did_comp}
 \end{figure}
 
-%Table~\ref{tab:diagnosis} shows the failure detection rate among sensing, energy
-%and radio failures.
-We compare oure algorithm with DID\cite{gong2015directional}, but as it is
-not open-source, we implement a version of DID and evaluate it in our own
-settings. The main reason why we can succeed DID is mainly that our UAVs can fly
-to a the fault area which decrease the number of potential candidate of injected
-nodes. Besides, our controller proactively adjusts the routing based on the
-preliminary diagnosis results, which make it possible to decrease the routing
-failure before it happens and improve the throughput as shown in
-Figure~\ref{fig:diagnosis}.
+%Table~\ref{tab:diagnosis} shows the failure detection rate among sensing,
+%energy and radio failures.
+We compare oure algorithm with DID\cite{gong2015directional}, but as it is not
+open-source, we implement DID by closely following the algorithm proposed in
+\cite{gong2015directional} and evaluate it in our settings. The main reason
+{\sdn} performs better than DID is that our UAVs can fly to a the fault area
+which decrease the number of potential candidate of injected nodes. Besides, our
+controller proactively adjusts the routing based on the preliminary diagnosis
+results, which make it possible to decrease the routing failure before it
+happens and improve the throughput as shown in Figure~\ref{fig:diagnosis}.
 
 \begin{figure}[htbp]
 	\centering
