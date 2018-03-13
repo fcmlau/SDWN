@@ -19,15 +19,14 @@ neighbor's IP and RSSI.
 
 \textbf{Packet Forwarding and Data Sampling}: The nodes get routing table from UAV through
 northbound interface. When a node receive a data packet from other nodes, it
-just sends it to the next hop node according the routing table.
-
-Nodes read task table received from UAV to decide when
-to wake up sensors to make sure that they cost minimal energy to get the same
+just sends it to the next hop node according the routing table. Nodes read task
+table received from UAV to decide when to start data sampling to make sure 
+that they cost minimal energy to get the same
 quality data. 
 
 \subsection{Control Plane}
 
-We run our SDN control plane a power airborne computer carried by UAV. 
+We run our SDN control plane on a power airborne computer carried by UAV. 
 The UAV's flight controller runs on ROS (Robot Operating System) base on UAV's SDK.
 And we use MySQL as our SDN database. UAV gathers topology from each node and save
 it into database, so that users can easily read the whole network data from
