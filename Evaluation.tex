@@ -45,9 +45,9 @@ unit time.
 
 \subsection{Basic Routing}
 
-In order to fairly compare with existing works, we first only use our basic
-{\sdn} routing protocol without any intelligent approaches. We evaluate routing
-performance by throughput, package received ratio and end-to-end latency.
+In order to fairly compare with existing works, we first use our basic
+{\sdn} routing protocol without any intelligent approaches only. We evaluate routing
+performance by throughput, packet received ratio and end-to-end latency.
 Meanwhile, We also evaluate the scalability of our network through network
 lifetime. We do not compare {\sdn} with Alder on throughput and latency because
 Alder doesn't implement a complete routing protocol.
@@ -132,11 +132,12 @@ small and large network sizes.
 
 \subsection{AI Applications}
 
-By deploying intelligent node selection algorithm, we use least waken sensors
+By deploying intelligent node selection algorithm, we use least waken sensors,
 but collect most necessary sensing data covering the whole area and reduce the
 redundant ones in the meantime. Besides, less sensors means less collision and
-interference which further improved the reliability of network. And the packet
-received ratio grows by 10\%$\sim$15\% and achieves almost 100\% as Figure~\ref{fig:ai_selection} shows.
+interference, and it can further improves the reliability of network. And the
+packet received ratio grows by 10\%$\sim$15\% and achieves almost 100\% as
+Figure~\ref{fig:ai_selection} shows.
 
 %\begin{figure}[htbp]
 \begin{figure}[!h]
@@ -149,7 +150,7 @@ received ratio grows by 10\%$\sim$15\% and achieves almost 100\% as Figure~\ref{
 	\label{fig:ai_selection}
 \end{figure}
 
-By deploying MLP on UAV, {\sdn} can predicts the energy consumption precisely as
+By deploying MLP on UAVs, {\sdn} can predicts the energy consumption precisely as
 Figure~\ref{fig:energy_pred} shows, and the absolute error can be restricted in
 $0.1$, which enable us to predict and fix energy failure in advance.
 
