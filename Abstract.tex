@@ -1,27 +1,29 @@
 \begin{abstract}
 
-Software defined network (SDN) enables  
-artificial intelligence (AI) techniques to be implemented easily, and in
-turn AI techniques greatly improve the performance and resilience of SDN system.
-However, all the existing SDN systems in wireless sensor networks
-are implemented in simulators and there is no practical 
-implementation of SDN system in wireless sensor networks.
+A software defined network (SDN) enables  
+many techniques (e.g., artificial intelligence, or AI) to be implemented easily, and in
+turn these techniques greatly improve the performance and resilience of the SDN system.
+Unfortunately, all the existing SDN systems in wireless sensor networks
+are implemented in simulators, and there is no practical 
+SDN implementation for wireless sensor networks.
 
 In this paper, we present {\sdn}, the first practical SDN wireless sensor network system,
 which achieves intelligence, high-performance and resilience at the same time.
 In {\sdn}, we utilize a set of unmanned aerial vehicles (UAVs) to serve as the SDN controllers. 
-UAVs communicate with sensor nodes by one-hop communication and thus greatly
-reduce the network energy consumption. 
-We designed easy-to-use interfaces and implemented five SDN applications, namely
-routing, multi-task, network diagnosis, AI energy exhaustion prediction, AI node selection.
-{\sdn} is a ecosystem that all applications can run simultaneously to benefit each other.
-Our evaluations show the throughput improves by {\simpleTput} compared with two notable protocols.
+Sensor nodes communicate with UAVs when they are within one-hop communication ranges, 
+greatly improving throughputs and reducing the sensor nodes' energy consumption. 
+{\sdn} includes easy-to-use SDN interfaces and we have implemented five SDN applications, namely
+routing, multi-task, network diagnosis, AI energy exhaustion prediction, and AI node selection.
+{\sdn} is a ecosystem where all SDN applications run simultaneously to benefit each other.
+Our evaluation shows that {\sdn}'s throughput is  {\simpleTput} higher than two 
+notable traditional sensor network routing protocols.
 %by using the basic {\sdn} routing algorithm. 
-Meanwhile, the average lifetime of sensor nodes grows by
-{\simpleLife}. By running energy prediction %and AI selection 
-application, {\sdn} further increases the lifetime by {\totalLife}. %and {\seleLife}
-All source code and results of {\sdn} are ready to open source.
-
+Meanwhile, the average lifetime of sensor nodes in {\sdn} is 
+{\simpleLife} longer than these two protocols. 
+%By running our AI energy prediction %and AI selection 
+%application,  the nodes' lifetime in {\sdn} further improves  by {\totalLife}. %and {\seleLife}
+All source code and results of {\sdn} are released on \emph{anonymous}.
+%
 
 
 %throughput improves by 1.2X compared to two notable traditional sensor network routing protocols.

@@ -2,38 +2,46 @@
 
 
 %logic flow
-Software defined network (SDN)~\cite{Benzekki2016Software,Sezer2013Are} paradigm
+The software defined network (SDN)~\cite{Benzekki2016Software,Sezer2013Are} paradigm
 enables flexible programmability for networks 
 by using programmable data plane and centralized network controller~\cite{7122247}.
 It shows remarkable strengths in network control, global optimization 
-(e.g. throughputs~\cite{Alicherry2005Joint}, energy consumption~\cite{Miao2010Cross}, network diagnosis~\cite{gong2015directional})
+(e.g., throughputs~\cite{Alicherry2005Joint}, energy consumption~\cite{Miao2010Cross}, network diagnosis~\cite{gong2015directional})
 and easy deployment for new applications~\cite{Feamster2014The}.
 
 With the support of SDN for networks, programmable artificial intelligence (AI) 
 techniques~\cite{Norvig1995Artificial, Poole2010Artificial, Cockburn1996ARCHON} 
 are easy to be implemented in networks \cite{mahmud2011exploitation}.
-In turn, AI technique makes SDN become a smarter and more effective network system
-due to its high performance in predicting and optimizing network capacity\cite{mahmud2011exploitation},
-e.g. network throughput~\cite{Alicherry2005Joint}, energy consumption~\cite{Miao2010Cross}, etc.
+In turn, AI techniques make SDN become a smarter and more effective network system
+due to their intelligence on predicting and optimizing network features~\cite{mahmud2011exploitation}
+(e.g., routing~\cite{Alicherry2005Joint} and energy consumption~\cite{Miao2010Cross}).
  
-Unfortunately, although Internet of Things (IoTs) \cite{Atzori2010The} 
-make wireless sensor networks \cite{Potdar2009Wireless}
-increasingly pervasive and important (such as volcanic investigation 
-\cite{Wernerallen2006Deploying}, and agriculture monitoring \cite{Wang2010L3SN}), 
-there is no real implementation of SDN in a WSN. Existing works 
- \cite{mahmud2011exploitation, costanzo2012software, luo2012sensor, de2015tinysdn, galluccio2015sdn} 
-all design frameworks of SDN for WSNs and validate them in  .  
-Even worse, these simulational SDN works construct the central controller 
-of SDN in their database station~\cite{Potdar2009Wireless}. The controller transmits control 
-instructions with sensor nodes by multi-hop communications \cite{Mizuyama2017Estimation}.
-This causes a great deal of energy consumption \cite{Yang2014}, which 
-makes it a paradox since sensor network suffering from 
-ought to be an energy-efficient and reliable network.
+ 
 
-Moreover, to achieve intelligent WSNs, 
-our observation is that AI methods 
-are only able to be conducted in the SDN controllers 
-due to two major reasons. 
+Unfortunately, despite these advances on developing SDN and AI %Internet of Things (IoTs) \cite{Atzori2010The} 
+for various networks, wireless sensor networks (WSNs)~\cite{Potdar2009Wireless}
+(e.g., volcanic investigation~\cite{Wernerallen2006Deploying}
+and agriculture monitoring networks~\cite{Wang2010L3SN}),
+there is no real SDN implementation for WSNs. 
+Existing SDN works~\cite{mahmud2011exploitation, costanzo2012software, luo2012sensor, de2015tinysdn, galluccio2015sdn} 
+for WSNs are all developed in simulators.
+Worse, these simulational SDN works typically construct one no-moving, centralized SDN controller 
+in their simulator database~\cite{Potdar2009Wireless}. 
+This often causes the sensor nodes around the  controller to incur 
+excessive transmission collisions~\cite{Yang2014,Mizuyama2017Estimation} 
+and energy consumption, and 
+the entire system is single point of failures.
+%The controller transmits control 
+%instructions with sensor nodes by multi-hop communications.
+%This causes a great deal of energy consumption~\cite{}, which 
+%makes it a paradox since sensor network suffering from 
+%ought to be an energy-efficient and reliable network.
+
+
+
+To create a practical SDN for WSNs, 
+our observation is that most computations are only suitable to run
+in the SDN controllers due to two major reasons. 
 First, sensor nodes 
 have limited processing capability and cannot 
 deal with complex computations \cite{Sharma2012Security,Heller2012The}.
@@ -42,63 +50,67 @@ to support complicated operations. With the help of SDN,
 the controllers can conduct complex computations 
 and store large-scale data information for WSNs.
 
-
 Adler~\cite{Alder}, a recent testbed that combines WSNs
-and the unmanned aerial vehicle (UAV)~\cite{Cambone2005Unmanned, Perry2000Unmanned, Cathcart2014Method},
+and the unmanned aerial vehicle 
+(UAV)~\cite{Cambone2005Unmanned, Perry2000Unmanned, Cathcart2014Method},
 shows that UAVs enable WSNs to achieve resilience, 
 high-performance and energy-efficiency at the same time.
-Specifically, UAVs are flexible to 
-communicate with sensors by one-hop transmission
-and greatly reduce energy consumption compared to multi-hop communications.
+In Adler, UAVs are set to fly nearby the sensors and perform applications by only one-hop 
+radio transmission.
+Compared to traditional WSNs, Adler greatly reduces the network energy consumption by about $80\%$
+and achieves about $42.2\%$ higher per-hop package receiving ratio.
 Moreover, UAVs are capable to perform complex computations 
 by their airborne computers with powerful CPUs and GPUs.
 Although Adler is a traditional sensor system instead of a SDN system, 
-it provides a favorable proof
-that UAVs are perfect to serve as the SDN controller.
+it implies that UAVs are promising to serve as the SDN controllers.
 
-Another advantage of utilizing UAV compared to
-terrestrial mobile controllers~\cite{Somasundara2007Mobile} is that, the air-ground communication range
-is almost 10 times than that of ground-ground communication under ZigBee protocol~\cite{Farahani2008ZigBee}, which are
-around 145 meters and 15 meters respectively tested by our practical experiments.
-This is due to the air-ground communication suffers from less interference of the terrestrial WSN.
+Another advantage of utilizing UAVs as SDN controllers compared to
+terrestrial mobile controllers~\cite{Somasundara2007Mobile} is that, 
+the air-ground communication range
+is almost 10 times than that of ground-ground communication 
+under ZigBee protocol~\cite{Farahani2008ZigBee}, which are
+around $150$ meters (between a UAV and a sensor) and $20$ meters(between two sensors) respectively~\cite{Alder}.
+This is because air-ground communications suffer from much less interference than ground-ground.
 
 In this paper, we present {\sdn}\footnote{In Hebrew, {\sdn} is the semantic word of angels, who fly in the sky and bring goodness to all things on earth. }, 
-the first UAV based SDN sensor system.
-In {\sdn}, UAV plays the role of the central controllers to monitor the sensor system.
-We designed routing interfaces, multi-task interfaces and AI interfaces in {\sdn} to support
-five fundamental applications: routing, network diagnosis, 
-AI energy prediction, AI node selection and multi-task,
-and provide users with easy-to-use interfaces.
-Routing application allows users to update the flow table of nodes.
-Network diagnosis is used to find the fault source when network exception is detected.
-Multi-task application enables sensor to perform multiple 
-tasks simultaneously. All the applications are within a ecosystem
-and can be combined synergistically. For example,
-users can execute the AI node selection application to choose
-the node set for the multi-task application. 
+the first UAV based SDN system for WSNs.
+In {\sdn}, a set of UAVs serve as the SDN controllers.
+We design three types of SDN interfaces, including routing, multi-task and AI interfaces in {\sdn}. 
+We develop five fundamental SDN applications: routing, network diagnosis, 
+AI energy prediction, AI node selection and multi-task.
+The routing application automatically computes flow tables for both UAVs and sensor nodes.
+Therefore, sensor nodes can communicate through UAVs when they fly around,
+and sensors can directly communicate with each other when UAVs are absent.
+The network diagnosis application automatically finds and repair the fault routes when network exception is detected.
+All these applications can greatly improve both the throughput, energy efficiency and resilience of the entire network. 
+All the applications can run within a ecosystem
+and can be combined synergistically. 
+%For example,
+%users can execute the AI node selection application to choose
+%the node set for the multi-task application. 
 
 
 We implement {\sdn}, using DJI M100 UAV with Intel NUC as airborne computer, 
 and 100 TI CC2650 SensorTag to build our testbed.
 We evaluated the five applications of  {\sdn} on this testbed, 
-compared with LEACH~\cite{kaur2016wsn} and RPL~\cite{winter2012rpl}.
+compared with two notable traditional routing protocols LEACH~\cite{kaur2016wsn} and RPL~\cite{winter2012rpl}.
 Our evaluation shows that:
 \begin{itemize}
 	\item[1)] {\sdn} has high performance. {\sdn} achieves overall {\simpleTput} higher
-		throughput than RPL via the routing application ;
+		throughput than RPL via running only the routing application;
 	\item[2)] {\sdn} has intelligent features. {\sdn} achieves absolute error of energy prediction within {\Error} 
-		and obtain an {\totalLife} increment of network lifetime compared with RPL;
+		and obtain an {\totalLife} increment of average sensor nodes' lifetime compared with RPL;
 	\item[3)] {\sdn} is resilient. As time goes by, {\sdn} maintains over
-		{\pktRecvRatio} overall package received ratio while others drop to nearly {\OpktRecvRatio}
+		{\pktRecvRatio} overall package received ratio while both LEACH and PRL drop to nearly {\OpktRecvRatio}
 		sharply.
 \end{itemize}
 
 The main contribution of this paper is {\sdn}, the first 
 practical SDN wireless sensor network system. 
 {\sdn} takes the first significant step to realize global optimization in a distributed WSN environment.
-Other contributions include several effective strategies and algorithms 
-in the five implemented applications of {\sdn}. 
-Contrast to all the existing works, the applications in {\sdn}
+Other contributions include several effective strategies and new algorithms 
+in the five applications of {\sdn}. 
+In contrast to all existing WSN systems, the applications in {\sdn}
 can run together and benefit each other. 
 
 

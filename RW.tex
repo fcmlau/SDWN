@@ -1,5 +1,8 @@
 \section{Related work}
 
+\section{Alder: a UAV and WSN hybrid system}
+
+
 \subsection{Software Defined Wireless Sensor Networks}
 
 
@@ -122,3 +125,38 @@ Nowadays, works aiming to design an energy-efficient sensor management strategy
 tends to develop their methods in three steps: choose the proper subset of nodes to be active \cite{Aghdasi2009High}, choose the subset of active nodes to assign the task and set the sampling rate of the task. Related study has found an efficient online 
 algorithm considering sensor activation and task mapping to deal with dynamic events during the 
 runtime of software defined sensor network system \cite{Zeng2015}.
+
+\subsection{Motivation of using  UAVs to build {\sdn}}
+
+%how Adler works
+Adler~\cite{Alder} is a recent testbed that combines WSNs and UAVs.
+Adler implements three applications: localization, gathering and configuration, 
+and achieves resilience, high-performance and energy-efficiency at the same time.
+First, to get a sensor's three-dimension (3D) position, 
+Adler sets UAVs to fly nearby sensors and calculates each sensor's 
+location, which improves localization accuracy and recedes the 
+localization error by $78.4\%$ compared to methods through a multi-hop network. 
+Second, to gather data efficiently, 
+Adler uses the minimum number of hexagons to cover 
+sensors, designs flight trajectory and gathers sensors' data by UAVs. 
+This method reduces energy cost by $82.4\%$ compared to a mobile vehicle method. 
+Third, to update parameter settings or switch between different applications/tasks
+Adler utilizes a UAV-based reconfiguration method that utilizes over-the-air (OTA) 
+programming to reconfigure sensors through one-hop communication, 
+which reduces package loss probability by $42.4\%$ compared to a multi-hop OTA programming method.
+
+These results suggest that UAVs are promising to serve as SDN controllers.
+However, Alder is a traditional WSN system instead of a SDN system for two reasons.
+First, Alder does not have a  complete routing protocol for any pair of communicating sensors;
+It mainly supports information gathering and reconfiguration.
+Second, in order to gather information, Alder assumes that all sensor nodes can
+reach at least one UAV, while {\sdn} supports a complete hybrid protocol
+(sensors can route among other peers when UAVs are not around)
+ and diverse SDN applications. 
+
+
+
+
+
+
+
