@@ -3,17 +3,17 @@
 \subsection{SDN Preliminaries}
 Before introducing our SDN system architecture, we first present some general terms including three planes and two interfaces in SDN system \cite{kreutz2015software}.
 
-A data plane is the part of a network that carries user traffic and basic sensing functions. And a control plane is the part of a network that carries signaling traffic and is responsible for routing. The top layer of SDN system is management plane which includes the software services, such as simple network management protocol (SNMP). It used to remotely monitor and configure the control functionality. The user implement their applications on it.
+A data plane is the part of a network that carries user traffic and basic sensing functions. And a control plane is the part of a network that carries signaling traffic and is responsible for routing. The top layer of SDN system is management plane which includes the software services, such as simple network management protocol. It used to remotely monitor and configure the control functionality. The user implement their applications on it.
 
-Southbound Interface (SI) is the instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact. Northbound Interface (NI) is the middleware on control plane can offer an API to application developers.
+Southbound interface (SI) is the instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact. Northbound interface (NI) is the middleware on control plane can offer an API to application developers.
 
 \subsection{Overview of {\sdn}}
-The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
-The system is divided into three layers and two interface abstraction, the southbound interface connect data plane and control plane, and the nouthbound interface connect control plane and management plane. In our system, the data plane runs on sensor nodes. The control plane and management plane runs on more powerful UAVs.
+The architecture of {\sdn} is shown in Fig~\ref{Architecture}. 
+The system is divided into three layers and two interface abstraction, the southbound interface connect data plane and control plane, and the nouthbound interface connect control plane and management plane. In our system, the data plane runs on sensor nodes. The control plane and management plane run on UAVs.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=3.5in]{./Figure/Architecture}
-	\caption{Architecture of the system.}
+	\includegraphics[width=3.3in]{./Figure/Architecture}
+	\caption{{\sdn} architecture. \textnormal{Arrows are data flows}}
 	\label{Architecture}
 \end{figure}
 
@@ -35,22 +35,24 @@ In the \textbf{control plane} of {\sdn}, in order to make our system easy to use
 On \textbf{management plane}, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
 scheduler, etc. Our system is capable to run application together. We design and implement five applications on {\sdn}. The detail design of our applications is described in section \ref{App}. 
 
-As shown in Fig. \ref{Architecture}, both the upward data flow and downward SDN commands transfer smoothly by using our well defined interface. Take the topology gathering as an example, the control plane receives nodes neighbor table through southbound interface, it saves the topology in database. After UAV gathered all nodes' neighbor table, the topology management module arrange nodes neighbor table in database and get the whole network topology for management applications such as routing protocol application to read. Another example is sensor's task deployment, the task scheduler application outputs the task schedule table to control plane. Then the task management module save it to database. When UAVs is near sensor nodes, it get the task table for specific nodes from database. 
-
 Different from wired network, the data plane of WSN not only runs
 data forwarding function, but also executes data sampling function. 
 For example,  sensor nodes execute neighbor discovery process for getting topology, 
 data sampling process for getting data from environment and data forwarding process
 for data gathering. {\sdn} is an easy-to-use system that we design and implement a lot of 
 interfaces for users. The detail implementation of our system is introduced in section \ref{Imp}.
-\subsection{Nouthbound Data Structures}
+\subsection{The Workflow of {\sdn}}
+Given a deployment area, we show how the routing app works as example with six steps. First, each sensor node invokes the neighbor discovery component, computes a list of its local neighbors, and uploads the list to a UAV's neighbor table component in its own communication range. Second, a UAV stores the neighbor list sent from its nearby nodes into its database. Third, a set of UAVs fly and evenly distributed within the area, in order to cover all sensor nodes. In our evaluation, because each UAV can cover 150 m, and
+ each sensor node can cover 20 m, we find it easy for UAVs to cover all sensors. Fourth, UAVs' topology management components compute a global routing topology, and upload the topology to the routing protocol module on the management plane. Fifth, the routing protocol computes a globally optimized routing topology (Fig~\ref{topology}), and distributes the topology to the route management component in UAVs. Sixth, each UAV generates a global routing table for itself and distributes the routing mapping table for each sensor nearby.
 
-As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
+\subsection{Nouthbound Data Flow}
+
+As shown in Fig~\ref{downstream} and Fig~\ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream data flow fully considered the difference between wired networks and wireless sensor networks, the flow structure not only contains routing related data, but also has sensor task control tables.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.8\columnwidth]{Figure/upstream}
-	\caption{Upstream data structure}
+	\includegraphics[width=.6\columnwidth]{Figure/upstream}
+	\caption{Upstream data flow}
 	\label{upstream}
 \end{figure}
 
@@ -61,8 +63,8 @@ Moreover, node also records some statistic information including the data traffi
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.8\columnwidth]{Figure/downstream}
-	\caption{Downstream data structure}
+	\includegraphics[width=.7\columnwidth]{Figure/downstream}
+	\caption{Downstream data flow}
 	\label{downstream}
 \end{figure}
 
