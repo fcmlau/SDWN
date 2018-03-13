@@ -54,9 +54,10 @@ lifetime.
 Figure~\ref{fig:throughput} compares network throughput by deploying various
 routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
 sensors to data center, to calculate the route table, its throughput exceeds RPL
-and LEACH. Besides, in {\sdn}, sensors' lifetime increases a lot more than
+and LEACH.This implies there are less collisions in {\sdn}. Besides, 
+in {\sdn}, sensors' lifetime increases a lot more than
 others, because all computation-intensive tasks are done by UAV and sensors do
-not need to send packets to negotiate route path, which decrease the energy
+not need to send packets to negotiate route path, which decreases the energy
 consumption with no doubt.
 
 \begin{figure}[htbp]
@@ -76,7 +77,7 @@ consumption with no doubt.
 	\centering
 	\includegraphics[width=.95\columnwidth]{Figure/latency}
 	\vspace{-0.1in}
-	\caption{End-to-end average latency of different routing algorithms and distance
+	\caption{End-to-end average latency of different routing algorithms and distance.
 		\textnormal{
 		}}
 	\label{fig:latency}
@@ -102,8 +103,8 @@ energy consumption between nodes.
 	\vspace{-0.1in}
 	\caption{Per-node packet received ratio improved by {\sdn}.
 		\textnormal{
-			This figure implys the {\sdn} minishes collisions of nodes much by
-			reducing the routing negotiation, which decrease the radio
+			This figure implies the {\sdn} diminishes collisions of nodes much more by
+			reducing the routing negotiation, which decreases the radio
 			transmission.
 		}}
 	\label{fig:packet_loss_ratio_with_size}
@@ -161,7 +162,7 @@ $3\times10^{-10}$, which enable us to predict and fix energy failure in advance.
 	\vspace{-0.1in}
 	\caption{Energy prediction
 		\textnormal{
-			We use regression method to predict energy consumption and the
+			We use MLP to predict energy consumption and the
 			prediction result is consistent with the truth-ground.  The absolute
 			error of energy prediction never exceeds $3\times10^{-10}$ with normalized energy
 			(i.e. the maximum energy of a sensor is 1).
