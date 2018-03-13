@@ -426,26 +426,27 @@ AI_Multitasks(taskset){
 
 \end{lstlisting}
 
-\begin{table*}[htbp]
+\begin{table}[htbp]
 	\caption{Task Buffer}
 	\label{TB}
 	\centering
 	\scalebox{0.9}{
-	\begin{tabular}{|l|l|l|l|l|}
+	\begin{tabular}{|c|c|c|c|c|}
 		\hline
-		Task ID& Node set& Sensing rate & Sensing range& Sensing duration \\
+		Task & Node & Sensing & Sensing & Sensing \\
+		ID   & set  & rate    & range   & duration \\
 		\hline
-		 010& \{$u_2,u_6,...,u_{88}...u_{99}$\}& 0.2 & 4 & 2046 \\
+		001& \{$u_2,u_6,...,u_{99}$\}& 0.2 & 4 & 2046 \\
 		\hline
 		...& ...& ... & ...& ... \\
 		\hline
-		101&  \{$u_3,u_4,...,u_{34}...u_{67}$\}& 0.2 & 5 & 4096 \\
+		101&  \{$u_3,u_4,...,u_{67}$\}& 0.2 & 5 & 4096 \\
 		\hline
 		...& ...& ... & ...& ... \\
 		\hline
 		\end{tabular}
 	}
-\end{table*}
+\end{table}
 
 Each task has a unique task ID. The task buffer maintains the task information of node set, 
 sensing rate, sensing range and sensing duration. 
