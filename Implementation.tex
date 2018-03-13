@@ -1,27 +1,24 @@
 \section{Implementation}
 \label{Imp}
 
-
-
 \subsection{Data Plane}
 
 We implement our data plane based on contiki-ng, a system for next generation IoT (Internet of
-Things), We modify the network layer of contiki-ng, and abstract
+Things). We modify the network layer of contiki-ng, and abstract
 data plane interface to separate network control functions from data plane. 
 The details are described as follows.
 
-\textbf{Neighbor Discovery}: After deployment, nodes frist start IPv6 neighbor
+\textbf{Neighbor Discovery}: After deployment, nodes first start IPv6 neighbor
 discovery protocol to find the nodes which can be reached within one hop, and
 then save the neighbor information to neighbor table and wait for UAV arriving
 to gather the topology information. Every neighbor's information consists of the
-neighbor's IP and RSSI. 
+neighbor's IP and RSSI.
 
 \textbf{Packet Forwarding and Data Sampling}: The nodes get routing table from UAV through
 northbound interface. When a node receive a data packet from other nodes, it
 just sends it to the next hop node according the routing table. Nodes read task
 table received from UAV to decide when to start data sampling to make sure 
-that they cost minimal energy to get the same
-quality data. 
+that they cost minimal energy to get the same quality data. 
 
 \subsection{Control Plane}
 

@@ -28,13 +28,13 @@ packets sent by the $i$-th node and the number of packets received by data
 center, respectively.
 
 \textbf{Throughput} is defined as the the total data packets received by data
-center in unit time, and it measures the capability and scalability of a network.
+center in 10 seconds, and it measures the capability and scalability of a network. 
 
-\textbf{Latency} is define as the time interval between node sent data package and
+\textbf{Latency} is defined as the time interval between node sent data package and
 data center received the package.
 
-\textbf{Network Lifetime} is define as the elapsed time when total package
-received ratio is less than 50\%, which is an important metric to measures the
+\textbf{Network Lifetime} is defined as the elapsed time when total package
+received ratio is less than 50\%, which is an important metric to measure the
 reliability of network.
 
 \textbf{Energy Consumption} is estimated by multiplying different coefficients on
@@ -46,7 +46,7 @@ unit time.
 \subsection{Basic Routing}
 
 In order to fairly compare with existing works, we first use our basic
-{\sdn} routing protocol without any intelligent approaches only. We evaluate routing
+{\sdn} routing protocol without any intelligent approaches. We evaluate routing
 performance by throughput, packet received ratio and end-to-end latency.
 Meanwhile, We also evaluate the scalability of our network through network
 lifetime. We do not compare {\sdn} with Alder on throughput and latency because
@@ -59,21 +59,21 @@ Alder doesn't implement a complete routing protocol.
 	\vspace{-0.1in}
 	\caption{End-to-end routing throughput.
 		\textnormal{
-			The {\sdn}'s integral of the throughput is 1.2 times higher than the
-			the PRL's in within 0 to 5000 seconds, and is 2 times higher within 0
+			The {\sdn}'s average of the throughput is 1.2 times higher than the
+			the RPL's in within 0 to 5000 seconds, and is 2 times higher within 0
 			to 8000 seconds.
 	}}
 	\label{fig:throughput}
 \end{figure}
 
 Figure~\ref{fig:throughput} compares network throughput by deploying various
-routing algorithms. As our {\sdn} uses OSPF, which finds the optimal path from
-sensors to data center, to calculate the route table, its throughput exceeds RPL
-and LEACH. This implies there are less collisions in {\sdn}. Besides, 
-in {\sdn}, sensors' lifetime increases a lot more than
-others, since all computation-intensive tasks are done by UAV and sensors do
-not need to send packets to negotiate route path, which decreases the energy
-consumption with no doubt.
+routing algorithms. As {\sdn} uses OSPF to calculate the route table, which
+finds the optimal path from sensors to data center, its throughput exceeds RPL
+and LEACH. This implies there are less collisions in {\sdn}. Besides, in {\sdn},
+sensors' average lifetime increases by {\totalLife} compared with RPL, since all
+compute-intensive tasks are done by UAVs and sensors do not need to send
+packets to negotiate route path, which decreases the energy consumption with no
+doubt.
 
 %\begin{figure}[htbp]
 \begin{figure}[!h]
@@ -86,11 +86,11 @@ consumption with no doubt.
 	\label{fig:latency}
 \end{figure}
 
-When measuring the latency of the network, our {\sdn} routing method
-performs best due to the use of the global topology information to find the optimal
-route path. As shown in Figure~\ref{fig:latency}, as the distance from node to
-data center increases, the latency grows about 4 times and 1.5 times slower than
-LEACH and RPL, respectively.
+When measuring the latency of the network, the {\sdn} routing method performs
+better than RPL due to the use of the global topology information to find the
+optimal route path. As shown in Figure~\ref{fig:latency}, as the distance from
+node to data center increases, the latency grows about 4 times and 1.5 times
+slower than LEACH and RPL, respectively.
 
 %\begin{figure}[htbp]
 \begin{figure}[!h]
@@ -99,8 +99,8 @@ LEACH and RPL, respectively.
 	\vspace{-0.1in}
 	\caption{Per-node packet received ratio improved by {\sdn}.
 		\textnormal{
-			This figure implies the {\sdn} diminishes collisions of nodes much more by
-			reducing the routing negotiation, which decreases the radio
+			This figure shows the {\sdn} reduce collisions of nodes by
+			reducing the routing negotiation, and decreases the radio
 			transmission.
 	}}
 	\label{fig:packet_loss_ratio_with_size}
@@ -109,10 +109,10 @@ LEACH and RPL, respectively.
 Figure~\ref{fig:packet_loss_ratio_with_size} shows two remarkable advantages of
 {\sdn}: (1) The packet received ratio exceeds state-of-the-art algorithms
 RPL\cite{winter2012rpl} and LEACH\cite{kaur2016wsn} by 20\%; (2) With the
-increasing of network size, the {\sdn}'s packet received ration is still much
-higher than others'. The reasons are that {\sdn} uses global information to
-achieve optimal routing and intelligent cluster header selection balances the
-energy consumption between nodes.
+increasing of network size, the {\sdn}'s packet received ratio is still 20.2\%
+and 28.8\% higher than RPL and LEACH, respectively. There are two reasons: (1) {\sdn}
+uses global information to achieve optimal routing, and (2) intelligent cluster
+header selection balances the energy consumption between nodes.
 
 %\begin{figure}[htbp]
 \begin{figure}[!h]
@@ -126,15 +126,16 @@ energy consumption between nodes.
 	\label{fig:lifetime}
 \end{figure}
 
-Our {\sdn} system is capable in large scale wireless sensor networks as
+The{\sdn} system is capable in large scale WSNs as
 Figure~\ref{fig:lifetime} shows. Its lifetime excels RPL and LEACH in both
 small and large network sizes.
 
 \subsection{AI Applications}
 
-By deploying intelligent node selection algorithm, we use least waken sensors,
-but collect most necessary sensing data covering the whole area and reduce the
-redundant ones in the meantime. Besides, less sensors means less collision and
+By deploying intelligent node selection algorithm, we use minimum active sensors
+to collect necessary sensing data.
+%covering the whole area and reduce the redundant ones in the meantime.
+Besides, less sensors means less collision and
 interference, and it can further improves the reliability of network. And the
 packet received ratio grows by 10\%$\sim$15\% and achieves almost 100\% as
 Figure~\ref{fig:ai_selection} shows.
