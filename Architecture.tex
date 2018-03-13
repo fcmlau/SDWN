@@ -3,9 +3,9 @@
 \subsection{SDN Preliminaries}
 Before introducing our SDN system architecture, we first present some general terms including three planes and two interfaces in SDN system \cite{kreutz2015software}.
 
-A data plane is the part of a network that carries user traffic and basic sensing functions. And a control plane is the part of a network that carries signaling traffic and is responsible for routing. The top layer of SDN system is management plane which includes the software services, such as simple network management protocol (SNMP). It used to remotely monitor and configure the control functionality. The user implement their applications on it.
+A data plane is the part of a network that carries user traffic and basic sensing functions. And a control plane is the part of a network that carries signaling traffic and is responsible for routing. The top layer of SDN system is management plane which includes the software services, such as simple network management protocol. It used to remotely monitor and configure the control functionality. The user implement their applications on it.
 
-Southbound Interface (SI) is the instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact. Northbound Interface (NI) is the middleware on control plane can offer an API to application developers.
+Southbound interface (SI) is the instruction set of the forwarding devices is defined by the southbound API, which is part of the southbound interface. Furthermore, the SI also defines the communication protocol between data plane and control plane elements. This protocol formalizes the way the control and data plane elements interact. Northbound interface (NI) is the middleware on control plane can offer an API to application developers.
 
 \subsection{Overview of {\sdn}}
 The architecture of {\sdn} is shown in Fig. \ref{Architecture}. 
