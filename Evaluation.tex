@@ -12,7 +12,7 @@ throughput or latency.
 
 When testing the network, we make nodes send packets every 10 seconds, and the
 packet size is 60 bytes. Unless otherwise specified, we set the evaluation time
-from 0 to 5000 seconds.
+from 0 to 8000 seconds.
 
 \subsection{Evaluation Metrics}
 
@@ -68,7 +68,7 @@ consumption with no doubt.
 		\textnormal{
 			The {\sdn}'s integral of the throughput is 1.2 times higher than the
 			the PRL's in within 0 to 5000 seconds, and is 2 times higher within 0
-			to 10000 seconds.
+			to 8000 seconds.
 		}}
 	\label{fig:throughput}
 \end{figure}
@@ -212,7 +212,7 @@ recover from failures of cluster headers.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.95\columnwidth]{Figure/did_comp}
+	\includegraphics[width=.95\columnwidth]{Figure/did_comp_curve}
 	\vspace{-0.1in}
 	\caption{Comparation of {\sdn} and DID on failure detection rate.
 		\textnormal{
