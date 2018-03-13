@@ -146,7 +146,16 @@ We implement the network diagnosis process as an application in our {\sdn} syste
 Since in {\sdn} we have our mobile UAV as a controller, a more flexible way is to infer the suspicious 
 nodes of the network fault in traditional way first and then set the UAV to check out the fault sources. 
  
+
+
 \subsubsection{Design}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.5in]{Figure/Diagnosisprocess}
+	\caption{Network Diagnosis}
+	\label{Diagnosis}
+\end{figure}
 
 We first introduce a state-of-the-art algorithm named DID 
 \cite{gong2015directional}, which is a directional diagnosis approach.
@@ -208,12 +217,12 @@ This kind of cooperation and mutual assistance makes {\sdn} an effective ecosyst
 
 \subsubsection{Design}
 
-\begin{figure*}[htbp]
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=6.5in]{Figure/SDWN-AIprediction}
+	\includegraphics[width=3.5in]{Figure/SDWN-AIprediction}
 	\caption{AI prediction}
 	\label{prediction}
-\end{figure*}
+\end{figure}
 
 In {\sdn},  we implement an energy prediction application 
 to forecast lifetime of sensors. The architecture of this application
