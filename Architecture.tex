@@ -35,22 +35,24 @@ In the \textbf{control plane} of {\sdn}, in order to make our system easy to use
 On \textbf{management plane}, user can run tons of applications base on our well-defined southbound APIs, such as routing algorithms, network diagnose, sensor task 
 scheduler, etc. Our system is capable to run application together. We design and implement five applications on {\sdn}. The detail design of our applications is described in section \ref{App}. 
 
-As shown in Fig. \ref{Architecture}, both the upward data flow and downward SDN commands transfer smoothly by using our well defined interface. Take the topology gathering as an example, the control plane receives nodes neighbor table through southbound interface, it saves the topology in database. After UAV gathered all nodes' neighbor table, the topology management module arrange nodes neighbor table in database and get the whole network topology for management applications such as routing protocol application to read. Another example is sensor's task deployment, the task scheduler application outputs the task schedule table to control plane. Then the task management module save it to database. When UAVs is near sensor nodes, it get the task table for specific nodes from database. 
-
 Different from wired network, the data plane of WSN not only runs
 data forwarding function, but also executes data sampling function. 
 For example,  sensor nodes execute neighbor discovery process for getting topology, 
 data sampling process for getting data from environment and data forwarding process
 for data gathering. {\sdn} is an easy-to-use system that we design and implement a lot of 
 interfaces for users. The detail implementation of our system is introduced in section \ref{Imp}.
-\subsection{Nouthbound Data Structures}
+\subsection{The Workflow of {\sdn}}
+As shown in Fig. \ref{Architecture}, both the upward data flow and downward SDN commands transfer smoothly by using our well defined interface. Take the topology gathering as an example, the control plane receives nodes neighbor table through southbound interface, it saves the topology in database. After UAV gathered all nodes' neighbor table, the topology management module arrange nodes neighbor table in database and get the whole network topology for management applications such as routing protocol application to read. Another example is sensor's task deployment, the task scheduler application outputs the task schedule table to control plane. Then the task management module save it to database. When UAVs is near sensor nodes, it get the task table for specific nodes from database. 
+
+
+\subsection{Nouthbound Data Flow}
 
 As shown in Fig \ref{downstream} and Fig \ref{upstream}, the \textbf{nouthbound data structure} including downstream and upstream structure fully considered the difference between wired networks and wireless sensor networks, the data structure not only contains routing  related data, but also has sensor task control tables.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.8\columnwidth]{Figure/upstream}
-	\caption{Upstream data structure}
+	\includegraphics[width=.7\columnwidth]{Figure/upstream}
+	\caption{Upstream data flow}
 	\label{upstream}
 \end{figure}
 
@@ -61,8 +63,8 @@ Moreover, node also records some statistic information including the data traffi
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.8\columnwidth]{Figure/downstream}
-	\caption{Downstream data structure}
+	\includegraphics[width=.7\columnwidth]{Figure/downstream}
+	\caption{Downstream data flow}
 	\label{downstream}
 \end{figure}
 
